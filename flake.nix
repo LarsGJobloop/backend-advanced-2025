@@ -20,6 +20,7 @@
       devShells = withPkgs (pkgs: {
         default = pkgs.mkShell {
           packages = with pkgs; [
+            pandoc
           ];
         };
       });
