@@ -2,6 +2,7 @@
 synlighet: intern
 livsyklus: utkast
 tittel: BE03 - TDD - Introduksjon til Test Dreven Utvikling
+slug: be03-tdd-introduksjon
 ---
 
 # Introduksjon til Test Dreven Utvikling (TDD)

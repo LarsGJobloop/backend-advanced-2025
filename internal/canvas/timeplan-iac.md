@@ -2,6 +2,7 @@
 synlighet: intern
 godkjent: usant
 tittel: BE03 - IaC - Timeplan
+slug: be03-iac-timeplan
 ---
 
 # Timeplan

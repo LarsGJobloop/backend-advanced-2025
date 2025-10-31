@@ -2,6 +2,7 @@
 synlighet: intern
 godkjent: usant
 tittel: BE03 - SOA - Timeplan
+slug: be03-soa-timeplan
 ---
 
 # Timeplan

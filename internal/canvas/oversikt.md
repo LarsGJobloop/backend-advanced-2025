@@ -2,6 +2,7 @@
 synlighet: åpen
 godkjent: usant
 tittel: BE03 - Backend Advanced
+slug: be03-backend-advanced
 ---
 
 # BE03 - Backend Advanced

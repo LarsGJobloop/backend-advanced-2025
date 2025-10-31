@@ -1,5 +1,6 @@
 ---
 tittel: BE03 - Ekstra temaer
+slug: be03-ekstra-temaer
 ---
 
 # Ekstra temaer

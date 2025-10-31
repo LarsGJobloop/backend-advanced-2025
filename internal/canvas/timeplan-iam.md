@@ -2,6 +2,7 @@
 synlighet: intern
 godkjent: usant
 tittel: BE03 - IAM - Timeplan
+slug: be03-iam-timeplan
 ---
 
 # Timeplan
