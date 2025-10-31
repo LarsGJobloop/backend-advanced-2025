@@ -13,6 +13,8 @@ Dette er noe som ikke blir endelig avgjort her, men vi trenger noe som fungerer 
 - Strukturert Metadata
   - synlighet: intern | åpen
   - livsyklus: utkast | høring | akseptert
+  - tittel: Side tittel
+  - slug: URL-slug for siden
 - Bakenforliggende Teori
   - Kort fortalt, lenk til autorative kilder
   - Tegninger/Kart for å illustrer relasjoner

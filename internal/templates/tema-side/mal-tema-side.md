@@ -1,6 +1,8 @@
 ---
 synlighet: intern
 livsyklus: utkast
+tittel: { { BE03 - SOA - Introduksjon til Tjeneste Orienterte Systemer } }
+slug: { { be03-soa-introduksjon } }
 ---
 
 # {{ Kort Tittel for Tema }}
