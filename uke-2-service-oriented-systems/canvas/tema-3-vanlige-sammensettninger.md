@@ -1,6 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
+tittel: BE03 - SOA - Vanlige Tjenestesammensetninger
 ---
 
 # Vanlige Tjenestesammensetninger

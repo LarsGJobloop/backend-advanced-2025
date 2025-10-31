@@ -1,6 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
+tittel: BE03 - SOA - Introduksjon til Tjeneste Orienterte Systemer
 ---
 
 # Introduksjon til Tjeneste Orienterte Systemer (SOA)
