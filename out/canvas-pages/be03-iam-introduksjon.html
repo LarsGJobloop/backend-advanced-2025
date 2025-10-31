@@ -1,0 +1,209 @@
+<h1 id="iam---introduksjon-til-identitet-og-tilgangsstyring">
+  IAM - Introduksjon til Identitet og Tilgangsstyring
+</h1>
+<p>
+  En introduksjon til hvordan identitet og tilgang håndteres i både den fysiske
+  og digitale verdenen. Økten legger grunnlaget for å forstå hvordan digitale
+  systemer bruker identitet og autorisasjon for å gi riktig tilgang til riktige
+  brukere, på riktig tidspunkt.
+</p>
+<h2 id="teori">Teori</h2>
+<h3 id="hva-er-identitet-og-tilgangsstyring">
+  Hva er Identitet og Tilgangsstyring?
+</h3>
+<p>
+  <strong>Identity and Access Management (IAM)</strong> handler om å kontrollere
+  <em>hvem</em> som har <em>tilgang til hva</em>. Dette skjer både i fysiske og
+  digitale kontekster. Målet er å sikre at rett person får rett tilgang, og at
+  feil personer ikke gjør det.
+</p>
+<p>IAM består av tre hovedkomponenter:</p>
+<ul>
+  <li>
+    <strong>Identifikasjon:</strong> Hvem hevder du å være?<br />
+    Eksempel: Du viser førerkortet ditt.
+  </li>
+  <li>
+    <strong>Autentisering:</strong> Hvordan beviser du at du er den du sier du
+    er?<br />
+    Eksempel: Politiet kontrollerer førerkortet mot Statens Vegvesen.
+  </li>
+  <li>
+    <strong>Autorisasjon:</strong> Hva får du lov til å gjøre?<br />
+    Eksempel: Du har førerkort for klasse B, ikke lastebil (C).
+  </li>
+</ul>
+<h3 id="analogt-eksempel---trafikkontroll">
+  Analogt eksempel - Trafikkontroll
+</h3>
+<p>For å forstå IAM er trafikkontroll et godt bilde:</p>
+<ol type="1">
+  <li>Du blir stoppet av politiet (tilgangskontroll).</li>
+  <li>
+    Du viser <strong>førerkort</strong> og <strong>vognkort</strong> – dette er
+    <em>credentials</em>.
+  </li>
+  <li>
+    Politiet verifiserer dokumentene mot en <em>sentral autoritet</em> (CA) —
+    Statens Vegvesen.
+  </li>
+  <li>
+    Vegvesenet er igjen underlagt en overordnet autoritet — Den Norske Stat.
+  </li>
+</ol>
+<p>
+  Dette eksempelet illustrerer hvordan tillit og identitet bygges i lag, et
+  hierarki av autoriteter.
+</p>
+<h3 id="digitale-paralleller">Digitale paralleller</h3>
+<table>
+  <colgroup>
+    <col style="width: 38%" />
+    <col style="width: 61%" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Fysisk</th>
+      <th>Digitalt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Førerkort / Pass</td>
+      <td>JSON Web Token (JWT)</td>
+    </tr>
+    <tr>
+      <td>Statens Vegvesen / Den Norske Stat</td>
+      <td>Sertifikatutsteder (Certificate Authority / CA)</td>
+    </tr>
+    <tr>
+      <td>Politiet</td>
+      <td>Applikasjonen som kontrollerer tilgang</td>
+    </tr>
+    <tr>
+      <td>Legitimasjon</td>
+      <td>Autentiseringsdata (brukernavn, passord, nøkkel, token)</td>
+    </tr>
+  </tbody>
+</table>
+<p>
+  Digitale systemer bruker det samme prinsippet: man får
+  <em>digitale legitimasjonsdata</em> utstedt, og signert, av en
+  <em>autoritet</em> (CA), som så kan verifiseres av systemet man prøver å få
+  tilgang til.
+</p>
+<p>Eksempler:</p>
+<ul>
+  <li>
+    <strong>Private CA-er:</strong> Facebook, Google, Microsoft Entra (Azure AD)
+  </li>
+  <li><strong>Offentlige CA-er:</strong> BankID, eID, ID-porten.no</li>
+  <li>
+    <strong>DNSSEC:</strong> Et eksempel på autoritet og signering brukt for å
+    sikre, verifisert, rettigheter til et domenenavn.
+  </li>
+</ul>
+<h3 id="legitimasjonstyper">Legitimasjonstyper</h3>
+<ul>
+  <li>Fødselsattest (grunnleggende identitet)</li>
+  <li>Pass (offisiell identitet)</li>
+  <li>Bankkort / BankID (verifisering av identitet i finansielle systemer)</li>
+  <li>Førerkort (autorisasjon til spesifikke handlinger)</li>
+  <li>
+    Pengesedler (verifisering av identitet og tillit fra statlige autoriteter)
+  </li>
+</ul>
+<h3 id="json-web-tokens-jwt">JSON Web Tokens (JWT)</h3>
+<p>
+  Et <strong>JWT</strong> er en digital legitimasjon som inneholder informasjon
+  (<em>claims</em>) om brukeren, utstedt av en autoritet.<br />
+  Eksempel:
+</p>
+<ul>
+  <li><code>iss</code> – hvem utstedte tokenet (issuer)</li>
+  <li><code>sub</code> – hvem tokenet gjelder for (subject)</li>
+  <li><code>exp</code> – utløpstid (expiration time)</li>
+  <li>
+    <code>aud</code> – hvilket system tokenet er ment for (intended audience)
+  </li>
+</ul>
+<p>
+  JWT-er kan inspiseres på <a href="https://jwt.io">https://jwt.io</a> for å se
+  struktur og innhold.
+</p>
+<h2 id="konkretisering">Konkretisering</h2>
+<h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
+<p>IAM brukes i alt fra nettsider til nasjonale infrastrukturer:</p>
+<ul>
+  <li>
+    <strong>Nettsider:</strong> Pålogging med Google eller GitHub (OAuth2)
+  </li>
+  <li>
+    <strong>Bedriftssystemer:</strong> Microsoft Entra / Azure AD for
+    brukerkontroll
+  </li>
+  <li><strong>Bank og offentlig sektor:</strong> BankID, eID</li>
+  <li><strong>API-er:</strong> Token-basert autentisering (JWT, OAuth)</li>
+</ul>
+<p>
+  Dette er fundamentalt for sikkerhet, personvern og drift av digitale systemer.
+  Uten IAM vet ikke systemet <em>hvem du er</em> eller
+  <em>hva du får lov til å gjøre</em>.
+</p>
+<h3 id="eksempler-på-praksis">Eksempler på praksis</h3>
+<ul>
+  <li>
+    En webserver mottar en HTTP request med et JWT i headeren og validerer det
+    før tilgang gis.
+  </li>
+  <li>Et API kaller et annet API, men må først autentiseres via OAuth2.</li>
+  <li>En GitHub OAuth App brukes for å hente brukerdata med samtykke.</li>
+</ul>
+<h3 id="eksterne-lenker">Eksterne Lenker</h3>
+<ul>
+  <li><a href="https://jwt.io/">JSON Web Token (jwt.io)</a></li>
+  <li><a href="https://openid.net/">OpenID Foundation</a></li>
+  <li>
+    <a href="https://datatracker.ietf.org/doc/html/rfc6749"
+      >OAuth 2.0 Framework (IETF RFC 6749)</a
+    >
+  </li>
+  <li>
+    <a href="https://learn.microsoft.com/en-us/entra/"
+      >Microsoft Entra ID (Azure AD)</a
+    >
+  </li>
+  <li><a href="https://www.bankid.no/">BankID Norge</a></li>
+</ul>
+<h2 id="videre-lesing">Videre Lesing</h2>
+<ul>
+  <li>
+    <a href="https://pages.nist.gov/800-63-3/"
+      >NIST Digital Identity Guidelines (SP 800-63)</a
+    >
+  </li>
+  <li>
+    <a
+      href="https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
+      >OWASP Authentication Cheat Sheet</a
+    >
+  </li>
+  <li>
+    <a href="https://aaronparecki.com/oauth-2-simplified/"
+      >OAuth 2 Simplified – Aaron Parecki</a
+    >
+  </li>
+  <li>
+    <a href="https://auth0.com/blog/a-look-at-the-jwt-handbook/"
+      >Auth0 Blog – JWT Best Practices</a
+    >
+  </li>
+</ul>
+<h2 id="referanse-liste">Referanse Liste</h2>
+<ul>
+  <li>RFC 6749 - <em>The OAuth 2.0 Authorization Framework</em></li>
+  <li>RFC 7519 - <em>JSON Web Token (JWT)</em></li>
+  <li>NIST SP 800-63 - <em>Digital Identity Guidelines</em></li>
+  <li>Microsoft Entra ID Documentation</li>
+  <li>BankID.no og ID-porten.no</li>
+</ul>

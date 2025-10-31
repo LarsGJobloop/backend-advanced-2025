@@ -36,6 +36,12 @@
     "out": "out/canvas-pages/be03-iac-introduksjon.html"
   },
   {
+    "file": "./uke-4-identity-and-access-managment/canvas/tema-1-introduksjon-til-iam.md",
+    "title": "BE03 - IAM - Introduksjon til Identitet og Tilgangsstyring",
+    "slug": "be03-iam-introduksjon",
+    "out": "out/canvas-pages/be03-iam-introduksjon.html"
+  },
+  {
     "file": "./internal/canvas/timeplan-iac.md",
     "title": "BE03 - IaC - Timeplan",
     "slug": "be03-iac-timeplan",
