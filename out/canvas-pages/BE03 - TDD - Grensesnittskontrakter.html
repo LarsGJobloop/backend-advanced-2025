@@ -1,0 +1,110 @@
+<h1 id="grensesnittskontrakter">Grensesnittskontrakter</h1>
+<p>
+  Når det kommer til utvikling av løsninger så er det vi lager i dag altfor
+  komplekst til å kunne håndteres av enkelt individer, men koordinasjon er
+  kostbart og ofte så er det vanskelig å ha flere personer som arbeider med det
+  samme sammtidig (mange kokker, mye søl).
+</p>
+<p>
+  Med bakgrunn i det så prøver vi å snevre inn problemer til noe som kan
+  utvikles av små team, og så kommuniserer disse bitene av løsningen igjennom
+  veldefinerte grensesnitt og protokoller.
+</p>
+<h2 id="teori">Teori</h2>
+<p>
+  Siden programmene våre kommuniserere i gjennom veldefinerte grensesnitt og
+  protokoller så er dette en grense vi legger ned mye energi i for å verifisere.
+</p>
+<p>
+  For Web APIer så vil da første og viktigste sett med oppførsel vi ønsker å
+  kartlegge være dette settet med endepunkt.
+</p>
+<p>Her er en grov liste over det som du kan komme bort i:</p>
+<ul>
+  <li>REST endepunkt og ressurser</li>
+  <li>gRPC protokollen (server-til-server kommunikasjon)</li>
+  <li>IPC protokoller (prosess-til-prosses)</li>
+</ul>
+<p>
+  Disse vil være utgangspunktet for der du starter med å skrive spørsmålene
+  dine, og drive eventuelt andre spørsmål som du måtte trenge som del for å
+  tilfredstille disse.
+</p>
+<p>
+  Disse grensesnittene som du definere here, mellom det som du kontrollerer, og
+  omverdene, er og det som vi versjonerer og publiserer til andre.
+</p>
+<p>
+  Noe av det som kan være vanskelig er at selv om du gjerne har full kontroll
+  over det grensesnittet du eksponerer, så har du ikke full kontrol over de
+  komponentene du er avhengig av (eksterne Databaser, Harddisk, OS, etc). Det er
+  forskjellige måter å tilnærme seg de avhengighetene på, og hvilken du velger
+  vil være avhengig av prosjektet du arbeider med og tilhørende økonomi.
+</p>
+<ul>
+  <li>Sette opp en dedikert test instans som du bruker (koster penger)</li>
+  <li>
+    Lage/Hente inn en “Mock” instanse som du bruker (kan være forskjeller fra
+    “ekte vare”)
+  </li>
+</ul>
+<p>
+  Dette blir fort komplisert, og det er ingen løsning som dekker alt, så her må
+  du reflektere rundt kostnad/tidsbruk/nytteverdi for å kunne lande på noe
+  fornuftig.
+</p>
+<h2 id="konkretisering">Konkretisering</h2>
+<h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
+<p>
+  Grensesetting er noe som vil være en del av alle løsninger du lager. Det
+  nærmeste unntaket du kommer er viss du hadde laget alt fra bunnen av (CPU,
+  RAM, etc) til sluttprodukt, som ikke er tilfellet utenfor laboratorium.
+</p>
+<h3 id="eksempel-kode">Eksempel Kode</h3>
+<p>Eksempel for å teste en REST Server</p>
+<div class="sourceCode" id="cb1">
+  <pre
+    class="sourceCode csharp"
+  ><code class="sourceCode cs"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> BlogApiTests <span class="op">:</span> IClassFixture<span class="op">&lt;</span>WebApplicationFactory<span class="op">&lt;</span>Program<span class="op">&gt;&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="kw">readonly</span> Mock<span class="op">&lt;</span>IBlogPostRepository<span class="op">&gt;</span> _repoMock<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="kw">readonly</span> HttpClient _client<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">BlogApiTests</span><span class="op">(</span>WebApplicationFactory<span class="op">&lt;</span>Program<span class="op">&gt;</span> factory<span class="op">)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    _client <span class="op">=</span> factory<span class="op">.</span><span class="fu">CreateClient</span><span class="op">();</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">[</span>Fact<span class="op">]</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> async Task <span class="fu">GetPosts_ShouldReturnOk</span><span class="op">()</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Arrange &amp; Act</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">var</span> response <span class="op">=</span> _client<span class="op">.</span><span class="fu">GetAsync</span><span class="op">(</span><span class="st">&quot;/posts&quot;</span><span class="op">);</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Assert</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    response<span class="op">.</span><span class="fu">EnsureSuccessStatusCode</span><span class="op">();</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre>
+</div>
+<h3 id="eksterne-lenker">Eksterne Lenker</h3>
+<ul>
+  <li><a href="">TODO! Lenk til GitHub Repository</a></li>
+</ul>
+<h2 id="videre-lesing">Videre Lesing</h2>
+<ul>
+  <li>
+    <a
+      href="https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design"
+      >Microsoft Docs - RESTful API Design</a
+    >
+  </li>
+</ul>
+<h2 id="referanse-liste">Referanse Liste</h2>
+<ul>
+  <li>
+    <a
+      href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/test-min-api"
+      >Microsoft Docs - API Testing</a
+    >
+  </li>
+</ul>

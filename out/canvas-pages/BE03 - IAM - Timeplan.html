@@ -1,0 +1,104 @@
+<h1 id="timeplan">Timeplan</h1>
+<p>
+  Undervisnings øktene er delt opp i Teori med Praksis ca 50/50. Mink andelen
+  teori, ikke praksis. For noen deler kan det være nok med 30 minutter
+  teori/bakgrunn og 90 minutter praksis, legg inn 3-4 pauser.
+</p>
+<h2 id="identity-and-access-management">Identity and Access Management</h2>
+<h3 id="iam---intro">1. IAM - Intro</h3>
+<blockquote>
+  <p>[!NOTE]</p>
+  <p>
+    Dette kan fort bli veldig abstrakt og komplekst. Eksemplet jeg har benyttet
+    er Trafikk Kontrol, siden det favner bredt. Viss gruppen ikke er kjent med
+    bilkjøring, så link det opp mot noe annet (eks. Ferie/Utenlandsreise).
+  </p>
+  <p>
+    Det er viktig at de har noen konkrete erfaringer å koble disse konseptene
+    mot. Så bruk mer tid på Teori her om nødvendig.
+  </p>
+</blockquote>
+<h4 id="teori">Teori</h4>
+<ul>
+  <li>
+    <p>Hvordan virker dette? Gå igjennom eks:</p>
+    <ol type="1">
+      <li>Blir stoppet i trafikk kontroll</li>
+      <li>Blir bedt om Førerkort (credential) og Vognkort (credential)</li>
+      <li>Vognkort -&gt; Statens Vegvesen (CA)</li>
+      <li>Førerkort -&gt; Statens Vegvesen -&gt; Den Norske Stat (CA)</li>
+    </ol>
+  </li>
+  <li>
+    <p>Legitimasjon:</p>
+    <ul>
+      <li>Fødsels Attest</li>
+      <li>Pass</li>
+      <li>Bank Kort</li>
+      <li>BankID</li>
+      <li>Penge Sedler</li>
+      <li>Førerkort</li>
+    </ul>
+  </li>
+  <li>
+    <p>Autoriteter:</p>
+    <ul>
+      <li>Statens Vegevesen</li>
+      <li>Den Norske Stat</li>
+      <li>Politiet</li>
+    </ul>
+  </li>
+  <li>
+    <p>Digitale varianter</p>
+    <ul>
+      <li>Legitimasjon -&gt; JSON Web Token</li>
+      <li>
+        Autoriteter (Central Authority/CA):
+        <ul>
+          <li>Private -&gt; Facebook, GMail, Microsoft Entra</li>
+          <li>Offentlige -&gt; BankID, eID</li>
+        </ul>
+      </li>
+      <li>DNS med DNSSEC</li>
+    </ul>
+  </li>
+</ul>
+<h4 id="implementasjon">Implementasjon</h4>
+<ul>
+  <li>
+    Kort, Gå igjennom hvordan JSON Web Tokens ser, hva de innholder
+    (https://jwt.io/).
+  </li>
+  <li>Les av i en Web Server, Request</li>
+</ul>
+<h3 id="iam---credentials-and-tokens">2. IAM - Credentials and Tokens</h3>
+<h4 id="teori-1">Teori</h4>
+<ul>
+  <li>Open Authentication 2.0</li>
+  <li>GitHub OAuth Apps</li>
+</ul>
+<h4 id="implementasjon-1">Implementasjon</h4>
+<ul>
+  <li>Registrer en GitHub OAuth App</li>
+  <li>
+    Sett opp en CLI for GitHub OAuth autentisering (ikke lagre token vi får
+    tilbake)
+  </li>
+  <li>Se på claims og scopes for hva du kan spørre om</li>
+  <li>
+    Gå igjennom Consent skjermen til GitHub (vis gjerne Android/Chrome sine)
+  </li>
+</ul>
+<h3 id="iam---tilgangsstyrings-modeller">3. IAM - Tilgangsstyrings Modeller</h3>
+<blockquote>
+  <p>[!NOTE]</p>
+  <p>
+    Igjen mye teori. Dra inn andre eksempler (ex. Discord, GitHub) som kan vise
+    et eksisterend systemer
+  </p>
+</blockquote>
+<h4 id="teori-2">Teori</h4>
+<ul>
+  <li>Tilgangstyring i virkeligheten (Førerkort, Flyplass, Kontor)</li>
+</ul>
+<h4 id="implementasjon-2">Implementasjon</h4>
