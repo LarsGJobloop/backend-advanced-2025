@@ -1,0 +1,182 @@
+<h1 id="moduler-og-gjenbrukbar-infrastruktur">
+  Moduler og Gjenbrukbar Infrastruktur
+</h1>
+<p>
+  En introduksjon til hvordan man strukturerer infrastrukturkode i gjenbrukbare
+  moduler. Vi ser på hvordan Terraform-moduler brukes for å bygge
+  komponentbasert og vedlikeholdbar IaC.
+</p>
+<h2 id="teori">Teori</h2>
+<h3 id="hvorfor-moduler">Hvorfor moduler?</h3>
+<p>
+  Etter hvert som infrastrukturprosjekter vokser, blir det upraktisk å ha all
+  konfigurasjon i én stor fil.<br />
+  Modularisering handler om <strong>gjenbruk</strong>,
+  <strong>abstraksjon</strong> og <strong>ansvarsdeling</strong>.
+</p>
+<p>Ved å pakke sammen relaterte ressurser i en modul kan vi:</p>
+<ul>
+  <li>gjenbruke kode mellom prosjekter,</li>
+  <li>redusere duplisering,</li>
+  <li>standardisere oppsett,</li>
+  <li>og gjøre infrastrukturen enklere å vedlikeholde.</li>
+</ul>
+<h3 id="hva-er-en-terraform-modul">Hva er en Terraform-modul?</h3>
+<p>
+  En Terraform-modul er en samling av <code>.tf</code>-filer i en mappe, med et
+  veldefinert grensesnitt via <code>variabler</code> og
+  <code>outputs</code>.<br />
+  Modulen kan representere alt fra én ressurs (f.eks. “S3 bucket”) til et
+  komplekst system (f.eks. “webapplikasjon med load balancer, database og
+  nettverk”).
+</p>
+<p><strong>Struktur:</strong></p>
+<pre><code>
+modules/
+app_server/
+main.tf
+variables.tf
+outputs.tf
+</code></pre>
+<p>En modul kan brukes fra andre moduler eller fra rotkonfigurasjonen:</p>
+<pre class="hcl"><code>module &quot;app_server&quot; {
+  source = &quot;./modules/app_server&quot;
+  server_name = &quot;hetzner-app-1&quot;
+}</code></pre>
+<h3 id="variabler-og-output">Variabler og Output</h3>
+<p>
+  Moduler definerer <strong>input</strong> gjennom <code>variable</code>-blokker
+  og <strong>output</strong> gjennom <code>output</code>-blokker. Dette gjør det
+  mulig å styre modulens oppførsel uten å endre intern kode.
+</p>
+<p>Eksempel:</p>
+<pre class="hcl"><code># variables.tf
+variable &quot;server_name&quot; {
+  description = &quot;Navn på serveren&quot;
+  type        = string
+}
+
+# outputs.tf
+output &quot;ip_address&quot; {
+  description = &quot;IP-adressen til serveren&quot;
+  value       = hcloud_server.main.ipv4_address
+}</code></pre>
+<h3 id="dokumentasjon-og-sensitivitet">Dokumentasjon og Sensitivitet</h3>
+<p>
+  Alle moduler bør dokumenteres, både formål, inputvariabler og outputs.
+  Terraform støtter automatisk dokumentasjon via <code>terraform-docs</code> og
+  flagget <code>sensitive = true</code> for verdier som ikke skal eksponeres
+  (f.eks. passord, tokens, private nøkler).
+</p>
+<h3 id="komposisjon-og-rekonsiliering">Komposisjon og Rekonsiliering</h3>
+<p>
+  Etter at infrastrukturen er modularisert, kan man bygge
+  <strong>komponerte systemer</strong>, moduler som kombinerer flere andre
+  moduler. Et naturlig neste steg er å legge til et
+  <strong>rekonsilieringsskript</strong> som sørger for kontinuerlig samsvar
+  mellom ønsket og faktisk tilstand (for eksempel med <code>systemd</code> på
+  Debian).
+</p>
+<p>
+  Dette illustrerer overgangen fra manuell drift til
+  <strong>systemer som oppdaterer seg selv</strong>.
+</p>
+<h2 id="konkretisering">Konkretisering</h2>
+<h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
+<p>
+  Modularisering er en modenhetsfase i IaC-prosjekter. Den brukes i alle større
+  organisasjoner og DevOps-team for å standardisere infrastrukturen.
+</p>
+<p>Eksempler:</p>
+<ul>
+  <li>
+    En modul for “webapp” som inkluderer server, sikkerhetsgruppe, domenenavn og
+    TLS-sertifikat.
+  </li>
+  <li>
+    En modul for “database” som oppretter PostgreSQL med backup og brukere.
+  </li>
+  <li>En felles “monitoring”-modul som kan plugges inn i alle miljøer.</li>
+</ul>
+<p>I økten skal deltakerne:</p>
+<ul>
+  <li>
+    Trekke ut sin eksisterende “Hetzner Compose App Server” til en egen modul.
+  </li>
+  <li>Definere <code>variable</code> og <code>output</code>.</li>
+  <li>Bruke modulen i sitt hovedprosjekt.</li>
+  <li>
+    (Valgfritt) legge til rekonsilieringsskript via <code>systemd</code> for å
+    automatisere synronisering mot et Git repo.
+  </li>
+</ul>
+<p>
+  Dette gir førstehånds erfaring med
+  <strong>strukturert, skalerbar IaC</strong>, en forutsetning for profesjonell
+  drift.
+</p>
+<h3 id="eksterne-lenker">Eksterne Lenker</h3>
+<ul>
+  <li>
+    <a href="https://developer.hashicorp.com/terraform/language/modules/develop"
+      >Terraform Modules Overview</a
+    >
+  </li>
+  <li>
+    <a
+      href="https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs"
+      >Hetzner Cloud Provider – Modules Examples</a
+    >
+  </li>
+  <li>
+    <a href="https://terraform-docs.io/"
+      >terraform-docs – Generating Documentation</a
+    >
+  </li>
+  <li>
+    <a
+      href="https://www.freedesktop.org/software/systemd/man/systemd.service.html"
+      >systemd Documentation</a
+    >
+  </li>
+</ul>
+<h2 id="videre-lesing">Videre Lesing</h2>
+<ul>
+  <li>
+    <strong>Terraform Best Practices</strong> – OpenTofu/Terraform community
+    guide for moduler.
+  </li>
+  <li>
+    <strong>“Production-Grade Terraform Modules”</strong> (Gruntwork blog)
+  </li>
+  <li><strong>HashiCorp Learn: Module Composition</strong></li>
+  <li>
+    <strong>Pulumi Components vs Terraform Modules</strong> – sammenligning av
+    modulariseringsstrategier.
+  </li>
+</ul>
+<h2 id="referanse-liste">Referanse Liste</h2>
+<ul>
+  <li>
+    Terraform-dokumentasjon:
+    <a href="https://developer.hashicorp.com/terraform"
+      >https://developer.hashicorp.com/terraform</a
+    >
+  </li>
+  <li>
+    Terraform-moduler på Registry:
+    <a href="https://registry.terraform.io/browse/modules"
+      >https://registry.terraform.io/browse/modules</a
+    >
+  </li>
+  <li>
+    OpenTofu-dokumentasjon:
+    <a href="https://opentofu.org/docs/">https://opentofu.org/docs/</a>
+  </li>
+  <li>
+    systemd-dokumentasjon:
+    <a href="https://www.freedesktop.org/software/systemd/man"
+      >https://www.freedesktop.org/software/systemd/man</a
+    >
+  </li>
+</ul>
