@@ -21,6 +21,8 @@
         default = pkgs.mkShell {
           packages = with pkgs; [
             pandoc
+            just
+            nodePackages.prettier # For formatting markdown and HTMLfiles
           ];
         };
       });
