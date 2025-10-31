@@ -18,6 +18,12 @@
     "out": "out/canvas-pages/be03-soa-vanlige-sammensettninger.html"
   },
   {
+    "file": "./uke-3-infrastructure-as-code/canvas/tema-1-introduksjon.md",
+    "title": "BE03 - IaC - Introduksjon til deklarative infrastruktur",
+    "slug": "be03-iac-introduksjon",
+    "out": "out/canvas-pages/be03-iac-introduksjon.html"
+  },
+  {
     "file": "./internal/canvas/timeplan-iac.md",
     "title": "BE03 - IaC - Timeplan",
     "slug": "be03-iac-timeplan",

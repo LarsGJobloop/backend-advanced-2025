@@ -1,0 +1,149 @@
+<h1 id="introduksjon-til-infrastruktur-som-kode-iac">
+  Introduksjon til Infrastruktur som Kode (IaC)
+</h1>
+<p>
+  En introduksjon til hvordan moderne infrastruktur administreres som kode –
+  versjonert, reproduserbar og automatisert. Målet er å forstå prinsippene bak
+  deklarativ infrastruktur og få førstehånds erfaring med verktøy som Terraform.
+</p>
+<h2 id="teori">Teori</h2>
+<h3 id="hva-er-infrastruktur-som-kode">Hva er Infrastruktur som Kode?</h3>
+<p>
+  Infrastructure as Code (IaC) handler om å beskrive og opprette
+  IT-infrastruktur gjennom kode i stedet for manuelle prosesser. I stedet for å
+  “klikke” seg gjennom et webgrensesnitt for å opprette servere og nettverk,
+  defineres ønsket tilstand i tekstfiler – og et verktøy sørger for å
+  implementere denne tilstanden.
+</p>
+<p>Grunntanken er <strong>reproduserbarhet og sporbarhet</strong>:</p>
+<ul>
+  <li>All infrastrukturkonfigurasjon lagres i versjonskontroll (Git).</li>
+  <li>Endringer kan revideres, testes og rulles tilbake.</li>
+  <li>
+    Man kan bygge identiske miljøer på tvers av utvikling, test og produksjon.
+  </li>
+</ul>
+<h3 id="versjonskontroll-og-reproduserbarhet">
+  Versjonskontroll og Reproduserbarhet
+</h3>
+<p>
+  Versjonskontrollsystemer som <strong>Git</strong> gir historikk og samarbeid
+  rundt infrastrukturkode. Dette muliggjør reproduserbarhet — samme kode gir
+  samme miljø, og dermed høyere kvalitet og forutsigbarhet.
+</p>
+<p>
+  Reproduserbarhet er en forutsetning for kvalitetssikring og verifikasjon: uten
+  versjonskontroll vet man aldri sikkert hvilken konfigurasjon som produserte et
+  gitt system.
+</p>
+<h3 id="api-er-som-grensesnitt-mot-skyen">API-er som grensesnitt mot skyen</h3>
+<p>
+  Moderne skyleverandører som AWS, Azure og Hetzner tilbyr API-er for å
+  bestille, konfigurere og administrere infrastruktur. IaC-verktøy fungerer som
+  “klienter” til disse API-ene, slik at utviklere kan beskrive ressursene som
+  kode.
+</p>
+<h3 id="verktøy-og-paradigmer">Verktøy og Paradigmer</h3>
+<ul>
+  <li>
+    <strong>Terraform</strong> – Deklarativt verktøy for å beskrive ønsket
+    tilstand og la motoren sørge for at virkeligheten matcher denne.
+  </li>
+  <li><strong>OpenTofu</strong> – Fri og åpen kildekode-fork av Terraform.</li>
+  <li>
+    <strong>Pulumi</strong> – Tilbyr IaC via tradisjonelle programmeringsspråk
+    (TypeScript, Python, Go, m.fl.).
+  </li>
+  <li>
+    <strong>REST/GraphQL</strong> – Rå alternativer for manuell orkestrering av
+    infrastruktur.
+  </li>
+</ul>
+<p>
+  IaC kan altså sees som et uttrykk for
+  <strong>deklarativ programmering</strong> anvendt på infrastruktur: “Hva skal
+  eksistere” heller enn “hvordan det opprettes”.
+</p>
+<h2 id="konkretisering">Konkretisering</h2>
+<h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
+<p>
+  Dette er et fundamentalt tema for alle som jobber med moderne IT-drift, DevOps
+  og skyarkitektur.<br />
+  Eksempler:
+</p>
+<ul>
+  <li>
+    <strong>Skyinfrastruktur:</strong> Oppsett av servere, nettverk og lagring i
+    Hetzner, AWS, Azure, GCP.
+  </li>
+  <li>
+    <strong>Automatisering:</strong> Bruk av CI/CD for å realisere
+    infrastrukturendringer automatisk.
+  </li>
+  <li>
+    <strong>Reproduserbarhet:</strong> Kloning av et helt miljø til en ny region
+    eller kunde med en kommando.
+  </li>
+  <li>
+    <strong>GitOps:</strong> Drift av infrastruktur gjennom Git som “source of
+    truth”.
+  </li>
+</ul>
+<p>I praksisdelen av denne økten kommer dere til å lære hvordan man:</p>
+<ul>
+  <li>Generere SSH-nøkler og koble seg til en Hetzner-instans.</li>
+  <li>Opprette og konfigurere en server gjennom et webgrensesnitt.</li>
+  <li>Bruke Git til å versjonere konfigurasjonen.</li>
+  <li>Bruke Terraform til å realisere infrastruktur som kode.</li>
+</ul>
+<h3 id="eksterne-lenker">Eksterne Lenker</h3>
+<ul>
+  <li>
+    <a href="https://developer.hashicorp.com/terraform/docs"
+      >Terraform.io – Dokumentasjon</a
+    >
+  </li>
+  <li>
+    <a href="https://opentofu.org/">OpenTofu – Open Source Terraform Fork</a>
+  </li>
+  <li>
+    <a href="https://www.pulumi.com/"
+      >Pulumi – Infrastructure as Code via Programming Languages</a
+    >
+  </li>
+  <li><a href="https://docs.hetzner.cloud/">Hetzner Cloud API</a></li>
+</ul>
+<h2 id="videre-lesing">Videre Lesing</h2>
+<ul>
+  <li>
+    <strong>“The Phoenix Project”</strong> – Roman som illustrerer hvorfor
+    automatisering og DevOps er avgjørende.
+  </li>
+  <li>
+    <strong>“Terraform: Up and Running”</strong> av Yevgeniy Brikman – Praktisk
+    bok om IaC i produksjon.
+  </li>
+  <li>
+    <strong>HashiCorp Learn: Terraform</strong> – Interaktive guider og
+    opplæringslabber.
+  </li>
+</ul>
+<h2 id="referanse-liste">Referanse Liste</h2>
+<ul>
+  <li>
+    HashiCorp Terraform-dokumentasjon:
+    <a href="https://developer.hashicorp.com/terraform"
+      >https://developer.hashicorp.com/terraform</a
+    >
+  </li>
+  <li>
+    Hetzner Cloud API-dokumentasjon:
+    <a href="https://docs.hetzner.cloud">https://docs.hetzner.cloud</a>
+  </li>
+  <li>
+    OpenTofu-prosjekt:
+    <a href="https://github.com/opentofu/opentofu"
+      >https://github.com/opentofu/opentofu</a
+    >
+  </li>
+</ul>
