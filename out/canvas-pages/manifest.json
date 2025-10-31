@@ -1,0 +1,68 @@
+[
+  {
+    "file": "./uke-2-service-oriented-systems/canvas/tema-2-tjenestesammensetning.md",
+    "title": "BE03 - SOA - Tjenestesammensetning",
+    "slug": "be03-soa-tjenestesammensetning",
+    "out": "out/canvas-pages/be03-soa-tjenestesammensetning.html"
+  },
+  {
+    "file": "./uke-2-service-oriented-systems/canvas/tema-1-introduksjon.md",
+    "title": "BE03 - SOA - Introduksjon til Tjeneste Orienterte Systemer",
+    "slug": "be03-soa-introduksjon",
+    "out": "out/canvas-pages/be03-soa-introduksjon.html"
+  },
+  {
+    "file": "./uke-2-service-oriented-systems/canvas/tema-3-vanlige-sammensettninger.md",
+    "title": "BE03 - SOA - Vanlige Tjenestesammensetninger",
+    "slug": "be03-soa-vanlige-sammensettninger",
+    "out": "out/canvas-pages/be03-soa-vanlige-sammensettninger.html"
+  },
+  {
+    "file": "./internal/canvas/timeplan-iac.md",
+    "title": "BE03 - IaC - Timeplan",
+    "slug": "be03-iac-timeplan",
+    "out": "out/canvas-pages/be03-iac-timeplan.html"
+  },
+  {
+    "file": "./internal/canvas/oversikt.md",
+    "title": "BE03 - Backend Advanced",
+    "slug": "be03-backend-advanced",
+    "out": "out/canvas-pages/be03-backend-advanced.html"
+  },
+  {
+    "file": "./internal/canvas/timeplan-iam.md",
+    "title": "BE03 - IAM - Timeplan",
+    "slug": "be03-iam-timeplan",
+    "out": "out/canvas-pages/be03-iam-timeplan.html"
+  },
+  {
+    "file": "./internal/canvas/timeplan-tdd.md",
+    "title": "BE03 - TDD - Timeplan",
+    "slug": "be03-tdd-timeplan",
+    "out": "out/canvas-pages/be03-tdd-timeplan.html"
+  },
+  {
+    "file": "./internal/canvas/utvidelser.md",
+    "title": "BE03 - Ekstra temaer",
+    "slug": "be03-ekstra-temaer",
+    "out": "out/canvas-pages/be03-ekstra-temaer.html"
+  },
+  {
+    "file": "./internal/canvas/timeplan-soa.md",
+    "title": "BE03 - SOA - Timeplan",
+    "slug": "be03-soa-timeplan",
+    "out": "out/canvas-pages/be03-soa-timeplan.html"
+  },
+  {
+    "file": "./uke-1-test-driven-development/canvas/tema-1-introduksjon.md",
+    "title": "BE03 - TDD - Introduksjon til Test Dreven Utvikling",
+    "slug": "be03-tdd-introduksjon",
+    "out": "out/canvas-pages/be03-tdd-introduksjon.html"
+  },
+  {
+    "file": "./uke-1-test-driven-development/canvas/tema-3-grensesnittskontrakter.md",
+    "title": "BE03 - TDD - Grensesnittskontrakter",
+    "slug": "be03-tdd-grensesnittskontrakter",
+    "out": "out/canvas-pages/be03-tdd-grensesnittskontrakter.html"
+  }
+]

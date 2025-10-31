@@ -23,6 +23,7 @@
             pandoc
             just
             nodePackages.prettier # For formatting markdown and HTMLfiles
+            jq
             sops
             age
           ];
