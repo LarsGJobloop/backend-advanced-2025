@@ -1,0 +1,172 @@
+<h1 id="cloud-init-og-automatisert-bootstrap">
+  Cloud Init og Automatisert Bootstrap
+</h1>
+<p>
+  Et dypdykk i hvordan servere kan konfigureres automatisk ved oppstart, uten
+  manuelle SSH-kommandoer. Vi introduserer Cloud Init som standardverktøyet for
+  deklarativ “bootstrap” av servere.
+</p>
+<h2 id="teori">Teori</h2>
+<h3 id="reproduserbarhet-og-imperative-installasjoner">
+  Reproduserbarhet og Imperative Installasjoner
+</h3>
+<p>
+  I forrige økt opprettet vi en server manuelt, logget inn via SSH og
+  installerte programvare steg for steg. Det fungerer — men det
+  <strong>er ikke reproduserbart</strong>.<br />
+  Hver gang man gjør endringer manuelt, introduseres risiko for variasjon og
+  feil.
+</p>
+<p>
+  IaC handler om å <strong>beskrive ønsket tilstand</strong>, ikke gjenta
+  manuelle handlinger.<br />
+  For at en server skal kunne konfigureres uten menneskelig innblanding, må
+  selve oppstarten være deklarativ. Det er her
+  <strong>Cloud Init</strong> kommer inn.
+</p>
+<h3 id="hva-er-cloud-init">Hva er Cloud Init?</h3>
+<p>
+  Cloud Init er en standard mekanisme brukt av de fleste moderne skyleverandører
+  (Hetzner, AWS, Azure, GCP, m.fl.) for å konfigurere en ny virtuell maskin
+  <strong>ved første oppstart</strong>.
+</p>
+<p>Man leverer et YAML- eller shell-skript til serveren som beskriver:</p>
+<ul>
+  <li>hvilke pakker som skal installeres,</li>
+  <li>hvilke filer som skal opprettes,</li>
+  <li>hvilke kommandoer som skal kjøres,</li>
+  <li>og hvordan systemet skal konfigureres.</li>
+</ul>
+<p>
+  Dette skriptet kjører <strong>automatisk</strong> når serveren starter første
+  gang.
+</p>
+<p>Eksempel (forkortet):</p>
+<div class="sourceCode" id="cb1">
+  <pre
+    class="sourceCode yaml"
+  ><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#cloud-config</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">packages</span><span class="kw">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> git</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">runcmd</span><span class="kw">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> git clone https://github.com/my-org/app.git /opt/app</span></span></code></pre>
+</div>
+<h3 id="deklarativ-bootstrap">Deklarativ Bootstrap</h3>
+<p>
+  Cloud Init gjør den første konfigurasjonen deklarativ — du beskriver ønsket
+  tilstand, ikke prosedyren for å nå den. Dette danner overgangen fra manuell
+  til <strong>helhetlig deklarativ IaC</strong>, der Terraform definerer selve
+  ressursen (VM-en), mens Cloud Init definerer hvordan den skal
+  <strong>sette seg selv opp</strong>.
+</p>
+<h3 id="samspill-med-terraform">Samspill med Terraform</h3>
+<p>Terraform og Cloud Init utfyller hverandre:</p>
+<ul>
+  <li>Terraform: Oppretter infrastrukturen (server, nettverk, IP, osv.).</li>
+  <li>Cloud Init: Konfigurerer innholdet på serveren ved oppstart.</li>
+</ul>
+<p>
+  I Terraform defineres Cloud Init vanligvis gjennom en “template” eller inline
+  YAML-struktur som sendes som <code>user_data</code> til ressursen. Hver gang
+  du kjører <code>terraform apply</code>, sørger Terraform for at riktig Cloud
+  Init-konfigurasjon blir levert.
+</p>
+<blockquote>
+  <p>
+    Dette gjør det mulig å
+    <strong>slette og gjenopprette hele miljøet</strong> med ett tastetrykk
+    (<code>terraform destroy</code> → <code>terraform apply</code>).
+  </p>
+</blockquote>
+<h2 id="konkretisering">Konkretisering</h2>
+<h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
+<p>
+  Cloud Init brukes i nesten alle moderne skymiljøer for å sikre at servere
+  starter med riktig konfigurasjon, uten manuell SSH-tilgang.
+</p>
+<p>Eksempler:</p>
+<ul>
+  <li>
+    <strong>Automatisk installasjon</strong> av Git, Docker, .NET og
+    avhengigheter.
+  </li>
+  <li>
+    <strong>Bootstrap av applikasjoner:</strong> Klone et Git-repo og starte
+    Docker Compose ved oppstart.
+  </li>
+  <li>
+    <strong>Reproduserbare miljøer:</strong> Ødelegg og gjenopprett hele
+    testmiljøet med <code>terraform apply</code>.
+  </li>
+</ul>
+<p>Under økten:</p>
+<ul>
+  <li>
+    Deltakerne lager et Cloud Init-skript for å installere Git og Docker
+    Compose.
+  </li>
+  <li>
+    De legger inn kommandoer for å klone et repo og starte et Docker
+    Compose-manifest automatisk.
+  </li>
+  <li>
+    De tester gjenoppbygging ved å kjøre <code>terraform destroy</code> og
+    <code>terraform apply</code>.
+  </li>
+</ul>
+<blockquote>
+  <p>
+    Poenget er å vise <strong>iterasjon og validering</strong>: små steg, test
+    ofte, og tenk “reproduserbart fra dag 1”.
+  </p>
+</blockquote>
+<h3 id="eksterne-lenker">Eksterne Lenker</h3>
+<ul>
+  <li>
+    <a href="https://cloudinit.readthedocs.io/en/latest/"
+      >Cloud Init Documentation</a
+    >
+  </li>
+  <li>
+    <a href="https://docs.hetzner.cloud/#cloud-init"
+      >Hetzner Cloud Init Support</a
+    >
+  </li>
+  <li>
+    <a
+      href="https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs"
+      >Terraform: Hetzner Cloud Provider</a
+    >
+  </li>
+</ul>
+<h2 id="videre-lesing">Videre Lesing</h2>
+<ul>
+  <li><strong>HashiCorp Learn: Using Cloud Init with Terraform</strong></li>
+  <li>
+    <strong>The Twelve-Factor App – Config as Code</strong> (spesielt faktor 10:
+    Dev/prod parity)
+  </li>
+  <li>
+    <strong>GitHub - cloud-init examples</strong>: Samling av eksempler fra
+    praksisfeltet.
+  </li>
+</ul>
+<h2 id="referanse-liste">Referanse Liste</h2>
+<ul>
+  <li>
+    Cloud Init-spesifikasjonen:
+    <a href="https://cloudinit.readthedocs.io"
+      >https://cloudinit.readthedocs.io</a
+    >
+  </li>
+  <li>
+    Terraform dokumentasjon:
+    <a href="https://developer.hashicorp.com/terraform"
+      >https://developer.hashicorp.com/terraform</a
+    >
+  </li>
+  <li>
+    Hetzner API Cloud Config:
+    <a href="https://docs.hetzner.cloud">https://docs.hetzner.cloud</a>
+  </li>
+</ul>

@@ -18,6 +18,12 @@
     "out": "out/canvas-pages/be03-soa-vanlige-sammensettninger.html"
   },
   {
+    "file": "./uke-3-infrastructure-as-code/canvas/tema-2-server-oppsett.md",
+    "title": "BE03 - IaC - Cloud Init og Automatisert Bootstrap",
+    "slug": "be03-iac-cloud-init",
+    "out": "out/canvas-pages/be03-iac-cloud-init.html"
+  },
+  {
     "file": "./uke-3-infrastructure-as-code/canvas/tema-1-introduksjon.md",
     "title": "BE03 - IaC - Introduksjon til deklarative infrastruktur",
     "slug": "be03-iac-introduksjon",
