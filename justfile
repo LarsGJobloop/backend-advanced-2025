@@ -72,7 +72,6 @@ upload-canvas-pages: generate-canvas-manifest
         just _upload_page "$slug" "$title" "$out" || {
             echo "Failed to upload ${slug}" >&2
         }
-        exit 0 # DEBUG
         sleep 1
     done
 
