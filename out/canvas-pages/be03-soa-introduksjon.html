@@ -1,0 +1,230 @@
+<h1 id="introduksjon-til-tjeneste-orienterte-systemer-soa">
+  Introduksjon til Tjeneste Orienterte Systemer (SOA)
+</h1>
+<p>
+  I begynnelsen av programmering så lagde vi systemer som inkluderte alt, fra
+  hardware komponenter til logikk, helt opp til bruker grensesnitt. Så kalte
+  “Big Balls of Mud” eller “Spaghetti Kode”.
+</p>
+<p>
+  Disse systeme kan ha fungert og løst problemet der og da, men de er tett
+  flettet sammen, og endringer i disse er som regel veldig til ekstremt
+  vanskelig å gjøre. Som for eksempel endre hvem som har tilgang til en ressurs
+  kan medføre endringer i titalls filer, gjennom et dusin undersystemer. Det er
+  og særdeles vanskelig å resonere rundt eller isoler egenskaper ved disse.
+</p>
+<p>
+  Som en løsning på disse problemene, og flere, så har vi et konsept som kalles
+  Tjeneste Orientert Arkitektur/Service Oriented Arkitekture.
+</p>
+<h2 id="teori">Teori</h2>
+<p>
+  Tjeneste Orientering flere problemer og er inspirert av hvordan moderne
+  markedsøkonomi og bedrifter organiserer sin virksomhet.
+</p>
+<p>Noen av kvalitetene en søker å oppnå:</p>
+<ul>
+  <li>(Loose Coupling) Tjenester kan utvikles uavhengig av hverandre</li>
+  <li>
+    (Reliability) Viss en tjeneste går ned, så kan andre håndtere mangler
+    elegant.
+  </li>
+  <li>
+    [Standardization] Standardiserte grensesnitt kan byttes ut med forskjellige
+    implementasjoner/outsourcing
+  </li>
+  <li>
+    (Agility) Små tjenester kan utvikles forter og med mindre ressurser enn
+    større
+  </li>
+  <li>
+    (Skalering) Når tjenster er veldefinerte og enkapsulerte så er individuell
+    skalering mulig
+  </li>
+  <li>
+    (Heterogenitet) Standardiserte grensesnitt tillater bruk av domene
+    optimisert teknologier
+  </li>
+</ul>
+<p>
+  For å kunne utvikle disse så kommer vi til å benytte oss av et sett med
+  løsninger som vi kaller Kontainer Teknologier. Dette er standardiserte
+  løsninger for å pakke ned, distribuere applikasjoner, og kjøre applikasjoner.
+</p>
+<p>
+  Konkret så trenger du å installere et lokalt kjøretids miljø for disse kalt
+  <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>.
+</p>
+<p>
+  Etter det så kommer vi til pakke ned en .NET applikasjon i en Docker Container
+  og kjøre denne, før vi laster den opp på GitHub Container Registry (GHCR) og
+  kjører værandre sine.
+</p>
+<p>
+  Disse Containerne er veldig lett og distribuere og kjøre lokalt, en kan sjekke
+  ut åpne registre for å se hva andre ting some er blitt laget og gjort åpent
+  tilgjengelig. <a href="https://hub.docker.com/">Docker Hub</a> er det mest
+  kjente, men det er og andre steder som GitHub sitt eget.
+</p>
+<blockquote>
+  <p>
+    For MacOS brukere så kan <a href="https://orbstack.dev/">OrbStack</a> være
+    ett bedre alternative til Docker Desktop
+  </p>
+</blockquote>
+<h2 id="konkretisering">Konkretisering</h2>
+<h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
+<p>
+  Tjeneste orientering er i bruk i gjennom hele samfunnet, ikke kun i digitale
+  systemer. Bare noter deg alt du bruker i det daglige liv (helsetjeneste,
+  rørleggertjeneste, etc). Digitale systemer følger mange av de samme
+  prinsippene fra:
+</p>
+<ul>
+  <li>ASP .NET Services</li>
+  <li>Docker Compose Services</li>
+  <li>Kubernetes Microservices</li>
+</ul>
+<p>Vi kommer til å bruke:</p>
+<ul>
+  <li>Dockerfile for å definere våre egne container bilder</li>
+  <li>Docker Desktop til å overvåke og inspisere containere som kjører</li>
+  <li>GitHub Actions til å automatisk publisere våre egne containere bilder</li>
+</ul>
+<h3 id="eksempler">Eksempler</h3>
+<p><strong>Dockerfile for å bygge en lokal ASP .NET Applikasjon</strong>:</p>
+<blockquote>
+  <p>
+    Denne kan endre seg viss du er veldig aktiv på å organisere ting i mapper
+  </p>
+</blockquote>
+<div class="sourceCode" id="cb1">
+  <pre
+    class="sourceCode dockerfile"
+  ><code class="sourceCode dockerfile"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start with an Image where .NET 9.0 SDK is already installed</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> mcr.microsoft.com/dotnet/sdk:9.0 <span class="kw">AS</span> build</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /App</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy everything</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> . ./</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Restore as distinct layers</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">dotnet</span> restore</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Build and publish a release</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">dotnet</span> publish <span class="at">-o</span> out</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Build runtime image, only containes the .NET 9.0 runtime</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> mcr.microsoft.com/dotnet/aspnet:9.0</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /App</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> <span class="op">--from=build</span> /App/out .</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">ENTRYPOINT</span> [<span class="st">&quot;dotnet&quot;</span>, <span class="st">&quot;DotNet.Docker.dll&quot;</span>]</span></code></pre>
+</div>
+<p><strong>GitHub Actions for å publisere kontainer bilde til GHCR</strong>:</p>
+<div class="sourceCode" id="cb2">
+  <pre
+    class="sourceCode yaml"
+  ><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Publish .NET Docker Image to GHCR</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> main</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build-and-publish</span><span class="kw">:</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">permissions</span><span class="kw">:</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">packages</span><span class="kw">:</span><span class="at"> write</span><span class="co"> # Grant write permission for packages at the job level</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Checkout repository</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Log in to GitHub Container Registry</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> docker/login-action@v3</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">registry</span><span class="kw">:</span><span class="at"> ghcr.io</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">username</span><span class="kw">:</span><span class="at"> ${{ github.actor }}</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">password</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Build and push Docker image</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> docker/build-push-action@v5</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">context</span><span class="kw">:</span><span class="at"> .</span><span class="co"> # Path to your Dockerfile context</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">file</span><span class="kw">:</span><span class="at"> ./Dockerfile</span><span class="co"> # Path to your Dockerfile</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">push</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">tags</span><span class="kw">:</span><span class="at"> ghcr.io/${{ github.repository }}:latest</span></span></code></pre>
+</div>
+<p><strong>Liste over mest brukte kommandoer</strong>:</p>
+<ul>
+  <li>
+    <p>Sjekk om Docker er korrekt installert:</p>
+    <div class="sourceCode" id="cb3">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run hello-world</span></code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Kjør et container bilde fra Docker Hub (NGinx)</p>
+    <div class="sourceCode" id="cb4">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--publish</span> 8080:80 nginx</span></code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Bygge og kjør en lokal container</p>
+    <div class="sourceCode" id="cb5">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">--tag</span> dotnet-test .</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--publish</span> 8080:5000 dotnet-test</span></code></pre>
+    </div>
+  </li>
+</ul>
+<blockquote>
+  <p>
+    Vi kommer til å benytte oss av noe letter verktøy framover, så ikke tenk at
+    du trenger å pugge disse kommandoene.
+  </p>
+</blockquote>
+<h3 id="eksterne-lenker">Eksterne Lenker</h3>
+<ul>
+  <li><a href="">TODO! Lenk til GitHub Repository</a></li>
+  <li>
+    <a href=""
+      >TODO! Lenk til CICD workflow for å containerisere ASP .NET APIer</a
+    >
+  </li>
+  <li>
+    <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>
+    <ul>
+      <li><a href="https://orbstack.dev/">For MacOS - OrbStack</a></li>
+    </ul>
+  </li>
+  <li><a href="https://hub.docker.com/">Docker Hub</a></li>
+  <li>
+    <a
+      href="https://learn.microsoft.com/en-us/dotnet/core/docker/build-container"
+      >Microsoft - Containerize .NET app</a
+    >
+  </li>
+</ul>
+<h2 id="videre-lesing">Videre Lesing</h2>
+<ul>
+  <li>
+    <a href="https://no.wikipedia.org/wiki/Tjenestedesign"
+      >Wikipedia - Tjenestedesign</a
+    >
+  </li>
+  <li><a href="https://opencontainers.org/">Open Container Initiative</a></li>
+</ul>
+<h2 id="referanse-liste">Referanse Liste</h2>
+<ul>
+  <li>
+    <a href="https://en.wikipedia.org/wiki/Service-oriented_architecture"
+      >Wikipedia - SOA</a
+    >
+  </li>
+  <li><a href="https://docs.docker.com/">Docker Documentation</a></li>
+</ul>

@@ -1,0 +1,143 @@
+<h1 id="timeplan-testdrevet-utvikling-tdd">
+  Timeplan — Testdrevet utvikling (TDD)
+</h1>
+<p>
+  Undervisningsøktene er delt opp i teori og praksis (ca. 50/50).<br />
+  Prioriter praksis fremfor teori – det er bedre med 30 minutter teori og 90
+  minutter praksis enn motsatt.<br />
+  Legg inn 3–4 korte pauser. Total tid per økt: ca. 120 minutter.
+</p>
+<h2 id="instruktørnotat">Instruktørnotat</h2>
+<p>
+  Økta handler om å la deltakerne <em>oppleve</em> TDD som metode, ikke forklare
+  den.<br />
+  Det er viktig å la dem snuble litt — ikke gi løsningen for tidlig.
+</p>
+<h2 id="økt-1-introduksjon-til-tdd">Økt 1 — Introduksjon til TDD</h2>
+<p>
+  <strong>Varighet:</strong> ~2 timer<br />
+  <strong>Formål:</strong> Forstå TDD som en eksperimentell metode for å drive
+  frem design.
+</p>
+<h3 id="teori-3040-min">Teori (30–40 min)</h3>
+<ul>
+  <li>
+    Vitenskapelig metodikk - hva er det og hvordan kan vi anvende den i
+    utvikling.
+  </li>
+  <li>
+    Eksperimenter for ingeniører:
+    <ul>
+      <li>Kartlegging og innsnevring av problem- og løsningsdomenet.</li>
+    </ul>
+  </li>
+  <li>Grenser for kunnskap og eksperimenter (Gödel, Kant, Taleb).</li>
+  <li>Hva betyr “å skrive tester først”? Hvorfor er det nyttig?</li>
+</ul>
+<h3 id="praksis-8090-min">Praksis (80–90 min)</h3>
+<ul>
+  <li><strong>Rytme:</strong> Red → Green → Refactor → Commit.</li>
+  <li>List opp forventede avhengigheter.</li>
+  <li>
+    Start med et <strong>enkelt og kjent problem</strong> (eks.
+    <em>Calculator</em>).
+  </li>
+  <li>Implementer happy path først.</li>
+  <li>Utforsk deretter edge cases.</li>
+</ul>
+<p><strong>Eksempelsekvens:</strong></p>
+<ol type="1">
+  <li>Opprett en klasse: <code>Calculator</code>.</li>
+  <li>Definer en metode: <code>Calculator.Add</code>.</li>
+  <li>Skriv en test for et kjent utfall: <code>2 + 2 = 4</code>.</li>
+  <li>
+    Lag neste test. La deltakerne formulere spørsmålene som driver neste steg.
+  </li>
+  <li>
+    Utforsk edge cases:
+    <ul>
+      <li>Underflow / overflow</li>
+      <li>Division by zero</li>
+    </ul>
+  </li>
+  <li>
+    Diskuter hvordan maskinvarebegrensninger påvirker hva som faktisk
+    <em>kan</em> testes.
+  </li>
+</ol>
+<h2 id="økt-2-eksperimenter-med-tdd">Økt 2 — Eksperimenter med TDD</h2>
+<p>
+  <strong>Varighet:</strong> ~2 timer<br />
+  <strong>Formål:</strong> Bruke TDD til å oppdage løsninger fremfor å bygge
+  etter spesifikasjon.
+</p>
+<h3 id="teori-30-min">Teori (30 min)</h3>
+<ul>
+  <li>Lag en enkel kravspesifikasjon.</li>
+  <li>Skisser en flyt, med fokus på <em>grensesnittet</em>.</li>
+  <li>
+    Ikke definer implementasjonen – det er det TDD skal avdekke.<br />
+    <em>(Oppmuntre deltakerne til å være “naive” i denne fasen.)</em>
+  </li>
+</ul>
+<h3 id="praksis-90-min">Praksis (90 min)</h3>
+<ul>
+  <li><strong>Rytme:</strong> Red → Green → Refactor → Commit.</li>
+  <li>Diskuter hva som er viktigst å verifisere.</li>
+  <li>Skriv første test <em>før</em> du lager programmet.</li>
+  <li>Jobb deg iterativt videre, med små steg og hyppige commits.</li>
+</ul>
+<h2 id="økt-3-tdd-og-grensesnittskontrakter">
+  Økt 3 — TDD og grensesnittskontrakter
+</h2>
+<p>
+  <strong>Varighet:</strong> ~2 timer<br />
+  <strong>Formål:</strong> Forstå verdien av stabile grensesnitt og hvordan TDD
+  hjelper med det.
+</p>
+<h3 id="teori-30-min-1">Teori (30 min)</h3>
+<ul>
+  <li>Programmene våre er bare små deler av et større system.</li>
+  <li>
+    Det er <strong>grensesnittene</strong> som skaper stabilitet – ikke intern
+    implementasjon.
+  </li>
+  <li>
+    Interne detaljer testes bare for å støtte forståelsen, ikke som mål i seg
+    selv.
+  </li>
+</ul>
+<h3 id="praksis-90-min-1">Praksis (90 min)</h3>
+<ul>
+  <li><strong>Rytme:</strong> Red → Green → Refactor → Commit.</li>
+  <li>Definer et RESTful API-grensesnitt.</li>
+  <li>Skriv tester for kontraktene, bryt dem opp etter behov.</li>
+  <li>
+    Utforsk edge cases for å drive frem arkitekturspørsmål:
+    <ul>
+      <li>Hva skjer ved server-restart?</li>
+      <li>Hva skjer når en ekstern API ikke svarer?</li>
+      <li>Hvordan bør feilhåndtering eksponeres?</li>
+    </ul>
+  </li>
+</ul>
+<h2 id="oppsummering-for-instruktør">Oppsummering for instruktør</h2>
+<p><strong>Evalueringstemaer:</strong></p>
+<ul>
+  <li>Deltakeren følger rytmen (Red–Green–Refactor).</li>
+  <li>De tester <em>før</em> de koder.</li>
+  <li>De kan reflektere over hvordan TDD påvirker designvalg.</li>
+  <li>De kan forklare hvorfor visse tester eksisterer.</li>
+</ul>
+<p><strong>Tips for fasilitering:</strong></p>
+<ul>
+  <li>Bruk tid på refleksjon gjennom praksisøktene.</li>
+  <li>
+    Oppmuntre til å <em>snakke høyt</em> om hva de forventer før de skriver
+    tester.
+  </li>
+  <li>
+    Ikke la øktene ende i “produksjonskode” – målet er læring, ikke ferdig
+    produkt.
+  </li>
+</ul>
