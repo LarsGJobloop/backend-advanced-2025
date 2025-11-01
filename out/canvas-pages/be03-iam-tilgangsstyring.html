@@ -1,0 +1,167 @@
+<h1 id="tilgangsstyring-i-praksis">Tilgangsstyring i praksis</h1>
+<p>
+  Når identitet og autentisering er etablert, gjenstår det viktigste
+  spørsmålet:<br />
+  <strong>Hva får du lov til å gjøre, og hvorfor?</strong><br />
+  Denne økten handler om hvordan systemer
+  <strong>håndhever rettigheter</strong>, og hvordan ulike modeller for
+  tilgangsstyring kan kombineres i praksis.
+</p>
+<h2 id="teori">Teori</h2>
+<h3 id="oversikt-over-tilgangsstyringsmodeller">
+  Oversikt over tilgangsstyringsmodeller
+</h3>
+<p>
+  IAM handler ikke bare om å vite hvem du er, men også om å bestemme hva du får
+  gjøre.<br />
+  Flere tilnærminger eksisterer, og de overlapper ofte i moderne systemer.
+</p>
+<h4 id="rbac---role-based-access-control">RBAC - Role Based Access Control</h4>
+<p>
+  Rettigheter tildeles basert på <strong>roller</strong>.<br />
+  Eksempel:
+</p>
+<ul>
+  <li><em>Administrator</em> → kan lese, skrive og slette</li>
+  <li><em>Bruker</em> → kan lese og opprette</li>
+  <li><em>Gjest</em> → kun lese</li>
+</ul>
+<p>
+  Fordel: Enkelt å forstå og implementere.<br />
+  Ulempe: Kan bli rigid og vanskelig å skalere ved mange roller.
+</p>
+<h4 id="abac---attribute-based-access-control">
+  ABAC - Attribute Based Access Control
+</h4>
+<p>
+  Tilgang bestemmes av <strong>attributter</strong> knyttet til bruker, ressurs
+  og kontekst.<br />
+  Eksempel:<br />
+  <em
+    >Brukeren får tilgang dersom (rolle == ‘ansatt’) og (tidspunkt mellom
+    08:00–18:00).</em
+  >
+</p>
+<p>
+  Fordel: Fleksibel og dynamisk.<br />
+  Ulempe: Krever presis policydefinisjon og mer kompleks evaluering.
+</p>
+<h4 id="pbac---policy-based-access-control">
+  PBAC - Policy Based Access Control
+</h4>
+<p>
+  Tilgang styres av <strong>deklarative regler (policies)</strong>, gjerne
+  uttrykt som kode.<br />
+  Eksempel:<br />
+  Et GitHub-team har policyer som definerer hvem som kan opprette repositories,
+  hvem som kan godkjenne Pull Requests (PR-er), osv.
+</p>
+<p>
+  Fordel: Gir revisjonsmuligheter og “as code”-styring.<br />
+  Ulempe: Mer krevende å teste og validere.
+</p>
+<h4 id="rebac---relationship-based-access-control">
+  ReBAC - Relationship Based Access Control
+</h4>
+<p>
+  Tilgang bestemmes av <strong>relasjoner</strong> mellom aktører og
+  ressurser.<br />
+  Eksempel:<br />
+  I Discord eller GitHub:
+</p>
+<ul>
+  <li>
+    <em
+      >Du kan endre dette repoet fordi du er medlem av et team som eier det.</em
+    >
+  </li>
+</ul>
+<p>
+  Fordel: Godt egnet for sosiale, samarbeids- og organisasjonsstrukturer.<br />
+  Ulempe: Vanskeligere å visualisere og kontrollere uten gode verktøy.
+</p>
+<h3 id="kombinerte-modeller">Kombinerte modeller</h3>
+<p>I virkeligheten kombineres modellene:</p>
+<ul>
+  <li>GitHub bruker <strong>RBAC + PBAC</strong> (team og rettningslinjer).</li>
+  <li>
+    Discord bruker <strong>ReBAC + ABAC</strong> (roller, kanaltilgang, og
+    kontekstuelle attributter).
+  </li>
+  <li>
+    Skyplattformer som Azure og AWS kombinerer
+    <strong>PBAC + ABAC</strong> (IAM-rettningslinjer med betingelser).
+  </li>
+</ul>
+<h2 id="konkretisering">Konkretisering</h2>
+<h3 id="observasjonsøvelse">Observasjonsøvelse</h3>
+<p>Studentene analyserer eksisterende systemer som IAM-eksempler:</p>
+<h4 id="discord">Discord</h4>
+<ul>
+  <li>Roller, attributter og tillatelser</li>
+  <li>Hvordan tillatelser arves og overstyres</li>
+  <li>
+    Hva skjer når en rolle fjernes eller legges til?<br />
+    → <strong>Diskusjon:</strong> Hvordan håndheves tillit og eier?
+  </li>
+</ul>
+<h4 id="github">GitHub</h4>
+<ul>
+  <li>Hvem kan endre repo-innstillinger?</li>
+  <li>
+    Hvordan kombineres organisasjonsnivå (RBAC) og repository-rettningslinjer
+    (PBAC)?
+  </li>
+  <li>
+    Hva skjer hvis en bruker mister teamtilgang, men fortsatt har en åpen PR?
+  </li>
+</ul>
+<p>
+  Disse observasjonene gjør IAM-begrepene konkrete og viser hvordan tillit
+  implementeres gjennom kode, konfigurasjon og praksis.
+</p>
+<h3 id="eksterne-lenker">Eksterne lenker</h3>
+<ul>
+  <li>
+    <a href="https://discord.com/developers/docs/topics/permissions"
+      >Discord Developer Docs – Permissions &amp; Roles</a
+    >
+  </li>
+  <li>
+    <a
+      href="https://docs.github.com/en/organizations/managing-access-to-your-organizations-repositories"
+      >GitHub Docs – Managing Access to Repositories</a
+    >
+  </li>
+  <li>
+    <a href="https://csrc.nist.gov/publications/detail/sp/800-192/final"
+      >NIST SP 800-192 – Access Control Models</a
+    >
+  </li>
+</ul>
+<h2 id="videre-lesing">Videre lesing</h2>
+<ul>
+  <li><em>Policy as Code</em> (HashiCorp Sentinel, Open Policy Agent)</li>
+  <li>
+    <a href="https://csrc.nist.gov/publications/detail/sp/800-162/final"
+      >NIST SP 800-162 – Attribute Based Access Control</a
+    >
+  </li>
+  <li>
+    <a href="https://research.google/pubs/pub48190/"
+      >Zanzibar: Google’s Consistent, Global Authorization System</a
+    >
+  </li>
+</ul>
+<h2 id="referanse-liste">Referanse liste</h2>
+<ul>
+  <li>GitHub Docs – Access Management</li>
+  <li>NIST 800-192 og 800-162 – Access Control Standard Models</li>
+  <li>Google Research – Zanzibar whitepaper</li>
+  <li>
+    Open Policy Agent –
+    <a href="https://www.openpolicyagent.org"
+      >https://www.openpolicyagent.org</a
+    >
+  </li>
+</ul>

@@ -42,6 +42,12 @@
     "out": "out/canvas-pages/be03-iam-oauth-github.html"
   },
   {
+    "file": "./uke-4-identity-and-access-managment/canvas/tema-3-tilgangsstyring.md",
+    "title": "BE03 - IAM - Tilgangsstyring i praksis",
+    "slug": "be03-iam-tilgangsstyring",
+    "out": "out/canvas-pages/be03-iam-tilgangsstyring.html"
+  },
+  {
     "file": "./uke-4-identity-and-access-managment/canvas/tema-1-introduksjon-til-iam.md",
     "title": "BE03 - IAM - Introduksjon til Identitet og Tilgangsstyring",
     "slug": "be03-iam-introduksjon",
