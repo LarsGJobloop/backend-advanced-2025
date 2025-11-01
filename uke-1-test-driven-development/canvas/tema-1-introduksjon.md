@@ -1,73 +1,96 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - TDD - Introduksjon til Test Dreven Utvikling
+tittel: BE03 - TDD - Introduksjon til Testdrevet utvikling
 slug: be03-tdd-introduksjon
 ---
 
-# Introduksjon til Test Dreven Utvikling (TDD)
+# Introduksjon til Testdrevet Utvikling (TDD)
 
-Test Dreven Utvikling (TDD) kommer fra problemet at når vi starter å utvikle en løsning så vet vi ikke egentlig hva den trenger å gjøre.
-
-Så når vi driver med utvikling så er det egentlig en kartlegging av hva løsningen vår trenger å gjøre eller ikke skal gjøre, det som skal være sant eller usant.
-
-TDD er praksis hvor vi skriver/kodefiserer disse kravene, før vi så endrer koden/løsningen vår for å tilfredstille disse.
+TDD (Test-Driven Development) er en metode for programvareutvikling der tester skrives **før** selve koden.  
+Hensikten er ikke primært å teste, men å **utforske og forme design** gjennom eksperimenter (forsøk og feil).
 
 ## Teori
 
-TDD deler aner med Vitensakplig Metode og du vil se mye overlapp med hvordan vi emperiske går fram for å kartlegge hvordan verden fungerer.
+### Fra vitenskap til utvikling
 
-Hele konseptet følger en ganske stram rytme:
+Testdrevet utvikling bygger på prinsippene fra vitenskapelig metode:
+man formulerer en hypotese (test), utfører et eksperiment (implementasjon), og evaluerer resultatet (refaktorering).
 
-1. Formuler noe som løsningen eller en del av løsningen skal tilfredstille.
-   1. Verifiser at spørsmålet ditt er av god nok kvalitet
-2. Endre programmet så det tilfredstiller spørsmålet du stilte
-3. Rydd opp i koden så det er letter å jobbe med den videre, mens testene fremdeles passerer
-4. Start med neste spørsmål.
+I stedet for å starte med en ferdig spesifikasjon, bruker utvikleren TDD til å **utforske** løsninger:
 
-Dette er det som blir betegnet som "Red" -> "Green" -> "Refactor" syklusen.
+- **Observasjon:** Hva er problemet vi forsøker å løse?
+- **Hypotese:** Hva bør koden gjøre?
+- **Eksperiment:** Skriv en test som feiler → implementer til den passer → refaktorer.
 
-For C# og .NET så kommer vi til å benytte oss av et rammeverk for å skrive disse testen kalt [xUnit](https://xunit.net/).
+Denne rytmen, kjent som **Red → Green → Refactor**, skaper en kontinuerlig læringssyklus.
+Koden blir et svar på spørsmålene utvikleren stiller, ikke et statisk produkt.
+
+### Eksperimentell tenkning i utvikling
+
+Å bruke TDD er å erkjenne at:
+
+- Vi **ikke vet** svaret på forhånd.
+- Vi lærer gjennom små, kontrollerte spørsmål (eksperimenter).
+- Design vokser frem gjennom interaksjon mellom test og kode.
+
+I likhet med naturvitenskapen har TDD sine begrensninger.  
+Filosofiske grenser (Kant), logiske grenser (Gödel), og praktiske grenser (Talebs _Black Swans_) minner oss om at ikke alt kan modelleres eller testes.  
+Men innenfor et gitt domene, hjelper TDD oss å utforske det vi faktisk _kan_ vite.
+
+### _Å skrive tester først_
+
+Når man skriver tester først, tvinges man til å:
+
+- Tydeliggjøre hva koden **skal gjøre** (intensjon før implementasjon).
+- Skape en **kontrakt** mellom forventning og oppførsel.
+- Designe kode som er **modulær og testbar**.
+
+Kort sagt: å skrive tester først gjør designbeslutningene mer eksplisitte.
 
 ## Konkretisering
 
 ### Hva, hvor, når blir dette brukt?
 
-TDD har blitt mer og mer vidspredd, tidligere så var det i hovedsak krevd for kritiske systemer, mens i dag så blir dette brukt selv for små
+TDD brukes der:
 
-### Eksempler
+- Kompleksiteten er håndterbar (små, isolerte enheter av logikk).
+- Man ønsker **høy endringshastighet** uten å ofre stabilitet.
+- Designet fortsatt er i flyt – man ønsker å _oppdage_ strukturen, ikke følge en rigid plan.
 
-#### Arrange -> Act -> Assert
+Eksempel på første TDD-øvelse:
 
-Standard struktur for å skrive en enkelt test.
+1. Opprett en klasse `Calculator`.
+2. Skriv første test: `2 + 2 = 4` → den feiler (Red).
+3. Implementer `Add()` til testen passer (Green).
+4. Refaktorer koden for klarhet og enkelhet (Refactor).
+5. Gjenta for neste test: `2 + (-3) = -1`.
+6. Til slutt: utforsk edge cases — overflow, deling på null, osv.
 
-```csharp
-// Arrange
-var calculator = new Calculator();
+Poenget er ikke at deltakerne skal bygge en komplett kalkulator, men at de skal **erfare rytmen** i TDD.
 
-// Act
-var result = calculator.Add(2, 2)
+Gjennom rytmen Red → Green → Refactor lærer de:
 
-// Assert
-Assert.Equal(4, result);
-```
+- Å skrive små, målbare eksperimenter.
+- Å la testene drive frem designet.
+- Å observere hvordan feil gir ny innsikt.
 
 ### Eksterne Lenker
 
-- [TODO! Lenk til GitHub Repository]()
-- [xUnit Dokumentasjon](https://xunit.net/)
+- [Kent Beck – Test-Driven Development: By Example (Addison-Wesley)](https://www.oreilly.com/library/view/test-driven-development/0321146530/)
+- [Martin Fowler – The Essence of TDD](https://martinfowler.com/bliki/TestDrivenDevelopment.html)
+- [Google Testing Blog: Why We Write Tests First](https://testing.googleblog.com/)
+- [James Shore – TDD Video Series](https://www.jamesshore.com/v2/projects/null/project-tdd)
 
-## Videre Lesing
+## Videre lesing
 
-- [Martin Fowler's Blog](https://martinfowler.com/bliki/TestDrivenDevelopment.html)
+- Kent Beck, _Extreme Programming Explained_
+- Robert C. Martin, _Clean Code_ (kapittel om testing)
+- Michael Feathers, _Working Effectively with Legacy Code_
+- Eric Evans, _Domain-Driven Design_ (for sammenhengen mellom modeller og testbare domener)
 
-> [!NOTE]
-> Mye av logikk baserer seg i filosofien, så for dypere forståelse av hvordan stille gode spørsmål og hvilken spørsmål som i det hele tatt gir mening krever et dykk ned i litt mer abstrakte emner
+## Referanse liste
 
-- [Immanuel Kant - Critique of Pure Reason](https://en.wikipedia.org/wiki/Critique_of_Pure_Reason)
-- [Kurt Gödel's Incompleteness Theorem](https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems)
-- [Nassim Nicholas Taleb - The Black Swan](https://en.wikipedia.org/wiki/The_Black_Swan:_The_Impact_of_the_Highly_Improbable)
-
-## Referanse Liste
-
-- [Wikipedia Artikkel](https://en.wikipedia.org/wiki/Test-driven_development)
+- Beck, K. (2003). _Test Driven Development: By Example._ Addison-Wesley.
+- Fowler, M. (2006). _Continuous Integration._ martinfowler.com.
+- Meszaros, G. (2007). _xUnit Test Patterns: Refactoring Test Code._ Addison-Wesley.

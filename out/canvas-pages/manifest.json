@@ -91,7 +91,7 @@
   },
   {
     "file": "./uke-1-test-driven-development/canvas/tema-1-introduksjon.md",
-    "title": "BE03 - TDD - Introduksjon til Test Dreven Utvikling",
+    "title": "BE03 - TDD - Introduksjon til Testdrevet utvikling",
     "slug": "be03-tdd-introduksjon",
     "out": "out/canvas-pages/be03-tdd-introduksjon.html"
   },
