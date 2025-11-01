@@ -1,104 +1,256 @@
-<h1 id="timeplan">Timeplan</h1>
+<h1 id="timeplan---identity-and-access-management-iam">
+  Timeplan - Identity and Access Management (IAM)
+</h1>
 <p>
-  Undervisnings øktene er delt opp i Teori med Praksis ca 50/50. Mink andelen
-  teori, ikke praksis. For noen deler kan det være nok med 30 minutter
-  teori/bakgrunn og 90 minutter praksis, legg inn 3-4 pauser.
+  Undervisningen er delt i tre økter på 2 timer.<br />
+  Ca. 30-40 min teori per økt, resten praksis og diskusjon.<br />
+  Legg inn 3-4 korte pauser, helst i overgangene mellom teori og praksis.
 </p>
-<h2 id="identity-and-access-management">Identity and Access Management</h2>
-<h3 id="iam---intro">1. IAM - Intro</h3>
+<h2 id="økt-1---identitet-legitimasjon-og-tillit">
+  Økt 1 - Identitet, legitimasjon og tillit
+</h2>
 <blockquote>
-  <p>[!NOTE]</p>
   <p>
-    Dette kan fort bli veldig abstrakt og komplekst. Eksemplet jeg har benyttet
-    er Trafikk Kontrol, siden det favner bredt. Viss gruppen ikke er kjent med
-    bilkjøring, så link det opp mot noe annet (eks. Ferie/Utenlandsreise).
-  </p>
-  <p>
-    Det er viktig at de har noen konkrete erfaringer å koble disse konseptene
-    mot. Så bruk mer tid på Teori her om nødvendig.
+    Bruk konkrete, sansbare eksempler - trafikkontroll fungerer godt. Hjelper
+    studentene å forstå at “identitet” og “autoritet” alltid er relasjonelle
+    konsepter.
   </p>
 </blockquote>
-<h4 id="teori">Teori</h4>
+<h3 id="teori">Teori</h3>
 <ul>
   <li>
-    <p>Hvordan virker dette? Gå igjennom eks:</p>
+    Hvordan systemer etablerer identitet og tillit:
     <ol type="1">
-      <li>Blir stoppet i trafikk kontroll</li>
-      <li>Blir bedt om Førerkort (credential) og Vognkort (credential)</li>
-      <li>Vognkort -&gt; Statens Vegvesen (CA)</li>
-      <li>Førerkort -&gt; Statens Vegvesen -&gt; Den Norske Stat (CA)</li>
+      <li>
+        Trafikkontroll: førerkort og vognkort → autoriteter (f.eks. Statens
+        Vegvesen, Politiet).
+      </li>
+      <li>Legitimasjon i digital sammenheng: Pass → CA, JWT → Signatur.</li>
     </ol>
   </li>
   <li>
-    <p>Legitimasjon:</p>
+    Legitimasjonstyper:
     <ul>
-      <li>Fødsels Attest</li>
-      <li>Pass</li>
-      <li>Bank Kort</li>
-      <li>BankID</li>
-      <li>Penge Sedler</li>
-      <li>Førerkort</li>
-    </ul>
-  </li>
-  <li>
-    <p>Autoriteter:</p>
-    <ul>
-      <li>Statens Vegevesen</li>
-      <li>Den Norske Stat</li>
-      <li>Politiet</li>
-    </ul>
-  </li>
-  <li>
-    <p>Digitale varianter</p>
-    <ul>
-      <li>Legitimasjon -&gt; JSON Web Token</li>
+      <li>Fødselsattest, pass, BankID, penger, førerkort.</li>
       <li>
-        Autoriteter (Central Authority/CA):
-        <ul>
-          <li>Private -&gt; Facebook, GMail, Microsoft Entra</li>
-          <li>Offentlige -&gt; BankID, eID</li>
-        </ul>
+        Digitale analoger: JSON Web Token, sertifikater, OAuth-leverandører.
       </li>
-      <li>DNS med DNSSEC</li>
+    </ul>
+  </li>
+  <li>
+    Autoriteter:
+    <ul>
+      <li>Offentlige: BankID, eID.</li>
+      <li>Private: Google, GitHub, Microsoft Entra ID.</li>
+    </ul>
+  </li>
+  <li>Hvorfor tillit er kjernen i IAM.</li>
+</ul>
+<h3 id="praksis">Praksis</h3>
+<ul>
+  <li>
+    Bruk <a href="https://jwt.io">jwt.io</a> til å inspisere et eksempel JWT.
+  </li>
+  <li>
+    Identifiser <code>header</code>, <code>payload</code>,
+    <code>signature</code>.
+  </li>
+  <li>Diskuter forskjellen på <code>Claims</code> og <code>Scopes</code>.</li>
+  <li>
+    Demo i .NET:
+    <ul>
+      <li>
+        Les et token fra
+        <code>HttpContext.Request.Headers["Authorization"]</code>-headeren.
+      </li>
+      <li>
+        Parse det med <code>System.IdentityModel.Tokens.Jwt</code>-biblioteket.
+      </li>
     </ul>
   </li>
 </ul>
-<h4 id="implementasjon">Implementasjon</h4>
+<h3 id="refleksjon">Refleksjon</h3>
+<ul>
+  <li>Hvordan beviser et system at det er “deg” eller “en person”?</li>
+  <li>Hvor kommer egentlig tilliten fra?</li>
+</ul>
+<h2 id="økt-2---oauth-2.0-og-github-cli-autentisering">
+  Økt 2 - OAuth 2.0 og GitHub CLI-autentisering
+</h2>
+<p>
+  <strong>Mål:</strong> Forstå og implementere en fungerende GitHub-OAuth-flyt i
+  en .NET-CLI.
+</p>
+<h3 id="teori-1">Teori</h3>
 <ul>
   <li>
-    Kort, Gå igjennom hvordan JSON Web Tokens ser, hva de innholder
-    (https://jwt.io/).
+    OAuth 2.0 - rollene og flyten:
+    <ul>
+      <li>Resource Owner, Client, Authorization Server, Resource Server.</li>
+    </ul>
   </li>
-  <li>Les av i en Web Server, Request</li>
-</ul>
-<h3 id="iam---credentials-and-tokens">2. IAM - Credentials and Tokens</h3>
-<h4 id="teori-1">Teori</h4>
-<ul>
-  <li>Open Authentication 2.0</li>
-  <li>GitHub OAuth Apps</li>
-</ul>
-<h4 id="implementasjon-1">Implementasjon</h4>
-<ul>
-  <li>Registrer en GitHub OAuth App</li>
   <li>
-    Sett opp en CLI for GitHub OAuth autentisering (ikke lagre token vi får
-    tilbake)
+    Authorization Code Flow:
+    <ul>
+      <li>Bruker gir samtykke → kode → token → tilgang.</li>
+    </ul>
   </li>
-  <li>Se på claims og scopes for hva du kan spørre om</li>
+  <li>Consent og scopes - hvordan GitHub definerer hva en app får gjøre.</li>
   <li>
-    Gå igjennom Consent skjermen til GitHub (vis gjerne Android/Chrome sine)
+    Hvorfor OAuth ikke i seg selv håndterer identitet (men kan kombineres med
+    OpenID Connect for det).
   </li>
 </ul>
-<h3 id="iam---tilgangsstyrings-modeller">3. IAM - Tilgangsstyrings Modeller</h3>
+<h3 id="praksis-1">Praksis</h3>
+<ul>
+  <li>Registrer en GitHub OAuth-app.</li>
+  <li>
+    Sett opp <code>Redirect URI</code>, <code>Client ID</code>,
+    <code>Client Secret</code>.
+  </li>
+  <li>
+    Implementer i .NET CLI:
+    <ol type="1">
+      <li>Åpne Authorization URL i nettleser.</li>
+      <li>
+        Motta <code>Authorization Code</code> via
+        <code>localhost</code> callback.
+      </li>
+      <li>Bytt code → token.</li>
+      <li>
+        Kall GitHub API (<code>https://api.github.com/user/repos</code>) med
+        <code>Authorization: Bearer &lt;token&gt;</code>.
+      </li>
+    </ol>
+  </li>
+  <li>Diskuter hva som skjer under panseret (HTTP flows, consent, tokens).</li>
+</ul>
+<h3 id="ressurser">Ressurser</h3>
+<ul>
+  <li>
+    <a href="https://docs.github.com/en/apps/oauth-apps/building-oauth-apps"
+      >GitHub OAuth Apps Documentation</a
+    >
+  </li>
+  <li>
+    <a
+      href="https://learn.microsoft.com/en/dotnet/api/system.net.http.httpclient"
+      >.NET HttpClient for OAuth flows (Microsoft Docs)</a
+    >
+  </li>
+</ul>
+<h3 id="refleksjon-1">Refleksjon</h3>
+<ul>
+  <li>Hva er forskjellen på “Autentisering” og “Autorisasjon” her?</li>
+  <li>Hvilke data stoler GitHub egentlig på?</li>
+</ul>
+<h2 id="økt-3---tilgangsstyring-i-praksis">
+  Økt 3 - Tilgangsstyring i praksis
+</h2>
 <blockquote>
-  <p>[!NOTE]</p>
   <p>
-    Igjen mye teori. Dra inn andre eksempler (ex. Discord, GitHub) som kan vise
-    et eksisterend systemer
+    Denne økten holdes hovedsakelig som samtale, analyse og demonstrasjon.<br />
+    Unngå ny kode, la studentene bruke observasjon og refleksjon for å lære.
   </p>
 </blockquote>
-<h4 id="teori-2">Teori</h4>
+<h3 id="teori-2">Teori</h3>
 <ul>
-  <li>Tilgangstyring i virkeligheten (Førerkort, Flyplass, Kontor)</li>
+  <li>
+    RBAC (Role Based Access Control)<br />
+    Roller → rettigheter (f.eks. “admin”, “member”).
+  </li>
+  <li>
+    ABAC (Attribute Based Access Control)<br />
+    Beslutning basert på attributter (tid, sted, eierskap).
+  </li>
+  <li>
+    PBAC (Policy Based Access Control)<br />
+    Regler og policies (eks. GitHubs team- og org-policies).
+  </li>
+  <li>
+    ReBAC (Relationship Based Access Control)<br />
+    Relasjoner styrer tilgang (eks. Discord-serverroller eller
+    GitHub-repo-tilganger).
+  </li>
 </ul>
-<h4 id="implementasjon-2">Implementasjon</h4>
+<h3 id="demonstrasjon-diskusjon">Demonstrasjon / Diskusjon</h3>
+<ul>
+  <li>
+    Analyser Discord som et IAM-system:
+    <ul>
+      <li>Roller, attributter og tillatelser.</li>
+      <li>Hvem eier ressursene, og hvem setter policyene?</li>
+    </ul>
+  </li>
+  <li>
+    Se på GitHub org-nivå:
+    <ul>
+      <li>
+        Hvordan RBAC + PBAC kombineres (teams + repository-innstillinger).
+      </li>
+    </ul>
+  </li>
+  <li>
+    Diskuter hvordan disse prinsippene ville sett ut i en egen applikasjon.
+  </li>
+</ul>
+<h3 id="ressurser-1">Ressurser</h3>
+<ul>
+  <li>
+    <a href="https://discord.com/developers/docs/topics/permissions"
+      >Discord Developer Docs – Permissions &amp; Roles</a
+    >
+  </li>
+  <li>
+    <a
+      href="https://docs.github.com/en/organizations/managing-access-to-your-organizations-repositories"
+      >GitHub Docs – Managing Access to Repositories</a
+    >
+  </li>
+  <li>
+    <a href="https://csrc.nist.gov/publications/detail/sp/800-192/final"
+      >NIST – Access Control Models</a
+    >
+  </li>
+</ul>
+<h3 id="refleksjon-2">Refleksjon</h3>
+<ul>
+  <li>Hvordan kan en policy beskrives som kode?</li>
+  <li>Hvilke kompromisser ser du mellom fleksibilitet og sikkerhet?</li>
+</ul>
+<h2 id="struktur-for-hver-økt">Struktur for hver økt</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Tid</th>
+      <th>Innhold</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0–30 min</td>
+      <td>Teori / introduksjon</td>
+    </tr>
+    <tr>
+      <td>30–90 min</td>
+      <td>Praksis, demo eller observasjonsøvelse</td>
+    </tr>
+    <tr>
+      <td>90–105 min</td>
+      <td>Pause og spørsmål</td>
+    </tr>
+    <tr>
+      <td>105–120 min</td>
+      <td>Oppsummering / refleksjon</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="kort-oppsummering">Kort oppsummering</h2>
+<p>
+  Uke 4 avslutter modulen ved å binde sammen utviklingspraksis og sikkerhet:<br />
+  fra hvordan identitet etableres, til hvordan autorisasjon håndheves i
+  distribuerte systemer.<br />
+  Studentene skal <strong>forstå IAM som konsept</strong> og
+  <strong>beherske en fungerende OAuth-flow i .NET</strong> – nok til å bygge
+  videre på dette i egne prosjekter.
+</p>
