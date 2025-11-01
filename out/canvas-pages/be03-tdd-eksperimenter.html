@@ -1,0 +1,156 @@
+<h1 id="eksperimenter-for-kartlegging-av-behov">
+  Eksperimenter for kartlegging av behov
+</h1>
+<p>
+  Andre økt handler om å bruke TDD som <strong>utforskende metode</strong> for å
+  finne løsninger, ikke for å validere ferdige ideer.<br />
+  Deltakerne lærer å la testene avdekke hvordan systemet <em>bør</em> oppføre
+  seg, heller enn å følge en på forhånd gitt spesifikasjon.
+</p>
+<h2 id="teori">Teori</h2>
+<h3 id="tdd-som-utforskende-design">TDD som utforskende design</h3>
+<p>
+  Tradisjonelt bygges systemer <em>top–down</em>: man definerer krav og deretter
+  implementerer.<br />
+  Med TDD snus dette på hodet — man begynner i det små, observerer hvordan koden
+  responderer, og lar designet vokse <strong>bottom–up</strong>.
+</p>
+<p>Nøkkelidéen er å bruke testene som <strong>mikro-eksperimenter</strong>:</p>
+<ul>
+  <li>
+    Hver test uttrykker en hypotese:
+    <em>hvis jeg sender inn dette, forventer jeg dette utfallet.</em>
+  </li>
+  <li>Implementasjonen blir forsøket som tester hypotesen.</li>
+  <li>Refaktoreringen destillerer læringen tilbake i strukturen.</li>
+</ul>
+<p>
+  TDD blir da ikke et mål om testdekning, men et
+  <strong>designverktøy</strong> for å forme kode gjennom observasjon.
+</p>
+<h3 id="fra-kravspesifikasjon-til-eksperiment">
+  Fra kravspesifikasjon til eksperiment
+</h3>
+<p>I praksis starter økta med en enkel kravbeskrivelse, for eksempel:</p>
+<blockquote>
+  <p>
+    <em>Lag et system som håndterer brukere med innlogging og poengscore.</em>
+  </p>
+</blockquote>
+<p>
+  Start med <em>spørsmålene</em>: Hva bør systemet gjøre først? Hvordan vet vi
+  at det fungerer? Og ikke prøv å dekke over alt, men start med det første
+  viktigste spørsmålet og bygg videre fra der.
+</p>
+<p>
+  Gjennom testene blir kravene omsatt til
+  <strong>observerbar oppførsel</strong>:
+</p>
+<ul>
+  <li>
+    Første test definerer grensesnittet (<em
+      >hva vil vi kunne spørre koden om?</em
+    >
+    ).
+  </li>
+  <li>Implementasjonen formes deretter av behovet til testen.</li>
+</ul>
+<p>
+  Dette er en eksperimentell og iterativ prosess, ikke en lineær implementasjon.
+</p>
+<h2 id="konkretisering">Konkretisering</h2>
+<h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
+<p>Denne fasen er typisk brukt når:</p>
+<ul>
+  <li>Løsningen ikke er kjent, men må <strong>utforskes</strong>.</li>
+  <li>Man ønsker å bygge forståelse for et domene gjennom kode.</li>
+  <li>Arkitekturen skal <strong>emerge</strong>, ikke defineres på forhånd.</li>
+</ul>
+<p>Eksempel på arbeidsflyt:</p>
+<ol type="1">
+  <li>
+    <p>
+      Deltakerne får et vagt problem:
+      <em>Lag et system som kan registrere brukere og gi poeng.</em>
+    </p>
+  </li>
+  <li>
+    <p>Første test kan være:</p>
+    <div class="sourceCode" id="cb1">
+      <pre
+        class="sourceCode csharp"
+      ><code class="sourceCode cs"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>Test<span class="op">]</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">UserCanGainPoints</span><span class="op">()</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">var</span> user <span class="op">=</span> <span class="kw">new</span> <span class="fu">User</span><span class="op">();</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    user<span class="op">.</span><span class="fu">GainPoints</span><span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    Assert<span class="op">.</span><span class="fu">Equal</span><span class="op">(</span><span class="dv">10</span><span class="op">,</span> user<span class="op">.</span><span class="fu">Points</span><span class="op">);</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre>
+    </div>
+  </li>
+  <li><p>Koden implementeres minimalt for å få grønt lys.</p></li>
+  <li>
+    <p>
+      Neste test introduserer et nytt spørsmål – f.eks.
+      <em>Hva skjer om poengsummen blir negativ?</em>
+    </p>
+  </li>
+  <li><p>Gjennom små steg formes både domenet og modellene.</p></li>
+</ol>
+<p>
+  Poenget er ikke å <em>løse oppgaven</em>, men å
+  <strong>observere hvordan testene former strukturen</strong>.
+</p>
+<h3 id="eksterne-lenker">Eksterne lenker</h3>
+<ul>
+  <li>
+    <a
+      href="https://www.oreilly.com/library/view/growing-object-oriented-software/9780321612136/"
+      >Growing Object-Oriented Software, Guided by Tests – Freeman &amp;
+      Pryce</a
+    >
+  </li>
+  <li>
+    <a href="https://martinfowler.com/articles/mocksArentStubs.html"
+      >Martin Fowler – Mocks Aren’t Stubs</a
+    >
+  </li>
+  <li>
+    <a href="https://www.youtube.com/watch?v=JjXcVzBRF_M"
+      >Kent Beck – Programmering som Hypoteseprøving (foredrag, Agile2008)</a
+    >
+  </li>
+  <li>
+    <a
+      href="https://blog.cleancoder.com/uncle-bob/2013/05/27/TheTransformationPriorityPremise.html"
+      >Uncle Bob – Transformation Priority Premise</a
+    >
+  </li>
+</ul>
+<h2 id="videre-lesing">Videre lesing</h2>
+<ul>
+  <li>
+    Freeman &amp; Pryce –
+    <em>Growing Object-Oriented Software, Guided by Tests</em>
+  </li>
+  <li>
+    Beck &amp; Andres – <em>Extreme Programming Explained: Embrace Change</em>
+  </li>
+  <li>Meszaros – <em>xUnit Test Patterns: Refactoring Test Code</em></li>
+  <li>
+    Feathers – <em>Working Effectively with Legacy Code</em> (for TDD i praksis
+    mot eksisterende kode)
+  </li>
+</ul>
+<h2 id="referanse-liste">Referanse liste</h2>
+<ul>
+  <li>
+    Beck, K. (2003).
+    <em>Test-Driven Development: By Example.</em> Addison-Wesley.
+  </li>
+  <li>
+    Freeman, S. &amp; Pryce, N. (2009).
+    <em>Growing Object-Oriented Software, Guided by Tests.</em> Addison-Wesley.
+  </li>
+  <li>Fowler, M. (2014). <em>Mocks Aren’t Stubs.</em> martinfowler.com.</li>
+</ul>
