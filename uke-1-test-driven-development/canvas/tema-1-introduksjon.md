@@ -3,6 +3,7 @@ synlighet: intern
 livsyklus: utkast
 tittel: BE03 - TDD - Introduksjon til Testdrevet utvikling
 slug: be03-tdd-introduksjon
+canvas_id: null
 ---
 
 # Introduksjon til Testdrevet Utvikling (TDD)

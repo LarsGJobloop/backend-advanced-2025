@@ -3,6 +3,7 @@ synlighet: intern
 livsyklus: utkast
 tittel: BE03 - SOA - Vanlige Tjenestesammensetninger
 slug: be03-soa-vanlige-sammensettninger
+canvas_id: null
 ---
 
 # Vanlige Tjenestesammensetninger

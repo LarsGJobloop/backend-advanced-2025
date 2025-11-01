@@ -3,6 +3,7 @@ synlighet: intern
 livsyklus: utkast
 tittel: BE03 - TDD - Grensesnittskontrakter
 slug: be03-tdd-grensesnittskontrakter
+canvas_id: null
 ---
 
 # TDD og Grensesnittskontrakter

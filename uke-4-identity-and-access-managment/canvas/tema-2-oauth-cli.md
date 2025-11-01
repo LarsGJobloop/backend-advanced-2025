@@ -3,6 +3,7 @@ synlighet: intern
 livsyklus: utkast
 tittel: BE03 - IAM - OAuth 2.0 og GitHub CLI-autentisering
 slug: be03-iam-oauth-github
+canvas_id: null
 ---
 
 # OAuth 2.0 og GitHub CLI-autentisering
