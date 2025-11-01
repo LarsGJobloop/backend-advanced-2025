@@ -88,3 +88,24 @@ _upload_page slug title path:
         --data-urlencode "wiki_page[title]={{ title }}" \
         --data-urlencode "wiki_page[body]@-" \
         "${CANVAS_DOMAIN}/api/v1/courses/${CANVAS_COURSE_ID}/pages/{{ slug }}" < "{{ path }}"
+
+[group("Canvas")]
+[doc("Update the slug-id mapping file.")]
+update-canvas-page-mapping:
+    #!/usr/bin/env bash
+    PER_PAGE=50
+
+    CANVAS_ACCESS_TOKEN=$(sops exec-env secrets.yaml 'bash -c "echo $canvas_access_token"')
+    CANVAS_DOMAIN="https://jobloop.instructure.com"
+    COURSE_ID="515"
+
+    OUT_DIR="out/canvas-pages"
+    MAPPING_FILE="${OUT_DIR}/slug-id-mapping.json"
+    mkdir -p "${OUT_DIR}"
+
+    # Canvas is based on Ruby on Rails, which transmits pagination information in the headers.
+    # It's a remnant of the old days where Transport and Application semantics blurred.
+    curl -sS \
+        -H "Authorization: Bearer ${CANVAS_ACCESS_TOKEN}" \
+        "${CANVAS_DOMAIN}/api/v1/courses/${COURSE_ID}/pages?per_page=${PER_PAGE}" | \
+        jq 'map({ (.url | sub("-[0-9]+$";"")): .page_id }) | add' > "${MAPPING_FILE}"
