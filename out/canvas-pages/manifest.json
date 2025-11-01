@@ -36,6 +36,12 @@
     "out": "out/canvas-pages/be03-iac-introduksjon.html"
   },
   {
+    "file": "./uke-4-identity-and-access-managment/canvas/tema-2-oauth-cli.md",
+    "title": "BE03 - IAM - OAuth 2.0 og GitHub CLI-autentisering",
+    "slug": "be03-iam-oauth-github",
+    "out": "out/canvas-pages/be03-iam-oauth-github.html"
+  },
+  {
     "file": "./uke-4-identity-and-access-managment/canvas/tema-1-introduksjon-til-iam.md",
     "title": "BE03 - IAM - Introduksjon til Identitet og Tilgangsstyring",
     "slug": "be03-iam-introduksjon",

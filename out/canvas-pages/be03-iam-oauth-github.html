@@ -1,0 +1,220 @@
+<h1 id="oauth-2.0-og-github-cli-autentisering">
+  OAuth 2.0 og GitHub CLI-autentisering
+</h1>
+<p>
+  Denne økten utforsker hvordan applikasjoner kan
+  <strong>representere deg</strong> overfor andre systemer, uten å gi bort
+  passordet ditt.<br />
+  OAuth 2.0 gir en sikker, standardisert måte å gi og begrense tilgang mellom
+  tjenester.
+</p>
+<h2 id="teori">Teori</h2>
+<h3 id="grunnideen-bak-oauth-2.0">Grunnideen bak OAuth 2.0</h3>
+<p>
+  OAuth 2.0 er et <strong>delegasjonsrammeverk</strong> for tilgang.<br />
+  Det lar én part (brukeren) gi en annen part (applikasjonen) midlertidig
+  tilgang til en ressurs (f.eks. GitHub-data), uten å utlevere adgangsnøkkelen
+  din.
+</p>
+<p>Systemet består av fire roller:</p>
+<table>
+  <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 49%" />
+    <col style="width: 25%" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Rolle</th>
+      <th>Forklaring</th>
+      <th>Eksempel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Resource Owner</strong></td>
+      <td>Den som eier dataene</td>
+      <td>GitHub-brukeren</td>
+    </tr>
+    <tr>
+      <td><strong>Client</strong></td>
+      <td>Applikasjonen som ber om tilgang</td>
+      <td>CLI-verktøy eller webapp</td>
+    </tr>
+    <tr>
+      <td><strong>Authorization Server</strong></td>
+      <td>Den som autentiserer brukeren og utsteder token</td>
+      <td>GitHub OAuth-server</td>
+    </tr>
+    <tr>
+      <td><strong>Resource Server</strong></td>
+      <td>API-et som beskytter dataene</td>
+      <td>api.github.com</td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="flyten---authorization-code-flow">Flyten - Authorization Code Flow</h3>
+<ol type="1">
+  <li>
+    <strong>Brukeren</strong> blir sendt til GitHub for å godkjenne appen.
+  </li>
+  <li>
+    GitHub viser et <strong>samtykkevindu</strong> (<em>Consent Screen</em>) med
+    <em>Scopes</em> (tilganger).
+  </li>
+  <li>
+    Etter godkjenning sendes brukeren tilbake til appen med en
+    <strong>authorization code</strong>.
+  </li>
+  <li>
+    Appen bruker denne koden (sammen med sin <strong>Client ID</strong> og
+    <strong>Client Secret</strong>) til å få et <strong>Access Token</strong>.
+  </li>
+  <li>
+    Tokenet brukes i HTTP-kall til API-et, som nå kan stole på at brukeren har
+    gitt samtykke.
+  </li>
+</ol>
+<h3 id="consent-og-scopes">Consent og Scopes</h3>
+<ul>
+  <li>
+    <strong>Scopes</strong> definerer <em>hva</em> applikasjonen får lov til å
+    gjøre (<code>read:user</code>, <code>repo</code>, <code>gist</code>, osv.)
+  </li>
+  <li>
+    <strong>Consent</strong> sikrer at brukeren eksplisitt samtykker til hver
+    type tilgang.
+  </li>
+  <li>
+    Dette gir et lag av både <strong>sikkerhet</strong> og
+    <strong>gjennomsiktighet</strong>.
+  </li>
+</ul>
+<h3 id="oauth-identitet">OAuth ≠ Identitet</h3>
+<p>
+  OAuth 2.0 sier <em>ingenting</em> om hvem brukeren er, bare at noen har gitt
+  tilgang.<br />
+  For å legge til identitetsinformasjon brukes <strong>OpenID Connect</strong>,
+  som bygger videre på OAuth og introduserer et <em>Id Token</em> med
+  brukerdata.
+</p>
+<h2 id="konkretisering">Konkretisering</h2>
+<h3 id="hvor-brukes-dette">Hvor brukes dette?</h3>
+<p>OAuth brukes overalt hvor tjenester trenger å representere brukere:</p>
+<ul>
+  <li>
+    Når du <strong>logger inn med GitHub</strong> i et tredjepartsverktøy.
+  </li>
+  <li>
+    Når et <strong>CLI-verktøy henter repositories</strong> uten å lagre
+    adgangsnøkkelen din.
+  </li>
+  <li>Når <strong>mobilapper kobler seg til API-er</strong> på dine vegne.</li>
+</ul>
+<p>Eksempler:</p>
+<ul>
+  <li>GitHub CLI (<code>gh auth login</code>)</li>
+  <li>VS Code-integrasjoner</li>
+  <li>Google Workspace API, Microsoft Graph, Discord OAuth</li>
+</ul>
+<h3 id="demo---github-cli-i-.net">Demo - GitHub CLI i .NET</h3>
+<ol type="1">
+  <li>
+    <p><strong>Registrer en OAuth App</strong> på GitHub:</p>
+    <ul>
+      <li>
+        Fyll inn <code>Redirect URI</code> (f.eks.
+        <code>http://localhost:5000/callback</code>)
+      </li>
+      <li>Noter <em>Client ID</em> og <em>Client Secret</em></li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Bygg flyten i CLI:</strong></p>
+    <div class="sourceCode" id="cb1">
+      <pre
+        class="sourceCode csharp"
+      ><code class="sourceCode cs"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">var</span> authUrl <span class="op">=</span> $<span class="st">&quot;https://github.com/login/oauth/authorize?client_id={clientId}&amp;scope=repo%20read:user&quot;</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Process<span class="op">.</span><span class="fu">Start</span><span class="op">(</span><span class="kw">new</span> <span class="fu">ProcessStartInfo</span><span class="op">(</span>authUrl<span class="op">)</span> <span class="op">{</span> UseShellExecute <span class="op">=</span> <span class="kw">true</span> <span class="op">});</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Motta callback med Authorization Code</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">var</span> tokenResponse <span class="op">=</span> await httpClient<span class="op">.</span><span class="fu">PostAsync</span><span class="op">(</span><span class="st">&quot;https://github.com/login/oauth/access_token&quot;</span><span class="op">,</span> content<span class="op">);</span></span></code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>Kall GitHub API med tokenet:</strong></p>
+    <div class="sourceCode" id="cb2">
+      <pre
+        class="sourceCode csharp"
+      ><code class="sourceCode cs"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>httpClient<span class="op">.</span><span class="fu">DefaultRequestHeaders</span><span class="op">.</span><span class="fu">Authorization</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">AuthenticationHeaderValue</span><span class="op">(</span><span class="st">&quot;Bearer&quot;</span><span class="op">,</span> accessToken<span class="op">);</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">var</span> repos <span class="op">=</span> await httpClient<span class="op">.</span><span class="fu">GetAsync</span><span class="op">(</span><span class="st">&quot;https://api.github.com/user/repos&quot;</span><span class="op">);</span></span></code></pre>
+    </div>
+  </li>
+  <li>
+    <p>
+      <strong>Diskuter</strong>: Hvem stoler på hvem i denne flyten? → GitHub
+      stoler på deg (via login), du stoler på GitHub (til å beskytte dataen
+      din), og CLI-en får midlertidig tillit via tokenet.
+    </p>
+  </li>
+</ol>
+<h3 id="eksterne-lenker">Eksterne lenker</h3>
+<ul>
+  <li>
+    <a href="https://docs.github.com/en/apps/oauth-apps/building-oauth-apps"
+      >GitHub OAuth Apps Documentation</a
+    >
+  </li>
+  <li>
+    <a
+      href="https://learn.microsoft.com/en/dotnet/api/system.net.http.httpclient"
+      >.NET HttpClient og OAuth flows (Microsoft Docs)</a
+    >
+  </li>
+  <li>
+    <a href="https://developers.google.com/oauthplayground"
+      >OAuth 2.0 Playground (Google)</a
+    >
+  </li>
+</ul>
+<h2 id="videre-lesing">Videre lesing</h2>
+<ul>
+  <li>
+    <a href="https://datatracker.ietf.org/doc/html/rfc6749"
+      >RFC 6749 – The OAuth 2.0 Authorization Framework</a
+    >
+  </li>
+  <li>
+    <a href="https://openid.net/specs/openid-connect-core-1_0.html"
+      >OpenID Connect Core Specification</a
+    >
+  </li>
+  <li>
+    <a href="https://aaronparecki.com/oauth-2-simplified/"
+      >“OAuth 2 Simplified” – Aaron Parecki</a
+    >
+  </li>
+</ul>
+<h2 id="referanse-liste">Referanse liste</h2>
+<ul>
+  <li>
+    GitHub Docs –
+    <a
+      href="https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app"
+      >Creating an OAuth App</a
+    >
+  </li>
+  <li>
+    Microsoft Docs –
+    <a
+      href="https://learn.microsoft.com/en/azure/active-directory/develop/v2-oauth2-auth-code-flow"
+      >Secure Web APIs with OAuth 2.0</a
+    >
+  </li>
+  <li>
+    IETF –
+    <a href="https://datatracker.ietf.org/doc/html/rfc8252"
+      >RFC 8252 – OAuth 2.0 for Native Apps</a
+    >
+  </li>
+</ul>
