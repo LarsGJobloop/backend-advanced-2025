@@ -5,76 +5,113 @@ tittel: BE03 - TDD - Grensesnittskontrakter
 slug: be03-tdd-grensesnittskontrakter
 ---
 
-# Grensesnittskontrakter
+# TDD og Grensesnittskontrakter
 
-Når det kommer til utvikling av løsninger så er det vi lager i dag altfor komplekst til å kunne håndteres av enkelt individer, men koordinasjon er kostbart og ofte så er det vanskelig å ha flere personer som arbeider med det samme sammtidig (mange kokker, mye søl).
-
-Med bakgrunn i det så prøver vi å snevre inn problemer til noe som kan utvikles av små team, og så kommuniserer disse bitene av løsningen igjennom veldefinerte grensesnitt og protokoller.
+Tredje økt utforsker hvordan TDD hjelper oss å bygge **stabile grensesnitt**, og hvordan vi kan bruke tester til å uttrykke og håndheve kontrakter mellom deler av et system.
 
 ## Teori
 
-Siden programmene våre kommuniserere i gjennom veldefinerte grensesnitt og protokoller så er dette en grense vi legger ned mye energi i for å verifisere.
+### Programmer i kontekst
 
-For Web APIer så vil da første og viktigste sett med oppførsel vi ønsker å kartlegge være dette settet med endepunkt.
+Ingen programvare eksisterer i et vakuum.  
+Hver modul, tjeneste eller funksjon samhandler med andre, direkte eller indirekte, gjennom **grensesnitt**.  
+Det er disse grensesnittene som gir **stabilitet** i systemet, ikke detaljene i implementasjonen.
 
-Her er en grov liste over det som du kan komme bort i:
+Når man endrer interne detaljer, men bevarer grensesnittet og dets oppførsel, kan resten av systemet fortsette å fungere uforstyrret.  
+TDD hjelper oss å oppnå dette ved å uttrykke forventninger som **kontrakter** i form av tester.
 
-- REST endepunkt og ressurser
-- gRPC protokollen (server-til-server kommunikasjon)
-- IPC protokoller (prosess-til-prosses)
+### Testene som kontrakter
 
-Disse vil være utgangspunktet for der du starter med å skrive spørsmålene dine, og drive eventuelt andre spørsmål som du måtte trenge som del for å tilfredstille disse.
+En test kan sees som en kontrakt mellom to parter:
 
-Disse grensesnittene som du definere here, mellom det som du kontrollerer, og omverdene, er og det som vi versjonerer og publiserer til andre.
+- _Hvis du gir meg dette inputet, lover jeg å gi deg dette resultatet._
+- Brudd på kontrakten indikerer at noe vesentlig har endret seg i oppførselen.
 
-Noe av det som kan være vanskelig er at selv om du gjerne har full kontroll over det grensesnittet du eksponerer, så har du ikke full kontrol over de komponentene du er avhengig av (eksterne Databaser, Harddisk, OS, etc). Det er forskjellige måter å tilnærme seg de avhengighetene på, og hvilken du velger vil være avhengig av prosjektet du arbeider med og tilhørende økonomi.
+Ved å skrive tester for grensesnittet – ikke bare for interne detaljer – oppnår vi:
 
-- Sette opp en dedikert test instans som du bruker (koster penger)
-- Lage/Hente inn en "Mock" instanse som du bruker (kan være forskjeller fra "ekte vare")
+- Robusthet mot endringer i implementasjon.
+- Klare forventninger til hvordan komponenter skal samhandle.
+- Dokumentasjon som faktisk verifiseres maskinelt.
 
-Dette blir fort komplisert, og det er ingen løsning som dekker alt, så her må du reflektere rundt kostnad/tidsbruk/nytteverdi for å kunne lande på noe fornuftig.
+Eksempel:
+
+```csharp
+class ApiTests
+{
+  private readonly WebApplicationFactory<Program> _factory;
+
+  public ApiTests()
+  {
+    _factory = new WebApplicationFactory<Program>();
+    _client = _factory.CreateClient();
+  }
+
+  [Test]
+  public async Task ApiReturns_NotFound_WhenUserIsUnknown()
+  {
+    // Arrange & Act
+    var response = await _client.GetAsync("/users/unknown");
+    // Assert
+    Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+  }
+}
+```
+
+Denne testen sier ingenting om hvordan API-et er bygget, bare at **kontrakten** _ukjent bruker → 404_ skal holdes.
+
+### Arkitektur gjennom TDD
+
+Når vi bruker TDD på grensesnittnivå, får vi naturlig frem spørsmål som:
+
+- Hvordan håndterer vi feil og eksterne avhengigheter?
+- Hva skal skje når en tjeneste ikke svarer?
+- Hvor går grensen mellom _vårt ansvar_ og _andres ansvar_?
+
+Ved å la testene drive frem svarene på disse spørsmålene, utvikler vi **arkitektur gjennom erfaring**, ikke antagelser.
+Testene hjelper oss å utforske og formalisere grensene i systemet.
 
 ## Konkretisering
 
 ### Hva, hvor, når blir dette brukt?
 
-Grensesetting er noe som vil være en del av alle løsninger du lager. Det nærmeste unntaket du kommer er viss du hadde laget alt fra bunnen av (CPU, RAM, etc) til sluttprodukt, som ikke er tilfellet utenfor laboratorium.
+Dette brukes særlig i:
 
-### Eksempel Kode
+- **Distribuerte systemer** hvor flere tjenester samarbeider over nettverk.
+- **API-design** for å sikre konsistente svar og feilmeldinger.
+- **Integrasjonstesting** der kontrakter mellom systemer må valideres kontinuerlig.
 
-Eksempel for å teste en REST Server
+Et eksempel på øving:
 
-```csharp
-public class BlogApiTests : IClassFixture<WebApplicationFactory<Program>>
-{
-  private readonly Mock<IBlogPostRepository> _repoMock;
-  private readonly HttpClient _client;
+1. Definer et REST-API med operasjonene _GET /users_ og _POST /users_.
+2. Skriv tester for de forventede kontraktene:
 
-  public BlogApiTests(WebApplicationFactory<Program> factory)
-  {
-    _client = factory.CreateClient();
-  }
+   - _GET /users_ skal returnere 200 OK og en liste.
+   - _POST /users_ skal validere input og returnere 400 ved ugyldige data.
 
-  [Fact]
-  public async Task GetPosts_ShouldReturnOk()
-  {
-    // Arrange & Act
-    var response = _client.GetAsync("/posts");
+3. Utforsk edge cases:
 
-    // Assert
-    response.EnsureSuccessStatusCode();
-  }
-}
-```
+   - Hva skjer når serveren restartes?
+   - Hva skjer når en ekstern API ikke svarer?
+   - Hva skal skje når du mottar ugyldige data fra en tredjepart?
 
-### Eksterne Lenker
+Testene fungerer her som **kontrakter** som må holdes, uavhengig av hvordan tjenesten implementeres internt.
 
-- [TODO! Lenk til GitHub Repository]()
+### Eksterne lenker
 
-## Videre Lesing
+- [Martin Fowler – IntegrationContractTests](https://martinfowler.com/bliki/IntegrationContractTest.html)
+- [ThoughtWorks – Consumer-Driven Contracts Explained](https://www.thoughtworks.com/insights/blog/consumer-driven-contracts)
+- [Pact – Open Source Contract Testing Tool](https://pact.io)
+- [Roy Fielding – Architectural Styles and the Design of Network-based Software Architectures (REST)](https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
 
-- [Microsoft Docs - RESTful API Design](https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design)
+## Videre lesing
 
-## Referanse Liste
+- Freeman & Pryce – _Growing Object-Oriented Software, Guided by Tests_
+- Newman, S. – _Building Microservices_
+- Evans, E. – _Domain-Driven Design_
+- Meszaros, G. – _xUnit Test Patterns_
 
-- [Microsoft Docs - API Testing](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/test-min-api)
+## Referanse liste
+
+- Fowler, M. (2011). _Integration Contract Tests._ martinfowler.com.
+- Fielding, R. (2000). _Architectural Styles and the Design of Network-based Software Architectures._ PhD Thesis, UC Irvine.
+- Freeman, S. & Pryce, N. (2009). _Growing Object-Oriented Software, Guided by Tests._ Addison-Wesley.

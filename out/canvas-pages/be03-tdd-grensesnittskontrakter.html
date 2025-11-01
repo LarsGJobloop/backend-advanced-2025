@@ -1,110 +1,180 @@
-<h1 id="grensesnittskontrakter">Grensesnittskontrakter</h1>
+<h1 id="tdd-og-grensesnittskontrakter">TDD og Grensesnittskontrakter</h1>
 <p>
-  Når det kommer til utvikling av løsninger så er det vi lager i dag altfor
-  komplekst til å kunne håndteres av enkelt individer, men koordinasjon er
-  kostbart og ofte så er det vanskelig å ha flere personer som arbeider med det
-  samme sammtidig (mange kokker, mye søl).
-</p>
-<p>
-  Med bakgrunn i det så prøver vi å snevre inn problemer til noe som kan
-  utvikles av små team, og så kommuniserer disse bitene av løsningen igjennom
-  veldefinerte grensesnitt og protokoller.
+  Tredje økt utforsker hvordan TDD hjelper oss å bygge
+  <strong>stabile grensesnitt</strong>, og hvordan vi kan bruke tester til å
+  uttrykke og håndheve kontrakter mellom deler av et system.
 </p>
 <h2 id="teori">Teori</h2>
+<h3 id="programmer-i-kontekst">Programmer i kontekst</h3>
 <p>
-  Siden programmene våre kommuniserere i gjennom veldefinerte grensesnitt og
-  protokoller så er dette en grense vi legger ned mye energi i for å verifisere.
+  Ingen programvare eksisterer i et vakuum.<br />
+  Hver modul, tjeneste eller funksjon samhandler med andre, direkte eller
+  indirekte, gjennom <strong>grensesnitt</strong>.<br />
+  Det er disse grensesnittene som gir <strong>stabilitet</strong> i systemet,
+  ikke detaljene i implementasjonen.
 </p>
 <p>
-  For Web APIer så vil da første og viktigste sett med oppførsel vi ønsker å
-  kartlegge være dette settet med endepunkt.
+  Når man endrer interne detaljer, men bevarer grensesnittet og dets oppførsel,
+  kan resten av systemet fortsette å fungere uforstyrret.<br />
+  TDD hjelper oss å oppnå dette ved å uttrykke forventninger som
+  <strong>kontrakter</strong> i form av tester.
 </p>
-<p>Her er en grov liste over det som du kan komme bort i:</p>
+<h3 id="testene-som-kontrakter">Testene som kontrakter</h3>
+<p>En test kan sees som en kontrakt mellom to parter:</p>
 <ul>
-  <li>REST endepunkt og ressurser</li>
-  <li>gRPC protokollen (server-til-server kommunikasjon)</li>
-  <li>IPC protokoller (prosess-til-prosses)</li>
-</ul>
-<p>
-  Disse vil være utgangspunktet for der du starter med å skrive spørsmålene
-  dine, og drive eventuelt andre spørsmål som du måtte trenge som del for å
-  tilfredstille disse.
-</p>
-<p>
-  Disse grensesnittene som du definere here, mellom det som du kontrollerer, og
-  omverdene, er og det som vi versjonerer og publiserer til andre.
-</p>
-<p>
-  Noe av det som kan være vanskelig er at selv om du gjerne har full kontroll
-  over det grensesnittet du eksponerer, så har du ikke full kontrol over de
-  komponentene du er avhengig av (eksterne Databaser, Harddisk, OS, etc). Det er
-  forskjellige måter å tilnærme seg de avhengighetene på, og hvilken du velger
-  vil være avhengig av prosjektet du arbeider med og tilhørende økonomi.
-</p>
-<ul>
-  <li>Sette opp en dedikert test instans som du bruker (koster penger)</li>
   <li>
-    Lage/Hente inn en “Mock” instanse som du bruker (kan være forskjeller fra
-    “ekte vare”)
+    <em>Hvis du gir meg dette inputet, lover jeg å gi deg dette resultatet.</em>
+  </li>
+  <li>
+    Brudd på kontrakten indikerer at noe vesentlig har endret seg i oppførselen.
   </li>
 </ul>
 <p>
-  Dette blir fort komplisert, og det er ingen løsning som dekker alt, så her må
-  du reflektere rundt kostnad/tidsbruk/nytteverdi for å kunne lande på noe
-  fornuftig.
+  Ved å skrive tester for grensesnittet – ikke bare for interne detaljer –
+  oppnår vi:
 </p>
-<h2 id="konkretisering">Konkretisering</h2>
-<h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
-<p>
-  Grensesetting er noe som vil være en del av alle løsninger du lager. Det
-  nærmeste unntaket du kommer er viss du hadde laget alt fra bunnen av (CPU,
-  RAM, etc) til sluttprodukt, som ikke er tilfellet utenfor laboratorium.
-</p>
-<h3 id="eksempel-kode">Eksempel Kode</h3>
-<p>Eksempel for å teste en REST Server</p>
+<ul>
+  <li>Robusthet mot endringer i implementasjon.</li>
+  <li>Klare forventninger til hvordan komponenter skal samhandle.</li>
+  <li>Dokumentasjon som faktisk verifiseres maskinelt.</li>
+</ul>
+<p>Eksempel:</p>
 <div class="sourceCode" id="cb1">
   <pre
     class="sourceCode csharp"
-  ><code class="sourceCode cs"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> BlogApiTests <span class="op">:</span> IClassFixture<span class="op">&lt;</span>WebApplicationFactory<span class="op">&lt;</span>Program<span class="op">&gt;&gt;</span></span>
+  ><code class="sourceCode cs"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ApiTests</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="kw">readonly</span> Mock<span class="op">&lt;</span>IBlogPostRepository<span class="op">&gt;</span> _repoMock<span class="op">;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="kw">readonly</span> HttpClient _client<span class="op">;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">BlogApiTests</span><span class="op">(</span>WebApplicationFactory<span class="op">&lt;</span>Program<span class="op">&gt;</span> factory<span class="op">)</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    _client <span class="op">=</span> factory<span class="op">.</span><span class="fu">CreateClient</span><span class="op">();</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="kw">readonly</span> WebApplicationFactory<span class="op">&lt;</span>Program<span class="op">&gt;</span> _factory<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">ApiTests</span><span class="op">()</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    _factory <span class="op">=</span> <span class="kw">new</span> WebApplicationFactory<span class="op">&lt;</span>Program<span class="op">&gt;();</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    _client <span class="op">=</span> _factory<span class="op">.</span><span class="fu">CreateClient</span><span class="op">();</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">[</span>Fact<span class="op">]</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> async Task <span class="fu">GetPosts_ShouldReturnOk</span><span class="op">()</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">[</span>Test<span class="op">]</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> async Task <span class="fu">ApiReturns_NotFound_WhenUserIsUnknown</span><span class="op">()</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Arrange &amp; Act</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">var</span> response <span class="op">=</span> _client<span class="op">.</span><span class="fu">GetAsync</span><span class="op">(</span><span class="st">&quot;/posts&quot;</span><span class="op">);</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Assert</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    response<span class="op">.</span><span class="fu">EnsureSuccessStatusCode</span><span class="op">();</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">var</span> response <span class="op">=</span> await _client<span class="op">.</span><span class="fu">GetAsync</span><span class="op">(</span><span class="st">&quot;/users/unknown&quot;</span><span class="op">);</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Assert</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    Assert<span class="op">.</span><span class="fu">Equal</span><span class="op">(</span>HttpStatusCode<span class="op">.</span><span class="fu">NotFound</span><span class="op">,</span> response<span class="op">.</span><span class="fu">StatusCode</span><span class="op">);</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre>
 </div>
-<h3 id="eksterne-lenker">Eksterne Lenker</h3>
+<p>
+  Denne testen sier ingenting om hvordan API-et er bygget, bare at
+  <strong>kontrakten</strong> <em>ukjent bruker → 404</em> skal holdes.
+</p>
+<h3 id="arkitektur-gjennom-tdd">Arkitektur gjennom TDD</h3>
+<p>Når vi bruker TDD på grensesnittnivå, får vi naturlig frem spørsmål som:</p>
 <ul>
-  <li><a href="">TODO! Lenk til GitHub Repository</a></li>
+  <li>Hvordan håndterer vi feil og eksterne avhengigheter?</li>
+  <li>Hva skal skje når en tjeneste ikke svarer?</li>
+  <li>
+    Hvor går grensen mellom <em>vårt ansvar</em> og <em>andres ansvar</em>?
+  </li>
 </ul>
-<h2 id="videre-lesing">Videre Lesing</h2>
+<p>
+  Ved å la testene drive frem svarene på disse spørsmålene, utvikler vi
+  <strong>arkitektur gjennom erfaring</strong>, ikke antagelser. Testene hjelper
+  oss å utforske og formalisere grensene i systemet.
+</p>
+<h2 id="konkretisering">Konkretisering</h2>
+<h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
+<p>Dette brukes særlig i:</p>
 <ul>
   <li>
+    <strong>Distribuerte systemer</strong> hvor flere tjenester samarbeider over
+    nettverk.
+  </li>
+  <li>
+    <strong>API-design</strong> for å sikre konsistente svar og feilmeldinger.
+  </li>
+  <li>
+    <strong>Integrasjonstesting</strong> der kontrakter mellom systemer må
+    valideres kontinuerlig.
+  </li>
+</ul>
+<p>Et eksempel på øving:</p>
+<ol type="1">
+  <li>
+    <p>
+      Definer et REST-API med operasjonene <em>GET /users</em> og
+      <em>POST /users</em>.
+    </p>
+  </li>
+  <li>
+    <p>Skriv tester for de forventede kontraktene:</p>
+    <ul>
+      <li><em>GET /users</em> skal returnere 200 OK og en liste.</li>
+      <li>
+        <em>POST /users</em> skal validere input og returnere 400 ved ugyldige
+        data.
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Utforsk edge cases:</p>
+    <ul>
+      <li>Hva skjer når serveren restartes?</li>
+      <li>Hva skjer når en ekstern API ikke svarer?</li>
+      <li>Hva skal skje når du mottar ugyldige data fra en tredjepart?</li>
+    </ul>
+  </li>
+</ol>
+<p>
+  Testene fungerer her som <strong>kontrakter</strong> som må holdes, uavhengig
+  av hvordan tjenesten implementeres internt.
+</p>
+<h3 id="eksterne-lenker">Eksterne lenker</h3>
+<ul>
+  <li>
+    <a href="https://martinfowler.com/bliki/IntegrationContractTest.html"
+      >Martin Fowler – IntegrationContractTests</a
+    >
+  </li>
+  <li>
     <a
-      href="https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design"
-      >Microsoft Docs - RESTful API Design</a
+      href="https://www.thoughtworks.com/insights/blog/consumer-driven-contracts"
+      >ThoughtWorks – Consumer-Driven Contracts Explained</a
+    >
+  </li>
+  <li>
+    <a href="https://pact.io">Pact – Open Source Contract Testing Tool</a>
+  </li>
+  <li>
+    <a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm"
+      >Roy Fielding – Architectural Styles and the Design of Network-based
+      Software Architectures (REST)</a
     >
   </li>
 </ul>
-<h2 id="referanse-liste">Referanse Liste</h2>
+<h2 id="videre-lesing">Videre lesing</h2>
 <ul>
   <li>
-    <a
-      href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/test-min-api"
-      >Microsoft Docs - API Testing</a
+    Freeman &amp; Pryce –
+    <em>Growing Object-Oriented Software, Guided by Tests</em>
+  </li>
+  <li>Newman, S. – <em>Building Microservices</em></li>
+  <li>Evans, E. – <em>Domain-Driven Design</em></li>
+  <li>Meszaros, G. – <em>xUnit Test Patterns</em></li>
+</ul>
+<h2 id="referanse-liste">Referanse liste</h2>
+<ul>
+  <li>
+    Fowler, M. (2011). <em>Integration Contract Tests.</em> martinfowler.com.
+  </li>
+  <li>
+    Fielding, R. (2000).
+    <em
+      >Architectural Styles and the Design of Network-based Software
+      Architectures.</em
     >
+    PhD Thesis, UC Irvine.
+  </li>
+  <li>
+    Freeman, S. &amp; Pryce, N. (2009).
+    <em>Growing Object-Oriented Software, Guided by Tests.</em> Addison-Wesley.
   </li>
 </ul>
