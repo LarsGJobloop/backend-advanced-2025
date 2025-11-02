@@ -82,14 +82,14 @@ Gjennom rytmen Red → Green → Refactor lærer de:
 - [Google Testing Blog: Why We Write Tests First](https://testing.googleblog.com/)
 - [James Shore – TDD Video Series](https://www.jamesshore.com/v2/projects/null/project-tdd)
 
-## Videre lesing
+## Videre Lesing
 
 - Kent Beck, _Extreme Programming Explained_
 - Robert C. Martin, _Clean Code_ (kapittel om testing)
 - Michael Feathers, _Working Effectively with Legacy Code_
 - Eric Evans, _Domain-Driven Design_ (for sammenhengen mellom modeller og testbare domener)
 
-## Referanse liste
+## Referanse Liste
 
 - Beck, K. (2003). _Test Driven Development: By Example._ Addison-Wesley.
 - Fowler, M. (2006). _Continuous Integration._ martinfowler.com.
