@@ -93,6 +93,8 @@ Under økten:
 - **The Twelve-Factor App – Config as Code** (spesielt faktor 10: Dev/prod parity)
 - **GitHub - cloud-init examples**: Samling av eksempler fra praksisfeltet.
 
+> **Tilknyttet innhold:** Cloud Init-konfigurasjonen brukes her til å starte Docker Compose-applikasjoner fra forrige uke (Tjenesteorienterte Systemer). Dette viser hvordan infrastruktur som kode og containerisering arbeider sammen for å levere reproduserbare, deklarative systemoppsett.
+
 ## Referanse Liste
 
 - Cloud Init-spesifikasjonen: [https://cloudinit.readthedocs.io](https://cloudinit.readthedocs.io)
