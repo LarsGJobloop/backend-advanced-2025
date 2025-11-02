@@ -8,6 +8,8 @@
   outputs =
     { self, nixpkgs }:
     let
+      # These are the default systems and likely works.
+      # But we have not verified them all.
       withSystem = nixpkgs.lib.genAttrs [
         "x86_64-linux" # Verified
         "x86_64-darwin" # TODO! NOT Verified
