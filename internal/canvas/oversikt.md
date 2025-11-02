@@ -23,7 +23,7 @@ Etter modulen skal du ha fått erfaring med:
 - Å bygge et lite CLI-verktøy som autentiserer via GitHub OAuth.
 - Å forstå hvordan prinsipper som standardisering, versjonering og reproduserbarhet henger sammen i moderne utviklingsmiljøer.
 
-## Stillingsutlysningsordbok - **Gate Buster List**
+## Stillingsutlysningsordbok
 
 - Infrastructure as Code (IaC) / Terraform
 - Kontainerteknologi / Docker
