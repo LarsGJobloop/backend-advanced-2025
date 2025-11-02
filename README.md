@@ -14,6 +14,16 @@ Dette er et repository for å holde orden i undervisnings-og læringsmateriale f
 
 ![Uviklings System Skisse](/docs/assets/utvikling-av-fagmaterial.excalidraw.png)
 
+## Commit Message Konvensjoner
+
+Dette prosjektet følger strukturerte commit message konvensjoner. Se [docs/COMMIT_CONVENTIONS.md](docs/COMMIT_CONVENTIONS.md) for detaljer.
+
+For å bruke git commit malen:
+
+```bash
+git config --local commit.template .gitmessage
+```
+
 ## Referanse Liste
 
 - [Canvas Developer Documentation](https://developerdocs.instructure.com/)

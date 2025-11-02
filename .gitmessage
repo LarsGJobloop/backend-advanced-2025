@@ -1,0 +1,34 @@
+<type>(<scope>): <subject>
+
+<body>
+
+# Type must be one of:
+#   feat:     A new feature
+#   fix:      A bug fix
+#   refactor: Code change that neither fixes a bug nor adds a feature
+#   docs:     Documentation only changes
+#   chore:    Changes to build process or auxiliary tools
+#
+# Scope should be a project-specific label:
+#   canvas:   Canvas LMS integration and publishing
+#   content:  Content material (markdown files, course material)
+#   build:    Build configuration and tooling
+#   config:   Configuration files and settings
+#   scripts:  Automation scripts and workflows
+#
+# Subject:
+#   - Use imperative, present tense: "change" not "changed" nor "changes"
+#   - Don't capitalize the first letter
+#   - No period (.) at the end
+#
+# Body:
+#   - Use the imperative, present tense
+#   - Include motivation for the change and contrasts with previous behavior
+#   - Wrap at 72 characters
+#
+# Examples:
+#   feat(canvas): add support for batch page updates
+#   refactor(canvas): extract Canvas API calls into reusable module
+#   fix(build): correct Nix flake dependency version
+#   docs(content): add timeplan for IaC module
+#   chore(config): update Canvas course ID to 516
