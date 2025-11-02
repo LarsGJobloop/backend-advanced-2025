@@ -72,6 +72,16 @@ Beskriv konkrete bruksområder og scenarioer.
 - Git repositories fra undervisning
 - Eksterne eksempler
 
+**Kodeblokker:** Alle kodeblokker må ha et språkmerke (language tag) for korrekt syntaksfarging og tilgjengelighet:
+
+- `csharp` for C#-kode
+- `yaml` for YAML-filer (Docker Compose, GitHub Actions, etc.)
+- `dockerfile` for Dockerfile
+- `hcl` for Terraform/HCL
+- `sh` eller `bash` for shell-kommandoer
+- `plaintext` for struktur/filstrukturer uten syntaks
+- Bruk riktig språkmerke basert på innholdet
+
 #### Eksterne Lenker
 
 - Linker til relevante dokumentasjoner, verktøy, eller ressurser

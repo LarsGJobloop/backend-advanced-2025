@@ -31,13 +31,11 @@
   nettverk”).
 </p>
 <p><strong>Struktur:</strong></p>
-<pre><code>
-modules/
+<pre class="plaintext"><code>modules/
 app_server/
 main.tf
 variables.tf
-outputs.tf
-</code></pre>
+outputs.tf</code></pre>
 <p>En modul kan brukes fra andre moduler eller fra rotkonfigurasjonen:</p>
 <pre class="hcl"><code>module &quot;app_server&quot; {
   source = &quot;./modules/app_server&quot;

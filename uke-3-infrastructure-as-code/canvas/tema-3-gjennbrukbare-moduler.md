@@ -30,14 +30,12 @@ Modulen kan representere alt fra én ressurs (f.eks. “S3 bucket”) til et kom
 
 **Struktur:**
 
-```
-
+```plaintext
 modules/
 app_server/
 main.tf
 variables.tf
 outputs.tf
-
 ```
 
 En modul kan brukes fra andre moduler eller fra rotkonfigurasjonen:
