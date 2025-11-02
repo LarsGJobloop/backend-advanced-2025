@@ -88,18 +88,20 @@ Dette illustrerer overgangen fra manuell drift til **systemer som oppdaterer seg
 
 Modularisering er en modenhetsfase i IaC-prosjekter. Den brukes i alle større organisasjoner og DevOps-team for å standardisere infrastrukturen.
 
-Eksempler:
+### Eksempler
 
-- En modul for “webapp” som inkluderer server, sikkerhetsgruppe, domenenavn og TLS-sertifikat.
-- En modul for “database” som oppretter PostgreSQL med backup og brukere.
-- En felles “monitoring”-modul som kan plugges inn i alle miljøer.
+Bruksområder:
+
+- En modul for "webapp" som inkluderer server, sikkerhetsgruppe, domenenavn og TLS-sertifikat.
+- En modul for "database" som oppretter PostgreSQL med backup og brukere.
+- En felles "monitoring"-modul som kan plugges inn i alle miljøer.
 
 I økten skal deltakerne:
 
-- Trekke ut sin eksisterende “Hetzner Compose App Server” til en egen modul.
+- Trekke ut sin eksisterende "Hetzner Compose App Server" til en egen modul.
 - Definere `variable` og `output`.
 - Bruke modulen i sitt hovedprosjekt.
-- (Valgfritt) legge til rekonsilieringsskript via `systemd` for å automatisere synronisering mot et Git repo.
+- (Valgfritt) legge til rekonsilieringsskript via `systemd` for å automatisere synkronisering mot et Git-repo.
 
 Dette gir førstehånds erfaring med **strukturert, skalerbar IaC**, en forutsetning for profesjonell drift.
 
