@@ -7,7 +7,7 @@ slug: be03-tdd-eksperimenter
 
 # Eksperimenter for kartlegging av behov
 
-Andre økt handler om å bruke TDD som **utforskende metode** for å finne løsninger, ikke for å validere ferdige ideer.  
+Den andre økten handler om å bruke TDD som **utforskende metode** for å finne løsninger, ikke for å validere ferdige ideer.  
 Deltakerne lærer å la testene avdekke hvordan systemet _bør_ oppføre seg, heller enn å følge en på forhånd gitt spesifikasjon.
 
 ## Teori
