@@ -1,3 +1,8 @@
+mod canvas
+
+# The Canvas Course (Norsk Emne ID) to sync with.
+CANVAS_COURSE_ID := "515"
+
 default:
     @just --list
 
@@ -77,36 +82,15 @@ upload-canvas-pages: generate-canvas-manifest
 [private]
 _upload_page slug title path:
     #!/usr/bin/env bash
-    CANVAS_ACCESS_TOKEN=$(sops exec-env secrets.yaml 'bash -c "echo $canvas_access_token"')
-    CANVAS_DOMAIN="https://jobloop.instructure.com"
-    CANVAS_COURSE_ID="515"
-
     # Lookup page url from slug-id-mapping.json using title as key
     CANVAS_URL=$(jq -r ".[\"{{ title }}\"]" "out/canvas-pages/slug-id-mapping.json" 2>/dev/null || echo "null")
     
     if [ "${CANVAS_URL}" != "null" ]; then
-        # DEBUG
-        echo "Updating page: ${CANVAS_DOMAIN}/api/v1/courses/${CANVAS_COURSE_ID}/pages/${CANVAS_URL}"
-        
         # Page exists - update via PUT
-        curl -sS -o /dev/null -w "{{ slug }} → HTTP %{http_code}\n" \
-            -X PUT \
-            -H "Authorization: Bearer ${CANVAS_ACCESS_TOKEN}" \
-            --data-urlencode "wiki_page[title]={{ title }}" \
-            --data-urlencode "wiki_page[body]@-" \
-            "${CANVAS_DOMAIN}/api/v1/courses/${CANVAS_COURSE_ID}/pages/${CANVAS_URL}" < "{{ path }}"
+        just canvas::update-page "${CANVAS_URL}" "{{ title }}" "{{ path }}" "{{ CANVAS_COURSE_ID }}"
     else
-        # DEBUG
-        echo "Creating page: ${CANVAS_DOMAIN}/api/v1/courses/${CANVAS_COURSE_ID}/pages"
-
         # Page doesn't exist - create via POST
-        curl -sS -o /dev/null -w "{{ slug }} → HTTP %{http_code}\n" \
-            -X POST \
-            -H "Authorization: Bearer ${CANVAS_ACCESS_TOKEN}" \
-            --data-urlencode "wiki_page[title]={{ title }}" \
-            --data-urlencode "wiki_page[url]={{ slug }}" \
-            --data-urlencode "wiki_page[body]@-" \
-            "${CANVAS_DOMAIN}/api/v1/courses/${CANVAS_COURSE_ID}/pages" < "{{ path }}"
+        just canvas::create-page "{{ slug }}" "{{ title }}" "{{ path }}" "{{ CANVAS_COURSE_ID }}"
     fi
 
 [group("Canvas")]
@@ -115,10 +99,6 @@ update-canvas-page-mapping:
     #!/usr/bin/env bash
     PER_PAGE=50
 
-    CANVAS_ACCESS_TOKEN=$(sops exec-env secrets.yaml 'bash -c "echo $canvas_access_token"')
-    CANVAS_DOMAIN="https://jobloop.instructure.com"
-    COURSE_ID="515"
-
     OUT_DIR="out/canvas-pages"
     MAPPING_FILE="${OUT_DIR}/slug-id-mapping.json"
     mkdir -p "${OUT_DIR}"
@@ -126,7 +106,5 @@ update-canvas-page-mapping:
     # Canvas is based on Ruby on Rails, which transmits pagination information in the headers.
     # It's a remnant of the old days where Transport and Application semantics blurred.
     # Map titles to URLs for lookup
-    curl -sS \
-        -H "Authorization: Bearer ${CANVAS_ACCESS_TOKEN}" \
-        "${CANVAS_DOMAIN}/api/v1/courses/${COURSE_ID}/pages?per_page=${PER_PAGE}" | \
+    just canvas::list-pages "{{ CANVAS_COURSE_ID }}" "${PER_PAGE}" | \
         jq 'map({(.title): .url}) | add' > "${MAPPING_FILE}"
