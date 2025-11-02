@@ -1,0 +1,33 @@
+name: CI Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-content:
+    name: Lint Content
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        id: checkout
+        uses: actions/checkout@v5
+
+      - name: Install Nix
+        id: setup-nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate frontmatter structure
+        id: frontmatter-valid
+        run: nix develop --command just validate-frontmatter
