@@ -48,7 +48,7 @@ Så når det kommer til outsourcing av tjenester så er det operative ansvaret f
 
 ### Mellom tjenestelig kommunikasjon
 
-Docker Compose benytter seg av et internt nettverk som kan brukes når en trenger å snakke mellom de forskjellige tjenestene. Med dette nettverket hører det til en enkel DNS-tjeneste som kan benyttes, som bruker tjenestenavnet, som definert i Docker Compose-manifestet, som domene en kan gjøre spørringer mot internt. Det er mulig å isolere tjenester ved å sette opp flere nettverk, men siden dette er enkelt noder vi kjører det på, blir dette i hovedsak brukt for simulering av systemer, og ikke som nyttverktøy til faktiske produksjonsløsninger.
+Docker Compose benytter seg av et internt nettverk som kan brukes når en trenger å snakke mellom de forskjellige tjenestene. Med dette nettverket hører det til en enkel DNS-tjeneste som kan benyttes, som bruker tjenestenavnet, som definert i Docker Compose-manifestet, som domene en kan gjøre spørringer mot internt. Det er mulig å isolere tjenester ved å sette opp flere nettverk, men siden dette er en enkelt node vi kjører det på, blir dette i hovedsak brukt for simulering av systemer, og ikke som nyttverktøy til faktiske produksjonsløsninger.
 
 ### Deklarativ lagring
 
