@@ -1,38 +1,110 @@
 <h1 id="ekstra-temaer">Ekstra temaer</h1>
 <p>
-  Her er tema som er droppet med begrunnelse i tidsbegrensninger eller fordi de
-  er konkludert med å være for avansert. Hovedsaklig er det en “dumping” plass
-  for tanker så de ikke opptar plass under arbeid med hoved emnet.
+  Denne modulen gir et solid fundament, men backend-utvikling er et stort
+  fagfelt. Her er temaer for videre utforskning når du har mestret grunnleggende
+  konsepter.
 </p>
+<h2 id="observabilitet-og-monitoring">Observabilitet og Monitoring</h2>
+<p>Viktig for produksjonssystemer, men krevende å lære på kort tid:</p>
 <ul>
   <li>
-    Observabilitet: Viktig, men for kort tid
-    <ul>
-      <li>Presentasjon (Grafana)</li>
-      <li>Aggregering (Prometheus)</li>
-      <li>Traces (Jäger)</li>
-      <li>Logger (Loki)</li>
-      <li>Standard Format (OpenTelemetry)</li>
-    </ul>
+    <strong>Presentasjon:</strong> Grafana for dashboards og visualisering av
+    metrikker
   </li>
   <li>
-    Ontologi
-    <ul>
-      <li>RDF</li>
-    </ul>
+    <strong>Aggregering:</strong> Prometheus for metric collection og alerting
   </li>
+  <li><strong>Traces:</strong> Jäger eller Zipkin for distribuert tracing</li>
+  <li><strong>Logger:</strong> Loki for sentralisert logging</li>
   <li>
-    Kybernetiske systemer/Feedback, data drevne
-    <ul>
-      <li>Kubernetes</li>
-      <li>FluxCD</li>
-      <li>Flagger</li>
-    </ul>
-  </li>
-  <li>
-    IAM implementasjon
-    <ul>
-      <li>Dex/Keycloak</li>
-    </ul>
+    <strong>Standard format:</strong> OpenTelemetry for vendor-nøytral
+    instrumentering
   </li>
 </ul>
+<h2 id="kybernetiske-systemer-og-gitops">Kybernetiske systemer og GitOps</h2>
+<p>Data-drevne systemer med automatisk rekonsiliasjon:</p>
+<ul>
+  <li><strong>Kubernetes:</strong> Container orchestration på høyt nivå</li>
+  <li><strong>FluxCD:</strong> GitOps for kontinuerlig deployment</li>
+  <li><strong>Flagger:</strong> Progressive delivery og canary releases</li>
+</ul>
+<h2 id="iam-plattformer">IAM-plattformer</h2>
+<p>Ferdigbygde løsninger for identitetshåndtering:</p>
+<ul>
+  <li><strong>Dex:</strong> Identitetsvegg for Kubernetes og andre systemer</li>
+  <li>
+    <strong>Keycloak:</strong> Fullverdig identity and access management
+    platform
+  </li>
+  <li><strong>Ory:</strong> Mikroservices-basert identitetshåndtering</li>
+</ul>
+<h2 id="produksjonsklare-mønstre">Produksjonsklare mønstre</h2>
+<p>Konsepter som er kritiske for produksjonsmiljøer:</p>
+<ul>
+  <li>
+    <strong>Health checks og graceful shutdown:</strong> Håndtering av
+    container-livssyklus
+  </li>
+  <li>
+    <strong>Service discovery:</strong> Hvordan tjenester finner hverandre i
+    distribuerte miljøer
+  </li>
+  <li>
+    <strong>Config management:</strong> Miljøvariabelhåndtering,
+    hemmelighetshåndtering, multi-miljø
+  </li>
+  <li>
+    <strong>Deployment strategies:</strong> Blue-green, rolling updates, canary
+    releases
+  </li>
+</ul>
+<h2 id="avansert-teknisk-dybde">Avansert teknisk dybde</h2>
+<p>Teknologier for komplekse systemer:</p>
+<ul>
+  <li>
+    <strong>Service mesh:</strong> Istio, Linkerd for avanserte
+    mikrotjenester-mønstre
+  </li>
+  <li>
+    <strong>Event-driven arkitektur:</strong> Kafka, RabbitMQ, pub/sub mønstre
+  </li>
+  <li><strong>GitOps workflows:</strong> FluxCD, ArgoCD som IaC-utvidelse</li>
+  <li>
+    <strong>Advanced IaC:</strong> Ekstern tilstandsbehandling, team-samarbeid,
+    kostnadseffektivisering
+  </li>
+  <li>
+    <strong>Policy-as-code:</strong> OPA, Sentinel for granulær tilgangsstyring
+  </li>
+</ul>
+<h2 id="arkitekturelle-konsepter">Arkitekturelle konsepter</h2>
+<p>Designmønstre for skalerbare systemer:</p>
+<ul>
+  <li>
+    <strong>API gateway mønstre:</strong> Kong, Ambassador beyond simple ingress
+  </li>
+  <li>
+    <strong>Circuit breakers og resilience:</strong> Håndtering av feil i
+    distribuerte systemer
+  </li>
+  <li>
+    <strong>CQRS og event sourcing:</strong> Pattern for komplekse domener
+  </li>
+  <li>
+    <strong>Database migration strategier:</strong> Versjonert skjema,
+    zero-downtime migrasjoner
+  </li>
+  <li><strong>Multi-tenancy:</strong> Ressursisolering på arkitektur-nivå</li>
+</ul>
+<h2 id="praksisområder-for-fortsatt-læring">
+  Praksisområder for fortsatt læring
+</h2>
+<p>
+  <strong>Testing:</strong> Integrasjonstester for mikrotjenester,
+  kontraktstesting <strong>Performance:</strong> Profiling, load testing,
+  database indexing <strong>Security:</strong> SAST, DAST, avhengighetsskanning
+  <strong>Dokumentasjon:</strong> API-dokumentasjon,
+  arkitekturbeslutningsjournaler
+  <strong>Håndtering av hendelser:</strong> Debugging i distribuerte systemer,
+  logganalyse
+</p>
