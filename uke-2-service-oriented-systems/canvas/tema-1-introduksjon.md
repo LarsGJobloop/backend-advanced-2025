@@ -7,40 +7,44 @@ slug: be03-soa-introduksjon
 
 # Introduksjon til Tjeneste Orienterte Systemer (SOA)
 
-I begynnelsen av programmering så lagde vi systemer som inkluderte alt, fra hardware komponenter til logikk, helt opp til bruker grensesnitt. Så kalte "Big Balls of Mud" eller "Spaghetti Kode".
+I begynnelsen av programmering lagde vi systemer som inkluderte alt, fra hardware-komponenter til logikk, helt opp til brukergrensesnitt. Såkalte "Big Balls of Mud" eller "Spaghetti Kode".
 
-Disse systeme kan ha fungert og løst problemet der og da, men de er tett flettet sammen, og endringer i disse er som regel veldig til ekstremt vanskelig å gjøre. Som for eksempel endre hvem som har tilgang til en ressurs kan medføre endringer i titalls filer, gjennom et dusin undersystemer. Det er og særdeles vanskelig å resonere rundt eller isoler egenskaper ved disse.
+Disse systemene kan ha fungert og løst problemet der og da, men de er tett flettet sammen, og endringer i disse er som regel veldig til ekstremt vanskelige å gjøre. For eksempel kan det å endre hvem som har tilgang til en ressurs medføre endringer i titalls filer, gjennom et dusin undersystemer. Det er også særdeles vanskelig å resonere rundt eller isolere egenskaper ved disse.
 
-Som en løsning på disse problemene, og flere, så har vi et konsept som kalles Tjeneste Orientert Arkitektur/Service Oriented Arkitekture.
+Som en løsning på disse problemene, og flere, har vi et konsept som kalles Tjenesteorientert Arkitektur (Service Oriented Architecture, SOA).
 
 ## Teori
 
-Tjeneste Orientering flere problemer og er inspirert av hvordan moderne markedsøkonomi og bedrifter organiserer sin virksomhet.
+Tjenesteorientering løser flere problemer og er inspirert av hvordan moderne markedsøkonomi og bedrifter organiserer sin virksomhet.
+
+### Prinsipper og kvaliteter
 
 Noen av kvalitetene en søker å oppnå:
 
-- (Loose Coupling) Tjenester kan utvikles uavhengig av hverandre
-- (Reliability) Viss en tjeneste går ned, så kan andre håndtere mangler elegant.
-- [Standardization] Standardiserte grensesnitt kan byttes ut med forskjellige implementasjoner/outsourcing
-- (Agility) Små tjenester kan utvikles forter og med mindre ressurser enn større
-- (Skalering) Når tjenster er veldefinerte og enkapsulerte så er individuell skalering mulig
-- (Heterogenitet) Standardiserte grensesnitt tillater bruk av domene optimisert teknologier
+- **(Loose Coupling)** Tjenester kan utvikles uavhengig av hverandre
+- **(Reliability)** Hvis en tjeneste går ned, kan andre håndtere mangler elegant
+- **(Standardization)** Standardiserte grensesnitt kan byttes ut med forskjellige implementasjoner/outsourcing
+- **(Agility)** Små tjenester kan utvikles raskere og med færre ressurser enn større
+- **(Skalering)** Når tjenester er veldefinerte og enkapsulerte, er individuell skalering mulig
+- **(Heterogenitet)** Standardiserte grensesnitt tillater bruk av domene-optimerte teknologier
 
-For å kunne utvikle disse så kommer vi til å benytte oss av et sett med løsninger som vi kaller Kontainer Teknologier. Dette er standardiserte løsninger for å pakke ned, distribuere applikasjoner, og kjøre applikasjoner.
+### Kontainerteknologi
 
-Konkret så trenger du å installere et lokalt kjøretids miljø for disse kalt [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+For å kunne utvikle disse kommer vi til å benytte oss av et sett med løsninger som vi kaller kontainerteknologier. Dette er standardiserte løsninger for å pakke inn, distribuere applikasjoner, og kjøre applikasjoner.
 
-Etter det så kommer vi til pakke ned en .NET applikasjon i en Docker Container og kjøre denne, før vi laster den opp på GitHub Container Registry (GHCR) og kjører værandre sine.
+Konkret trenger du å installere et lokalt kjøretidsmiljø for disse, kalt [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
-Disse Containerne er veldig lett og distribuere og kjøre lokalt, en kan sjekke ut åpne registre for å se hva andre ting some er blitt laget og gjort åpent tilgjengelig. [Docker Hub](https://hub.docker.com/) er det mest kjente, men det er og andre steder som GitHub sitt eget.
+Etter det kommer vi til å pakke inn en .NET-applikasjon i en Docker-container og kjøre denne, før vi laster den opp på GitHub Container Registry (GHCR) og kjører hverandres containere.
 
-> For MacOS brukere så kan [OrbStack](https://orbstack.dev/) være ett bedre alternative til Docker Desktop
+Disse containerne er veldig lette å distribuere og kjøre lokalt. Du kan sjekke ut åpne registre for å se hva andre ting som er blitt laget og gjort åpent tilgjengelig. [Docker Hub](https://hub.docker.com/) er det mest kjente, men det er også andre steder som GitHub sitt eget.
+
+> For macOS-brukere kan [OrbStack](https://orbstack.dev/) være et bedre alternativ til Docker Desktop
 
 ## Konkretisering
 
 ### Hva, hvor, når blir dette brukt?
 
-Tjeneste orientering er i bruk i gjennom hele samfunnet, ikke kun i digitale systemer. Bare noter deg alt du bruker i det daglige liv (helsetjeneste, rørleggertjeneste, etc). Digitale systemer følger mange av de samme prinsippene fra:
+Tjenesteorientering er i bruk gjennom hele samfunnet, ikke kun i digitale systemer. Bare merk deg alt du bruker i det daglige liv (helsetjeneste, rørleggertjeneste, etc.). Digitale systemer følger mange av de samme prinsippene:
 
 - ASP .NET Services
 - Docker Compose Services
@@ -48,15 +52,15 @@ Tjeneste orientering er i bruk i gjennom hele samfunnet, ikke kun i digitale sys
 
 Vi kommer til å bruke:
 
-- Dockerfile for å definere våre egne container bilder
+- Dockerfile for å definere våre egne containerbilder
 - Docker Desktop til å overvåke og inspisere containere som kjører
-- GitHub Actions til å automatisk publisere våre egne containere bilder
+- GitHub Actions til å automatisk publisere våre egne containerbilder
 
 ### Eksempler
 
-**Dockerfile for å bygge en lokal ASP .NET Applikasjon**:
+**Dockerfile for å bygge en lokal ASP.NET-applikasjon**:
 
-> Denne kan endre seg viss du er veldig aktiv på å organisere ting i mapper
+> Denne kan endre seg hvis du er veldig aktiv på å organisere ting i mapper
 
 ```dockerfile
 # Start with an Image where .NET 9.0 SDK is already installed
@@ -70,14 +74,14 @@ RUN dotnet restore
 # Build and publish a release
 RUN dotnet publish -o out
 
-# Build runtime image, only containes the .NET 9.0 runtime
+# Build runtime image, only contains the .NET 9.0 runtime
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /App
 COPY --from=build /App/out .
 ENTRYPOINT ["dotnet", "DotNet.Docker.dll"]
 ```
 
-**GitHub Actions for å publisere kontainer bilde til GHCR**:
+**GitHub Actions for å publisere containerbilde til GHCR**:
 
 ```yaml
 name: Publish .NET Docker Image to GHCR
@@ -121,7 +125,7 @@ jobs:
   docker run hello-world
   ```
 
-- Kjør et container bilde fra Docker Hub (NGinx)
+- Kjør et containerbilde fra Docker Hub (NGinx)
 
   ```sh
   docker run --publish 8080:80 nginx
@@ -134,14 +138,14 @@ jobs:
   docker run --publish 8080:5000 dotnet-test
   ```
 
-> Vi kommer til å benytte oss av noe letter verktøy framover, så ikke tenk at du trenger å pugge disse kommandoene.
+> Vi kommer til å benytte oss av lettere verktøy framover, så ikke tenk at du trenger å memorere disse kommandoene.
 
 ### Eksterne Lenker
 
 - [TODO! Lenk til GitHub Repository]()
 - [TODO! Lenk til CICD workflow for å containerisere ASP .NET APIer]()
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-  - [For MacOS - OrbStack](https://orbstack.dev/)
+  - [For macOS - OrbStack](https://orbstack.dev/)
 - [Docker Hub](https://hub.docker.com/)
 - [Microsoft - Containerize .NET app](https://learn.microsoft.com/en-us/dotnet/core/docker/build-container)
 
