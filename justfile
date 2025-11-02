@@ -82,12 +82,33 @@ _upload_page slug title path:
     CANVAS_DOMAIN="https://jobloop.instructure.com"
     CANVAS_COURSE_ID="515"
 
-    curl -sS -o /dev/null -w "{{ slug }} → HTTP %{http_code}\n" \
-        -X PUT \
-        -H "Authorization: Bearer ${CANVAS_ACCESS_TOKEN}" \
-        --data-urlencode "wiki_page[title]={{ title }}" \
-        --data-urlencode "wiki_page[body]@-" \
-        "${CANVAS_DOMAIN}/api/v1/courses/${CANVAS_COURSE_ID}/pages/{{ slug }}" < "{{ path }}"
+    # Lookup page url from slug-id-mapping.json using title as key
+    CANVAS_URL=$(jq -r ".[\"{{ title }}\"]" "out/canvas-pages/slug-id-mapping.json" 2>/dev/null || echo "null")
+    
+    if [ "${CANVAS_URL}" != "null" ]; then
+        # DEBUG
+        echo "Updating page: ${CANVAS_DOMAIN}/api/v1/courses/${CANVAS_COURSE_ID}/pages/${CANVAS_URL}"
+        
+        # Page exists - update via PUT
+        curl -sS -o /dev/null -w "{{ slug }} → HTTP %{http_code}\n" \
+            -X PUT \
+            -H "Authorization: Bearer ${CANVAS_ACCESS_TOKEN}" \
+            --data-urlencode "wiki_page[title]={{ title }}" \
+            --data-urlencode "wiki_page[body]@-" \
+            "${CANVAS_DOMAIN}/api/v1/courses/${CANVAS_COURSE_ID}/pages/${CANVAS_URL}" < "{{ path }}"
+    else
+        # DEBUG
+        echo "Creating page: ${CANVAS_DOMAIN}/api/v1/courses/${CANVAS_COURSE_ID}/pages"
+
+        # Page doesn't exist - create via POST
+        curl -sS -o /dev/null -w "{{ slug }} → HTTP %{http_code}\n" \
+            -X POST \
+            -H "Authorization: Bearer ${CANVAS_ACCESS_TOKEN}" \
+            --data-urlencode "wiki_page[title]={{ title }}" \
+            --data-urlencode "wiki_page[url]={{ slug }}" \
+            --data-urlencode "wiki_page[body]@-" \
+            "${CANVAS_DOMAIN}/api/v1/courses/${CANVAS_COURSE_ID}/pages" < "{{ path }}"
+    fi
 
 [group("Canvas")]
 [doc("Update the slug-id mapping file.")]
@@ -105,7 +126,9 @@ update-canvas-page-mapping:
 
     # Canvas is based on Ruby on Rails, which transmits pagination information in the headers.
     # It's a remnant of the old days where Transport and Application semantics blurred.
+    # Map titles to URLs for lookup
     curl -sS \
         -H "Authorization: Bearer ${CANVAS_ACCESS_TOKEN}" \
         "${CANVAS_DOMAIN}/api/v1/courses/${COURSE_ID}/pages?per_page=${PER_PAGE}" | \
-        jq 'map({ (.url | sub("-[0-9]+$";"")): .page_id }) | add' > "${MAPPING_FILE}"
+        jq 'map({(.title): .url}) | add' > "${MAPPING_FILE}"
+    prettier --write "${MAPPING_FILE}"
