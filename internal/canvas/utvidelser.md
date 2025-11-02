@@ -1,4 +1,6 @@
 ---
+synlighet: intern
+livsyklus: utkast
 tittel: BE03 - Ekstra temaer
 slug: be03-ekstra-temaer
 ---
