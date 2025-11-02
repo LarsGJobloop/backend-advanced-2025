@@ -23,7 +23,7 @@ Dette danner et bilde av **autentisering (bevise hvem du er)** og **autorisasjon
 I digitale systemer er disse dokumentene erstattet av elektroniske bevis:
 
 - **Fødselsattest / Pass** → Sertifikater og signaturer (f.eks. CA, X.509)
-- **Førerkort / BankID** → eID-tjenester og Identytelsesleverandører (IdP)
+- **Førerkort / BankID** → eID-tjenester og Identitetsleverandører (IdP)
 - **Vognkort / medlemskort** → JSON Web Tokens (JWTs) og OAuth 2.0-tokens
 
 Når en applikasjon mottar et **JWT**, validerer den:
