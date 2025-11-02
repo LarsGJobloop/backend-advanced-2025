@@ -1,6 +1,6 @@
 ---
 synlighet: intern
-godkjent: false
+godkjent: usant
 tittel: BE03 - TDD - Timeplan
 slug: be03-tdd-timeplan
 ---
