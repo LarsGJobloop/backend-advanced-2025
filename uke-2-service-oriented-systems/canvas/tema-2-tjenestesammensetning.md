@@ -7,27 +7,31 @@ slug: be03-soa-tjenestesammensetning
 
 # Tjenestesammensetning
 
-En trend de siste årene har vært et fokus på Mikrotjenester, hvor vi splitter opp løsningene våre i veldig små biter for å lettere kunne utvikle løsninger. Det er en arkitektur for stor skala løsninger og spesielt attraktivt/mye brukt når det er stor usikkerhet rundt hva som kreves for at bedriften skal være levedyktig.
+En trend de siste årene har vært et fokus på mikrotjenester, hvor vi splitter opp løsningene våre i veldig små biter for å lettere kunne utvikle løsninger. Det er en arkitektur for storskala løsninger og spesielt attraktivt/mye brukt når det er stor usikkerhet rundt hva som kreves for at bedriften skal være levedyktig.
 
 Vi skal se på en mikro utgave av dette mønsteret her med hjelp av Docker Compose.
 
 ## Teori
 
-Mikrotjenester er et arkitektur mønster som beskriver løsninger hvor tjenestene er potensielt på størrelse med en KommentarTjeneste. Dette gjør det veldig lett og kjapt og eksperimentere, men enkeltvis så er disse ikke nødvendigvis noe som en kan ta betalt for.
+### Mikrotjenester
 
-Så verdien kommer først når du setter flere av disse sammen til et større produkt som en Blog Platform, eller Learning Management System. Dette leder til at mye av kompleksiteten er flytte fra individuell programmer til orkestrering/sammensettingene av disse tjenestene til en løsning.
+Mikrotjenester er et arkitekturmønster som beskriver løsninger hvor tjenestene er potensielt på størrelse med en KommentarTjeneste. Dette gjør det veldig lett og kjapt å eksperimentere, men alene er disse ikke nødvendigvis noe som en kan ta betalt for.
 
-Det største og mest kjente løsningen for å definere disse tjenestesammensetning er [Kubernetes](https://kubernetes.io/). Kubernetes er, potensielt, enormt stort og komplekst, og kommer fra Google sitt interne løsning (Borg) som de benytter for å adminisrer sine egne maskiner og produkter.
+Så verdien kommer først når du setter flere av disse sammen til et større produkt som en blogplatform, eller Learning Management System. Dette leder til at mye av kompleksiteten er flyttet fra individuelle programmer til orkestrering/sammensettingen av disse tjenestene til en løsning.
 
-Kort fortalt så er Kubernetes et distribuert operative system, ment for å kjøre tjenester på flåter av maskiner ([65,000+](https://cloud.google.com/blog/products/containers-kubernetes/gke-65k-nodes-and-counting)).
+### Orkestrering og sammensetning
 
-Vi holder oss relativt mye enklere og skal benytte oss av [Docker Compose]() for å sette opp våre egne komposisjoner som kan kjøres lokalt, og senere på en server. Docker Compose mangler mye av funksjonaliteten til Kubernetes, men det er lett å kjøre på sin egen maskin og gir ett innblikk i, og muligheten for å teste, hvordan moderne systemer snakker sammen og hvordan en kan hente inn mange ferdig løsninger som benyttes i industrien (Identitet, tilgangstyring og database løsninger vil være blandt de nyttigste).
+Det største og mest kjente løsningen for å definere disse tjenestesammensetningene er [Kubernetes](https://kubernetes.io/). Kubernetes er, potensielt, enormt stort og komplekst, og kommer fra Googles interne løsning (Borg) som de benytter for å administrere sine egne maskiner og produkter.
+
+Kort fortalt er Kubernetes et distribuert operativsystem, ment for å kjøre tjenester på flåter av maskiner ([65,000+](https://cloud.google.com/blog/products/containers-kubernetes/gke-65k-nodes-and-counting)).
+
+Vi holder oss relativt mye enklere og skal benytte oss av [Docker Compose](https://docs.docker.com/compose/) for å sette opp våre egne komposisjoner som kan kjøres lokalt, og senere på en server. Docker Compose mangler mye av funksjonaliteten til Kubernetes, men det er lett å kjøre på sin egen maskin og gir et innblikk i, og muligheten for å teste, hvordan moderne systemer snakker sammen og hvordan en kan hente inn mange ferdige løsninger som benyttes i industrien (identitet, tilgangsstyring og database-løsninger vil være blant de nyttigste).
 
 ## Konkretisering
 
 ### Hva, hvor, når blir dette brukt?
 
-Tjenestesammensetning vil bli brukt i de aller fleste løsninger. Eksakt hvordan dette gjøres varierer, og i markedet i dag så florere det av Platform løsninger som kan benyttes. Hvor det operative ansvaret blir outsourcet til spesialiserte bedrifter og du sitter med en Web GUI eller Web API som du benytter deg av.
+Tjenestesammensetning vil bli brukt i de aller fleste løsninger. Eksakt hvordan dette gjøres varierer, og i markedet i dag florerer det av plattformløsninger som kan benyttes, hvor det operative ansvaret blir outsourcet til spesialiserte bedrifter og du sitter med en web-GUI eller web-API som du benytter deg av.
 
 ### Eksempler
 
@@ -94,4 +98,4 @@ services:
 
 ## Referanse Liste
 
-{{ Lenke til autorative ressurser for temaet }}
+- Docker Inc. (2024). _Docker Compose Documentation._ docs.docker.com.
