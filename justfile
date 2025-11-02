@@ -108,3 +108,47 @@ update-canvas-page-mapping:
     # Map titles to URLs for lookup
     just canvas::list-pages "{{ CANVAS_COURSE_ID }}" "${PER_PAGE}" | \
         jq 'map({(.title): .url}) | add' > "${MAPPING_FILE}"
+
+[group("Validation")]
+[doc("Validate frontmatter structure in all canvas markdown files.")]
+validate-frontmatter:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    
+    tmpfile=$(mktemp)
+    count=0
+    
+    echo "Validating frontmatter in canvas markdown files..."
+    
+    while IFS= read -r file; do
+        count=$((count + 1))
+        
+        # Check if file starts with frontmatter delimiter
+        if ! head -n 1 "$file" | grep -q "^---$"; then
+            echo "ERROR: $file does not start with frontmatter delimiter (---)" >> "$tmpfile"
+            continue
+        fi
+        
+        # Extract frontmatter fields
+        title="$(awk '/^---/{f=!f;next} f && /^tittel:/{sub(/^tittel:[[:space:]]*/, ""); gsub(/"/, ""); print; exit}' "$file" || true)"
+        slug="$(awk '/^---/{f=!f;next} f && /^slug:/{sub(/^slug:[[:space:]]*/, ""); gsub(/"/, ""); print; exit}' "$file" || true)"
+        
+        # Validate required fields exist and are not empty
+        if [ -z "$title" ]; then
+            echo "ERROR: $file is missing required field 'tittel'" >> "$tmpfile"
+        fi
+        
+        if [ -z "$slug" ]; then
+            echo "ERROR: $file is missing required field 'slug'" >> "$tmpfile"
+        fi
+    done < <(find . -type f -path "*/canvas/*.md")
+    
+    if [ -s "$tmpfile" ]; then
+        cat "$tmpfile" >&2
+        rm "$tmpfile"
+        echo "Validation failed" >&2
+        exit 1
+    fi
+    
+    rm "$tmpfile"
+    echo "✓ Validated $count file(s) successfully"
