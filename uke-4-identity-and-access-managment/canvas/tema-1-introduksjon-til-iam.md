@@ -57,7 +57,7 @@ IAM ligger i kjernen av nesten all moderne programvare:
 
 Dette gjør IAM fundamentalt for både sikkerhet, brukervennlighet og drift.
 
-### Eksempler og øvelser
+### Eksempler
 
 - Inspiser et JWT på [jwt.io](https://jwt.io)  
   → Finn `Header`, `Payload`, `Signature`  
@@ -70,19 +70,19 @@ Dette gjør IAM fundamentalt for både sikkerhet, brukervennlighet og drift.
   var jwt = handler.ReadJwtToken(token);
   ```
 
-### Eksterne lenker
+### Eksterne Lenker
 
 - [JWT.io – Debugger og dokumentasjon](https://jwt.io)
 - [Microsoft – System.IdentityModel.Tokens.Jwt](https://learn.microsoft.com/en/dotnet/api/system.identitymodel.tokens.jwt)
 - [NIST – Digital Identity Guidelines](https://pages.nist.gov/800-63-3/)
 
-## Videre lesing
+## Videre Lesing
 
 - **OAuth 2.0** – hvordan tillit overføres mellom systemer.
 - **OpenID Connect** – hvordan identitet bygges på toppen av OAuth.
 - **“The Path to Zero Trust” (Microsoft Learn)** – forstå hvordan identitet blir et kontrollpunkt i moderne arkitektur.
 
-## Referanse liste
+## Referanse Liste
 
 - [RFC 7519 – JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519)
 - [RFC 6749 – OAuth 2.0 Authorization Framework](https://datatracker.ietf.org/doc/html/rfc6749)
