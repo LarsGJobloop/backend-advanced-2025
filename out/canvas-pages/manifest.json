@@ -24,7 +24,7 @@
     "out": "out/canvas-pages/be03-iac-moduler.html"
   },
   {
-    "file": "./uke-3-infrastructure-as-code/canvas/tema-2-server-oppsett.md",
+    "file": "./uke-3-infrastructure-as-code/canvas/tema-2-cloud-init.md",
     "title": "BE03 - IaC - Cloud Init og Automatisert Bootstrap",
     "slug": "be03-iac-cloud-init",
     "out": "out/canvas-pages/be03-iac-cloud-init.html"
