@@ -27,7 +27,6 @@ generate-canvas-manifest:
 
     jq -s '.' "$tmpfile" > "$META_FILE"
     rm "$tmpfile"
-    prettier --write "$META_FILE"
     echo "Manifest written to ${META_FILE}"
 
 [private]
@@ -131,4 +130,3 @@ update-canvas-page-mapping:
         -H "Authorization: Bearer ${CANVAS_ACCESS_TOKEN}" \
         "${CANVAS_DOMAIN}/api/v1/courses/${COURSE_ID}/pages?per_page=${PER_PAGE}" | \
         jq 'map({(.title): .url}) | add' > "${MAPPING_FILE}"
-    prettier --write "${MAPPING_FILE}"
