@@ -47,7 +47,7 @@ For å legge til identitetsinformasjon brukes **OpenID Connect**, som bygger vid
 
 ## Konkretisering
 
-### Hvor brukes dette?
+### Hva, hvor, når blir dette brukt?
 
 OAuth brukes overalt hvor tjenester trenger å representere brukere:
 
@@ -55,17 +55,21 @@ OAuth brukes overalt hvor tjenester trenger å representere brukere:
 - Når et **CLI-verktøy henter repositories** uten å lagre adgangsnøkkelen din.
 - Når **mobilapper kobler seg til API-er** på dine vegne.
 
-Eksempler:
+### Eksempler
+
+Bruksområder:
 
 - GitHub CLI (`gh auth login`)
 - VS Code-integrasjoner
 - Google Workspace API, Microsoft Graph, Discord OAuth
 
-### Demo - GitHub CLI i .NET
+**Demo - GitHub CLI i .NET:**
 
 1. **Registrer en OAuth App** på GitHub:
+
    - Fyll inn `Redirect URI` (f.eks. `http://localhost:5000/callback`)
    - Noter _Client ID_ og _Client Secret_
+
 2. **Bygg flyten i CLI:**
 
    ```csharp
@@ -86,19 +90,19 @@ Eksempler:
 4. **Diskuter**: Hvem stoler på hvem i denne flyten?
    → GitHub stoler på deg (via login), du stoler på GitHub (til å beskytte dataen din), og CLI-en får midlertidig tillit via tokenet.
 
-### Eksterne lenker
+### Eksterne Lenker
 
 - [GitHub OAuth Apps Documentation](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps)
 - [.NET HttpClient og OAuth flows (Microsoft Docs)](https://learn.microsoft.com/en/dotnet/api/system.net.http.httpclient)
 - [OAuth 2.0 Playground (Google)](https://developers.google.com/oauthplayground)
 
-## Videre lesing
+## Videre Lesing
 
 - [RFC 6749 – The OAuth 2.0 Authorization Framework](https://datatracker.ietf.org/doc/html/rfc6749)
 - [OpenID Connect Core Specification](https://openid.net/specs/openid-connect-core-1_0.html)
 - [“OAuth 2 Simplified” – Aaron Parecki](https://aaronparecki.com/oauth-2-simplified/)
 
-## Referanse liste
+## Referanse Liste
 
 - GitHub Docs – [Creating an OAuth App](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)
 - Microsoft Docs – [Secure Web APIs with OAuth 2.0](https://learn.microsoft.com/en/azure/active-directory/develop/v2-oauth2-auth-code-flow)
