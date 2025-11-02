@@ -44,13 +44,14 @@ IaC kan altså sees som et uttrykk for **deklarativ programmering** anvendt på 
 
 ### Hva, hvor, når blir dette brukt?
 
-Dette er et fundamentalt tema for alle som jobber med moderne IT-drift, DevOps og skyarkitektur.  
-Eksempler:
+Dette er et fundamentalt tema for alle som jobber med moderne IT-drift, DevOps og skyarkitektur:
 
 - **Skyinfrastruktur:** Oppsett av servere, nettverk og lagring i Hetzner, AWS, Azure, GCP.
 - **Automatisering:** Bruk av CI/CD for å realisere infrastrukturendringer automatisk.
 - **Reproduserbarhet:** Kloning av et helt miljø til en ny region eller kunde med en kommando.
-- **GitOps:** Drift av infrastruktur gjennom Git som “source of truth”.
+- **GitOps:** Drift av infrastruktur gjennom Git som "source of truth".
+
+### Eksempler
 
 I praksisdelen av denne økten kommer dere til å lære hvordan man:
 
