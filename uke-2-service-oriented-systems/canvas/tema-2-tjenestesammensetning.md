@@ -89,7 +89,6 @@ services:
 
 ### Eksterne Lenker
 
-- [TODO! Lenk til GitHub Repository]()
 - [Docker Compose Documentation](https://docs.docker.com/compose/)
 
 ## Videre Lesing

@@ -142,8 +142,6 @@ jobs:
 
 ### Eksterne Lenker
 
-- [TODO! Lenk til GitHub Repository]()
-- [TODO! Lenk til CICD workflow for å containerisere ASP .NET APIer]()
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
   - [For macOS - OrbStack](https://orbstack.dev/)
 - [Docker Hub](https://hub.docker.com/)
