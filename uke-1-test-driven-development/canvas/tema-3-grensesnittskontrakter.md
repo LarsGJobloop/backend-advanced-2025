@@ -113,6 +113,8 @@ Testene fungerer her som **kontrakter** som må holdes, uavhengig av hvordan tje
 - Evans, E. – _Domain-Driven Design_
 - Meszaros, G. – _xUnit Test Patterns_
 
+> **Tilknyttet innhold:** I neste uke (Tjenesteorienterte Systemer) vil du se hvordan stabile grensesnittskontrakter blir viktige når tjenester samarbeider i distribuerte systemer. TDD-verifiserte kontrakter gir fundamentet for pålitelige tjeneste-grenser.
+
 ## Referanse Liste
 
 - Fowler, M. (2011). _Integration Contract Tests._ martinfowler.com.
