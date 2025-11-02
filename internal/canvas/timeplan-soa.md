@@ -63,6 +63,4 @@ Undervisnings øktene er delt opp i Teori med Praksis ca 50/50. Mink andelen teo
   - En (eller flere) ASP .NET REST APIer
   - En (eller flere) databaser
 
-> [!NOTE]
->
 > Traefik støtter subdomener, men dette blir brukt som en sikkerhets mekanisme og bærer en del ekstra med seg. Så gjerne nevn det, men ikke bruk.

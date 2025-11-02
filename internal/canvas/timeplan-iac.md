@@ -11,8 +11,6 @@ Undervisnings øktene er delt opp i Teori med Praksis ca 50/50. Mink andelen teo
 
 ## Infrastrukt som Kode (Infrastructure as Code, IaC)
 
-> [!NOTE]
->
 > IaC er noe problemematisk å lære uten faktisk infrastrukur å jobbe med. Lokal ansvarlige bør få mulighet til å hente ut nøkkler fra Hetzner kontoen som de kan administrer for sine lokale deltakere. Viss umulig, så kan en benytte IaC til å administrere GitHub repoer (eller andre SaaS produkter), for å lære grunnleggende IaC konsepter.
 
 ### 1. IaC - Intro
@@ -43,8 +41,6 @@ Undervisnings øktene er delt opp i Teori med Praksis ca 50/50. Mink andelen teo
 
 #### Implementasjon
 
-> [!NOTE]
->
 > Ta små steg, og `terraform destroy` -> `terraform apply` etter hver endring.
 
 - Gå igjennom å sett opp en server som installerer å setter opp Git, .NET og Docker Compose
