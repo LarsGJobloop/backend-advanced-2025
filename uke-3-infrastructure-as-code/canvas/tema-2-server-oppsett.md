@@ -65,7 +65,9 @@ Hver gang du kjører `terraform apply`, sørger Terraform for at riktig Cloud In
 
 Cloud Init brukes i nesten alle moderne skymiljøer for å sikre at servere starter med riktig konfigurasjon, uten manuell SSH-tilgang.
 
-Eksempler:
+### Eksempler
+
+Bruksområder:
 
 - **Automatisk installasjon** av Git, Docker, .NET og avhengigheter.
 - **Bootstrap av applikasjoner:** Klone et Git-repo og starte Docker Compose ved oppstart.
@@ -77,7 +79,7 @@ Under økten:
 - De legger inn kommandoer for å klone et repo og starte et Docker Compose-manifest automatisk.
 - De tester gjenoppbygging ved å kjøre `terraform destroy` og `terraform apply`.
 
-> Poenget er å vise **iterasjon og validering**: små steg, test ofte, og tenk “reproduserbart fra dag 1”.
+> Poenget er å vise **iterasjon og validering**: små steg, test ofte, og tenk "reproduserbart fra dag 1".
 
 ### Eksterne Lenker
 
