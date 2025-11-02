@@ -39,6 +39,7 @@ Eksempel:
 class ApiTests
 {
   private readonly WebApplicationFactory<Program> _factory;
+  private readonly HttpClient _client;
 
   public ApiTests()
   {
@@ -80,6 +81,8 @@ Dette brukes særlig i:
 - **API-design** for å sikre konsistente svar og feilmeldinger.
 - **Integrasjonstesting** der kontrakter mellom systemer må valideres kontinuerlig.
 
+### Eksempler
+
 Et eksempel på øving:
 
 1. Definer et REST-API med operasjonene _GET /users_ og _POST /users_.
@@ -96,21 +99,21 @@ Et eksempel på øving:
 
 Testene fungerer her som **kontrakter** som må holdes, uavhengig av hvordan tjenesten implementeres internt.
 
-### Eksterne lenker
+### Eksterne Lenker
 
 - [Martin Fowler – IntegrationContractTests](https://martinfowler.com/bliki/IntegrationContractTest.html)
 - [ThoughtWorks – Consumer-Driven Contracts Explained](https://www.thoughtworks.com/insights/blog/consumer-driven-contracts)
 - [Pact – Open Source Contract Testing Tool](https://pact.io)
 - [Roy Fielding – Architectural Styles and the Design of Network-based Software Architectures (REST)](https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
 
-## Videre lesing
+## Videre Lesing
 
 - Freeman & Pryce – _Growing Object-Oriented Software, Guided by Tests_
 - Newman, S. – _Building Microservices_
 - Evans, E. – _Domain-Driven Design_
 - Meszaros, G. – _xUnit Test Patterns_
 
-## Referanse liste
+## Referanse Liste
 
 - Fowler, M. (2011). _Integration Contract Tests._ martinfowler.com.
 - Fielding, R. (2000). _Architectural Styles and the Design of Network-based Software Architectures._ PhD Thesis, UC Irvine.
