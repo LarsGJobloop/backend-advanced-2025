@@ -50,6 +50,8 @@ Denne fasen er typisk brukt når:
 - Man ønsker å bygge forståelse for et domene gjennom kode.
 - Arkitekturen skal **emerge**, ikke defineres på forhånd.
 
+### Eksempler
+
 Eksempel på arbeidsflyt:
 
 1. Deltakerne får et vagt problem: _Lag et system som kan registrere brukere og gi poeng._
@@ -71,21 +73,21 @@ Eksempel på arbeidsflyt:
 
 Poenget er ikke å _løse oppgaven_, men å **observere hvordan testene former strukturen**.
 
-### Eksterne lenker
+### Eksterne Lenker
 
 - [Growing Object-Oriented Software, Guided by Tests – Freeman & Pryce](https://www.oreilly.com/library/view/growing-object-oriented-software/9780321612136/)
 - [Martin Fowler – Mocks Aren’t Stubs](https://martinfowler.com/articles/mocksArentStubs.html)
 - [Kent Beck – Programmering som Hypoteseprøving (foredrag, Agile2008)](https://www.youtube.com/watch?v=JjXcVzBRF_M)
 - [Uncle Bob – Transformation Priority Premise](https://blog.cleancoder.com/uncle-bob/2013/05/27/TheTransformationPriorityPremise.html)
 
-## Videre lesing
+## Videre Lesing
 
 - Freeman & Pryce – _Growing Object-Oriented Software, Guided by Tests_
 - Beck & Andres – _Extreme Programming Explained: Embrace Change_
 - Meszaros – _xUnit Test Patterns: Refactoring Test Code_
 - Feathers – _Working Effectively with Legacy Code_ (for TDD i praksis mot eksisterende kode)
 
-## Referanse liste
+## Referanse Liste
 
 - Beck, K. (2003). _Test-Driven Development: By Example._ Addison-Wesley.
 - Freeman, S. & Pryce, N. (2009). _Growing Object-Oriented Software, Guided by Tests._ Addison-Wesley.
