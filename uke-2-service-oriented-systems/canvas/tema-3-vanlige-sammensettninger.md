@@ -155,6 +155,8 @@ volumes:
   - [ML (AI) Inference - Ollama](https://ollama.com/)
     > Merk at ML inference kan kreve enorme compute-ressurser for å levere kjappe svar. Så ikke vær overrasket hvis dette går særdeles tregt på laptopen din.
 
+> **Tilknyttet innhold:** I uke 4 (Identity and Access Management) vil du lære hvordan autentiserings- og tilgangsstyringstjenester fungerer i tjenesteorienterte systemer. Dette bygger videre på hvordan tjenester kan identifisere og autorisere brukere og andre tjenester i distribuerte systemer.
+
 ## Referanse Liste
 
 - [Docker Compose Reference](https://docs.docker.com/reference/compose-file/)
