@@ -2,83 +2,89 @@
   Introduksjon til Tjeneste Orienterte Systemer (SOA)
 </h1>
 <p>
-  I begynnelsen av programmering så lagde vi systemer som inkluderte alt, fra
-  hardware komponenter til logikk, helt opp til bruker grensesnitt. Så kalte
-  “Big Balls of Mud” eller “Spaghetti Kode”.
+  I begynnelsen av programmering lagde vi systemer som inkluderte alt, fra
+  hardware-komponenter til logikk, helt opp til brukergrensesnitt. Såkalte “Big
+  Balls of Mud” eller “Spaghetti Kode”.
 </p>
 <p>
-  Disse systeme kan ha fungert og løst problemet der og da, men de er tett
+  Disse systemene kan ha fungert og løst problemet der og da, men de er tett
   flettet sammen, og endringer i disse er som regel veldig til ekstremt
-  vanskelig å gjøre. Som for eksempel endre hvem som har tilgang til en ressurs
-  kan medføre endringer i titalls filer, gjennom et dusin undersystemer. Det er
-  og særdeles vanskelig å resonere rundt eller isoler egenskaper ved disse.
+  vanskelige å gjøre. For eksempel kan det å endre hvem som har tilgang til en
+  ressurs medføre endringer i titalls filer, gjennom et dusin undersystemer. Det
+  er også særdeles vanskelig å resonere rundt eller isolere egenskaper ved
+  disse.
 </p>
 <p>
-  Som en løsning på disse problemene, og flere, så har vi et konsept som kalles
-  Tjeneste Orientert Arkitektur/Service Oriented Arkitekture.
+  Som en løsning på disse problemene, og flere, har vi et konsept som kalles
+  Tjenesteorientert Arkitektur (Service Oriented Architecture, SOA).
 </p>
 <h2 id="teori">Teori</h2>
 <p>
-  Tjeneste Orientering flere problemer og er inspirert av hvordan moderne
+  Tjenesteorientering løser flere problemer og er inspirert av hvordan moderne
   markedsøkonomi og bedrifter organiserer sin virksomhet.
 </p>
+<h3 id="prinsipper-og-kvaliteter">Prinsipper og kvaliteter</h3>
 <p>Noen av kvalitetene en søker å oppnå:</p>
 <ul>
-  <li>(Loose Coupling) Tjenester kan utvikles uavhengig av hverandre</li>
   <li>
-    (Reliability) Viss en tjeneste går ned, så kan andre håndtere mangler
-    elegant.
+    <strong>(Loose Coupling)</strong> Tjenester kan utvikles uavhengig av
+    hverandre
   </li>
   <li>
-    [Standardization] Standardiserte grensesnitt kan byttes ut med forskjellige
-    implementasjoner/outsourcing
+    <strong>(Reliability)</strong> Hvis en tjeneste går ned, kan andre håndtere
+    mangler elegant
   </li>
   <li>
-    (Agility) Små tjenester kan utvikles forter og med mindre ressurser enn
-    større
+    <strong>(Standardization)</strong> Standardiserte grensesnitt kan byttes ut
+    med forskjellige implementasjoner/outsourcing
   </li>
   <li>
-    (Skalering) Når tjenster er veldefinerte og enkapsulerte så er individuell
-    skalering mulig
+    <strong>(Agility)</strong> Små tjenester kan utvikles raskere og med færre
+    ressurser enn større
   </li>
   <li>
-    (Heterogenitet) Standardiserte grensesnitt tillater bruk av domene
-    optimisert teknologier
+    <strong>(Skalering)</strong> Når tjenester er veldefinerte og enkapsulerte,
+    er individuell skalering mulig
+  </li>
+  <li>
+    <strong>(Heterogenitet)</strong> Standardiserte grensesnitt tillater bruk av
+    domene-optimerte teknologier
   </li>
 </ul>
+<h3 id="kontainerteknologi">Kontainerteknologi</h3>
 <p>
-  For å kunne utvikle disse så kommer vi til å benytte oss av et sett med
-  løsninger som vi kaller Kontainer Teknologier. Dette er standardiserte
-  løsninger for å pakke ned, distribuere applikasjoner, og kjøre applikasjoner.
+  For å kunne utvikle disse kommer vi til å benytte oss av et sett med løsninger
+  som vi kaller kontainerteknologier. Dette er standardiserte løsninger for å
+  pakke inn, distribuere applikasjoner, og kjøre applikasjoner.
 </p>
 <p>
-  Konkret så trenger du å installere et lokalt kjøretids miljø for disse kalt
+  Konkret trenger du å installere et lokalt kjøretidsmiljø for disse, kalt
   <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>.
 </p>
 <p>
-  Etter det så kommer vi til pakke ned en .NET applikasjon i en Docker Container
+  Etter det kommer vi til å pakke inn en .NET-applikasjon i en Docker-container
   og kjøre denne, før vi laster den opp på GitHub Container Registry (GHCR) og
-  kjører værandre sine.
+  kjører hverandres containere.
 </p>
 <p>
-  Disse Containerne er veldig lett og distribuere og kjøre lokalt, en kan sjekke
-  ut åpne registre for å se hva andre ting some er blitt laget og gjort åpent
+  Disse containerne er veldig lette å distribuere og kjøre lokalt. Du kan sjekke
+  ut åpne registre for å se hva andre ting som er blitt laget og gjort åpent
   tilgjengelig. <a href="https://hub.docker.com/">Docker Hub</a> er det mest
-  kjente, men det er og andre steder som GitHub sitt eget.
+  kjente, men det er også andre steder som GitHub sitt eget.
 </p>
 <blockquote>
   <p>
-    For MacOS brukere så kan <a href="https://orbstack.dev/">OrbStack</a> være
-    ett bedre alternative til Docker Desktop
+    For macOS-brukere kan <a href="https://orbstack.dev/">OrbStack</a> være et
+    bedre alternativ til Docker Desktop
   </p>
 </blockquote>
 <h2 id="konkretisering">Konkretisering</h2>
 <h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
 <p>
-  Tjeneste orientering er i bruk i gjennom hele samfunnet, ikke kun i digitale
-  systemer. Bare noter deg alt du bruker i det daglige liv (helsetjeneste,
-  rørleggertjeneste, etc). Digitale systemer følger mange av de samme
-  prinsippene fra:
+  Tjenesteorientering er i bruk gjennom hele samfunnet, ikke kun i digitale
+  systemer. Bare merk deg alt du bruker i det daglige liv (helsetjeneste,
+  rørleggertjeneste, etc.). Digitale systemer følger mange av de samme
+  prinsippene:
 </p>
 <ul>
   <li>ASP .NET Services</li>
@@ -87,15 +93,15 @@
 </ul>
 <p>Vi kommer til å bruke:</p>
 <ul>
-  <li>Dockerfile for å definere våre egne container bilder</li>
+  <li>Dockerfile for å definere våre egne containerbilder</li>
   <li>Docker Desktop til å overvåke og inspisere containere som kjører</li>
-  <li>GitHub Actions til å automatisk publisere våre egne containere bilder</li>
+  <li>GitHub Actions til å automatisk publisere våre egne containerbilder</li>
 </ul>
 <h3 id="eksempler">Eksempler</h3>
-<p><strong>Dockerfile for å bygge en lokal ASP .NET Applikasjon</strong>:</p>
+<p><strong>Dockerfile for å bygge en lokal ASP.NET-applikasjon</strong>:</p>
 <blockquote>
   <p>
-    Denne kan endre seg viss du er veldig aktiv på å organisere ting i mapper
+    Denne kan endre seg hvis du er veldig aktiv på å organisere ting i mapper
   </p>
 </blockquote>
 <div class="sourceCode" id="cb1">
@@ -112,13 +118,13 @@
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Build and publish a release</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">dotnet</span> publish <span class="at">-o</span> out</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Build runtime image, only containes the .NET 9.0 runtime</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Build runtime image, only contains the .NET 9.0 runtime</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> mcr.microsoft.com/dotnet/aspnet:9.0</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /App</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> <span class="op">--from=build</span> /App/out .</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">ENTRYPOINT</span> [<span class="st">&quot;dotnet&quot;</span>, <span class="st">&quot;DotNet.Docker.dll&quot;</span>]</span></code></pre>
 </div>
-<p><strong>GitHub Actions for å publisere kontainer bilde til GHCR</strong>:</p>
+<p><strong>GitHub Actions for å publisere containerbilde til GHCR</strong>:</p>
 <div class="sourceCode" id="cb2">
   <pre
     class="sourceCode yaml"
@@ -165,7 +171,7 @@
     </div>
   </li>
   <li>
-    <p>Kjør et container bilde fra Docker Hub (NGinx)</p>
+    <p>Kjør et containerbilde fra Docker Hub (NGinx)</p>
     <div class="sourceCode" id="cb4">
       <pre
         class="sourceCode sh"
@@ -184,8 +190,8 @@
 </ul>
 <blockquote>
   <p>
-    Vi kommer til å benytte oss av noe letter verktøy framover, så ikke tenk at
-    du trenger å pugge disse kommandoene.
+    Vi kommer til å benytte oss av lettere verktøy framover, så ikke tenk at du
+    trenger å memorere disse kommandoene.
   </p>
 </blockquote>
 <h3 id="eksterne-lenker">Eksterne Lenker</h3>
@@ -199,7 +205,7 @@
   <li>
     <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>
     <ul>
-      <li><a href="https://orbstack.dev/">For MacOS - OrbStack</a></li>
+      <li><a href="https://orbstack.dev/">For macOS - OrbStack</a></li>
     </ul>
   </li>
   <li><a href="https://hub.docker.com/">Docker Hub</a></li>

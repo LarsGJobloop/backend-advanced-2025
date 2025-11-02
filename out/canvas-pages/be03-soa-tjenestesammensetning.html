@@ -1,8 +1,8 @@
 <h1 id="tjenestesammensetning">Tjenestesammensetning</h1>
 <p>
-  En trend de siste årene har vært et fokus på Mikrotjenester, hvor vi splitter
+  En trend de siste årene har vært et fokus på mikrotjenester, hvor vi splitter
   opp løsningene våre i veldig små biter for å lettere kunne utvikle løsninger.
-  Det er en arkitektur for stor skala løsninger og spesielt attraktivt/mye brukt
+  Det er en arkitektur for storskala løsninger og spesielt attraktivt/mye brukt
   når det er stor usikkerhet rundt hva som kreves for at bedriften skal være
   levedyktig.
 </p>
@@ -11,50 +11,52 @@
   Compose.
 </p>
 <h2 id="teori">Teori</h2>
+<h3 id="mikrotjenester">Mikrotjenester</h3>
 <p>
-  Mikrotjenester er et arkitektur mønster som beskriver løsninger hvor
-  tjenestene er potensielt på størrelse med en KommentarTjeneste. Dette gjør det
-  veldig lett og kjapt og eksperimentere, men enkeltvis så er disse ikke
-  nødvendigvis noe som en kan ta betalt for.
+  Mikrotjenester er et arkitekturmønster som beskriver løsninger hvor tjenestene
+  er potensielt på størrelse med en KommentarTjeneste. Dette gjør det veldig
+  lett og kjapt å eksperimentere, men alene er disse ikke nødvendigvis noe som
+  en kan ta betalt for.
 </p>
 <p>
   Så verdien kommer først når du setter flere av disse sammen til et større
-  produkt som en Blog Platform, eller Learning Management System. Dette leder
-  til at mye av kompleksiteten er flytte fra individuell programmer til
-  orkestrering/sammensettingene av disse tjenestene til en løsning.
+  produkt som en blogplatform, eller Learning Management System. Dette leder til
+  at mye av kompleksiteten er flyttet fra individuelle programmer til
+  orkestrering/sammensettingen av disse tjenestene til en løsning.
 </p>
+<h3 id="orkestrering-og-sammensetning">Orkestrering og sammensetning</h3>
 <p>
   Det største og mest kjente løsningen for å definere disse
-  tjenestesammensetning er <a href="https://kubernetes.io/">Kubernetes</a>.
-  Kubernetes er, potensielt, enormt stort og komplekst, og kommer fra Google
-  sitt interne løsning (Borg) som de benytter for å adminisrer sine egne
-  maskiner og produkter.
+  tjenestesammensetningene er <a href="https://kubernetes.io/">Kubernetes</a>.
+  Kubernetes er, potensielt, enormt stort og komplekst, og kommer fra Googles
+  interne løsning (Borg) som de benytter for å administrere sine egne maskiner
+  og produkter.
 </p>
 <p>
-  Kort fortalt så er Kubernetes et distribuert operative system, ment for å
-  kjøre tjenester på flåter av maskiner (<a
+  Kort fortalt er Kubernetes et distribuert operativsystem, ment for å kjøre
+  tjenester på flåter av maskiner (<a
     href="https://cloud.google.com/blog/products/containers-kubernetes/gke-65k-nodes-and-counting"
     >65,000+</a
   >).
 </p>
 <p>
   Vi holder oss relativt mye enklere og skal benytte oss av
-  <a href="">Docker Compose</a> for å sette opp våre egne komposisjoner som kan
-  kjøres lokalt, og senere på en server. Docker Compose mangler mye av
-  funksjonaliteten til Kubernetes, men det er lett å kjøre på sin egen maskin og
-  gir ett innblikk i, og muligheten for å teste, hvordan moderne systemer
-  snakker sammen og hvordan en kan hente inn mange ferdig løsninger som benyttes
-  i industrien (Identitet, tilgangstyring og database løsninger vil være blandt
-  de nyttigste).
+  <a href="https://docs.docker.com/compose/">Docker Compose</a> for å sette opp
+  våre egne komposisjoner som kan kjøres lokalt, og senere på en server. Docker
+  Compose mangler mye av funksjonaliteten til Kubernetes, men det er lett å
+  kjøre på sin egen maskin og gir et innblikk i, og muligheten for å teste,
+  hvordan moderne systemer snakker sammen og hvordan en kan hente inn mange
+  ferdige løsninger som benyttes i industrien (identitet, tilgangsstyring og
+  database-løsninger vil være blant de nyttigste).
 </p>
 <h2 id="konkretisering">Konkretisering</h2>
 <h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
 <p>
   Tjenestesammensetning vil bli brukt i de aller fleste løsninger. Eksakt
-  hvordan dette gjøres varierer, og i markedet i dag så florere det av Platform
-  løsninger som kan benyttes. Hvor det operative ansvaret blir outsourcet til
-  spesialiserte bedrifter og du sitter med en Web GUI eller Web API som du
-  benytter deg av.
+  hvordan dette gjøres varierer, og i markedet i dag florerer det av
+  plattformløsninger som kan benyttes, hvor det operative ansvaret blir
+  outsourcet til spesialiserte bedrifter og du sitter med en web-GUI eller
+  web-API som du benytter deg av.
 </p>
 <h3 id="eksempler">Eksempler</h3>
 <p><strong>Docker Compose - Nginx</strong>:</p>
@@ -125,4 +127,8 @@
   </li>
 </ul>
 <h2 id="referanse-liste">Referanse Liste</h2>
-<p>{{ Lenke til autorative ressurser for temaet }}</p>
+<ul>
+  <li>
+    Docker Inc. (2024). <em>Docker Compose Documentation.</em> docs.docker.com.
+  </li>
+</ul>

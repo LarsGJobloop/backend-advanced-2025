@@ -1,33 +1,33 @@
 <h1 id="vanlige-tjenestesammensetninger">Vanlige Tjenestesammensetninger</h1>
 <p>
-  Når det kommer til tjenestesammensetning i digitale systemer så har det dukket
-  oppe ett sett med mer eller mindre standardiserte løsninger som de fleste vil
-  benytte seg av. Disse vil ligne på det dere allerede har vært innom i MVC
-  mønstret og ellers i ASP .NET APIene. Viss du har følger med og noterer deg,
-  så vil du se at flere av de samme tanken repeteres på flere nivåer, de er det
+  Når det kommer til tjenestesammensetning i digitale systemer, har det dukket
+  opp et sett med mer eller mindre standardiserte løsninger som de fleste vil
+  benytte seg av. Disse vil ligne på det dere allerede har vært innom i
+  MVC-mønstret og ellers i ASP.NET APIene. Hvis du har fulgt med og notert deg,
+  vil du se at flere av de samme tankene repeteres på flere nivåer – de er det
   vi kaller fraktale.
 </p>
-<p>Her kommer vi til å dra inn to sett av disse, og peke på ett par andre.</p>
+<p>Her kommer vi til å dra inn to sett av disse, og peke på et par andre.</p>
 <ul>
   <li>
     <p>
       <strong>Ruting/Ingress</strong>: En spesialisert tjeneste for å
       videresende inkommende meldinger til konkrete tjenester. Kan utvides til å
-      kreve autentisering og terminere TLS kjeder og benyttes for bevisføring av
-      domene eierskap (DNS Certificates). Eks: Nginx, Traefik, Kong
+      kreve autentisering og terminere TLS-kjeder og benyttes for bevisføring av
+      domeneeierskap (DNS-sertifikater). Eks: Nginx, Traefik, Kong
     </p>
   </li>
   <li>
     <p>
       <strong>Databaser</strong>: Dedikerte tjenester for lagring og
-      organisering av informasjon. Eks: PostgreSQL, MongoDB, Reddis
+      organisering av informasjon. Eks: PostgreSQL, MongoDB, Redis
     </p>
   </li>
   <li>
     <p>
-      <strong>Identity and Access Management (IAM)</strong>: Produksjons
-      systemer i dag benytter seg av identitets baserte autentisering løsninger,
-      disse blir fasilitert av IAM tjenester. Eks: Keycloak, Dex, Ory
+      <strong>Identity and Access Management (IAM)</strong>: Produksjonssystemer
+      i dag benytter seg av identitetsbaserte autentiseringsløsninger, disse
+      blir fasilitert av IAM-tjenester. Eks: Keycloak, Dex, Ory
     </p>
   </li>
   <li>
@@ -39,41 +39,41 @@
   </li>
   <li>
     <p>
-      <strong>Event Streams</strong>: Hendelses Drevne Systemer krever måter å
+      <strong>Event Streams</strong>: Hendelsesdrevne systemer krever måter å
       definere kanaler på og publisere og lytte etter meldinger som kommer inn.
       Eks: Kafka, NATS, RabbitMQ
     </p>
   </li>
   <li>
     <p>
-      <strong>ML (AI) Inference</strong>: Ny ML/AI tjeneste type for å kjørre
-      spørringer mot (inference) ML modeller. Eks. Ollama
+      <strong>ML (AI) Inference</strong>: Ny ML/AI-tjenestetype for å kjøre
+      spørringer mot (inference) ML-modeller. Eks: Ollama
     </p>
   </li>
 </ul>
 <h2 id="teori">Teori</h2>
 <h3 id="ingress">Ingress</h3>
 <p>
-  Ingress tjenester er et lite program som er det første eksterne brukere
+  Ingress-tjenester er et lite program som er det første eksterne brukere
   treffer på når de sender meldinger til ditt system. I sin enkleste
-  konfigurasjon så leser disse kun av inkommende meldinger og videresender disse
-  til konkrete tjenester. I denne konfigurasjonen så kaller en det gjerne en
-  Reverse-Proxy, og fungerer mer som en by port som all meldinger må igjennom.
+  konfigurasjon leser disse kun av inkommende meldinger og videresender disse
+  til konkrete tjenester. I denne konfigurasjonen kaller en det gjerne en
+  reverse proxy, og fungerer mer som en byport som alle meldinger må igjennom.
 </p>
 <p>
-  Dette legger til ett ekstra hopp inn i kommunikasjons kanalen, i Docker
-  Compose så blir dette fra en prossess til en annen, så i tilfeller hvor en har
-  applikasjoner som er veldig <em>latency</em> sensitive (Spill og streaming),
-  så vil den typen kommunikasjon potensielt taes via dedikerte kanaler.
+  Dette legger til et ekstra hopp inn i kommunikasjonskanalen. I Docker Compose
+  blir dette fra en prosess til en annen, så i tilfeller hvor en har
+  applikasjoner som er veldig <em>latency</em>-sensitive (spill og streaming),
+  vil den typen kommunikasjon potensielt tas via dedikerte kanaler.
 </p>
 <p>
   Det første en benytter Traefik til er for å ha en stabil fasade, hvor vi
-  bakenfor kan drive å updatere tjeneste implementasjonene våre individuelt,
+  bakenfor kan drive å oppdatere tjenesteimplementasjonene våre individuelt,
   uten at det påvirker resten av tjenestene vi har.
 </p>
 <p>
-  Det er langt mer disse Ingress/Gatewayen kan ta ansvar for, så here er en
-  liten liste av muligheter:
+  Det er langt mer disse ingress/gateway-tjenestene kan ta ansvar for, så her er
+  en liten liste av muligheter:
 </p>
 <ul>
   <li>Retry</li>
@@ -86,16 +86,16 @@
 <h3 id="databaser">Databaser</h3>
 <p>
   Databaser er et annet sett med tjenester som har vært standardisert og som vi
-  benytter oss av til langtids lagring av strukturert data. Disse er som regel
-  splitet i to biter, en database tjeneste og et database administrasjons
-  grensesnitt.
+  benytter oss av til langtidslagring av strukturert data. Disse er som regel
+  splitet i to biter: en databasetjeneste og et
+  databaseadministrasjonsgrensesnitt.
 </p>
 <p>
   Databaser er potensielt veldig tunge og kompliserte å operere, spesielt med
-  tanke på varig lagring av data. Her må en tenke på backup planer, oppetid,
-  hvor mye data som skal lagres, forholdet mellom spørringer/lesinger og
-  muteringer/skrivinger til database samt hvordan disse er grupert, per bruker,
-  på tvers av all, etc.
+  tanke på varig lagring av data. Her må en tenke på backupplaner, oppetid, hvor
+  mye data som skal lagres, forholdet mellom spørringer/lesninger og
+  muteringer/skrivinger til database samt hvordan disse er gruppert, per bruker,
+  på tvers av alle, etc.
 </p>
 <p>
   Så når det kommer til outsourcing av tjenester så er det operative ansvaret
@@ -104,58 +104,58 @@
 <h3 id="mellom-tjenestelig-kommunikasjon">Mellom tjenestelig kommunikasjon</h3>
 <p>
   Docker Compose benytter seg av et internt nettverk som kan brukes når en
-  trenger å snakke i mellom de forskjellige tjenestene. Med dette nettverket så
-  hører det til en enkel DNS tjeneste for som kan benyttes, som bruker tjeneste
-  navnet, som definert i Docker Compose manifestet, som domene en kan gjøre
-  spørringer i mot internt. Det er mulig å isolere tjenester ved å sett opp
-  flere nettverk, men siden dette er enkelt noder vi kjører det på så blir dette
-  i hovedsak brukt for simulering av systemer, og ikke som nytte verktøy til
-  faktiske produksjons løsninger.
+  trenger å snakke mellom de forskjellige tjenestene. Med dette nettverket hører
+  det til en enkel DNS-tjeneste som kan benyttes, som bruker tjenestenavnet, som
+  definert i Docker Compose-manifestet, som domene en kan gjøre spørringer mot
+  internt. Det er mulig å isolere tjenester ved å sette opp flere nettverk, men
+  siden dette er enkelt noder vi kjører det på, blir dette i hovedsak brukt for
+  simulering av systemer, og ikke som nyttverktøy til faktiske
+  produksjonsløsninger.
 </p>
-<h3 id="deklerative-lagrin">Deklerative Lagrin</h3>
+<h3 id="deklarativ-lagring">Deklarativ lagring</h3>
 <p>
-  Containere er stateless av design. Det vil si at de når du starter en
-  container så bruker den kun det some var definert i container bildet, og viss
-  du prøver å skrive noe til disken mens den kjøres så vil det forsvinne når
-  containeren stopper. Dette er gjort for å letter gjøre resonering rundt og
-  horisontal skalering (kjøre flere containere av samme slag).
+  Containere er stateless av design. Det vil si at når du starter en container,
+  bruker den kun det som var definert i containerbildet, og hvis du prøver å
+  skrive noe til disken mens den kjører, vil det forsvinne når containeren
+  stopper. Dette er gjort for å lettere gjøre resonnement rundt og horisontal
+  skalering (kjøre flere containere av samme slag).
 </p>
 <p>
-  Så viss du trenger å lagre noe utenom livssyklusen til containeren så har du
-  to alternativer:
+  Så hvis du trenger å lagre noe utenom livssyklusen til containeren, har du to
+  alternativer:
 </p>
 <ol type="1">
   <li>
-    Du kan sende dataen til en dedikert tjeneste som håndterer dette (Database,
-    Object Storage, Logging Tjeneste). Dette fungerer helt fint og er ofte det
-    vi gjør, selv om det vil gjøre applikasjonen vår tregere. Motivasjonen her
-    er ofte basert på økonomi og tjeneste garantier.
+    Du kan sende dataen til en dedikert tjeneste som håndterer dette (database,
+    Object Storage, loggingtjeneste). Dette fungerer helt fint og er ofte det vi
+    gjør, selv om det vil gjøre applikasjonen vår tregere. Motivasjonen her er
+    ofte basert på økonomi og tjenestegarantier.
   </li>
   <li>
     Du kan, eksplisitt, sette inn (mounte) en del av filsystemet fra verten, som
     applikasjonen i containeren kan skrive til. Vi kommer til å bruke dette for
-    databaser og andrer tjenester som trenger harddisk lagring. Viss du bruker
-    en skyleverandør så vil dette enten vere harddisken til noden eller Block
-    Storage (NAS variant).
+    databaser og andre tjenester som trenger harddisklagring. Hvis du bruker en
+    skyleverandør, vil dette enten være harddisken til noden eller Block Storage
+    (NAS-variant).
   </li>
 </ol>
 <h2 id="konkretisering">Konkretisering</h2>
 <h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
 <p>
-  Moderne produksjons systemer i dag er samensatt av flere tjenester. Det som
+  Moderne produksjonssystemer i dag er sammensatt av flere tjenester. Det som
   gjerne vil være aktuelt for din praksis/jobb er at du kommer ikke til å sitte
   med Docker Compose og konfigurere alt sammen selv. Ofte benytter en dedikerte
-  tjenester med egne Web UIer eller APIer for å konfigurere disse. Så Docker
+  tjenester med egne web-GUIer eller APIer for å konfigurere disse. Så Docker
   Compose er mer en løsning for å kunne eksperimentere lokalt og få innsikt i
   hvordan disse fungerer. Men du vil finne mye konseptuell overlapp mellom det
-  som du kan kjøre lokalt av Open Source løsninger og de tjenestene som tilbyes,
-  selv om du betaler deg ut av en del av ansvaret med driftene og
-  konfiugreringen av systemene.
+  som du kan kjøre lokalt av open source-løsninger og de tjenestene som tilbyes,
+  selv om du betaler deg ut av en del av ansvaret med driften og konfigureringen
+  av systemene.
 </p>
 <p>
-  Når det er sagt, så kan enklere løsninger, ofte interne, fremdeles benytte seg
-  av Docker Compose til oppsett. Og det er ett nyttig verktøy som du kan bruke
-  når du setter opp dine egne servere.
+  Når det er sagt, kan enklere løsninger, ofte interne, fremdeles benytte seg av
+  Docker Compose til oppsett. Og det er et nyttig verktøy som du kan bruke når
+  du setter opp dine egne servere.
 </p>
 <h3 id="eksempler">Eksempler</h3>
 <p>
@@ -237,11 +237,11 @@
     </ul>
   </li>
   <li>
-    <a href="https://www.postgresql.org/docs/">PosgreSQL Documentation</a>
+    <a href="https://www.postgresql.org/docs/">PostgreSQL Documentation</a>
     <ul>
       <li>
         <a href="https://hub.docker.com/r/bitnami/postgresql"
-          >PosgreSQL Container</a
+          >PostgreSQL Container</a
         >
       </li>
     </ul>
@@ -275,8 +275,8 @@
       <li><a href="https://kafka.apache.org/">Event Streaming - Kafka</a></li>
       <li>
         <a href="https://ollama.com/">ML (AI) Inference - Ollama</a> &gt; Merk
-        at ML inference kan kreve enorme compute ressurser for å levere kjappe
-        svar. Så ikke være overrasket viss dette går særdeles tregt på laptopen
+        at ML inference kan kreve enorme compute-ressurser for å levere kjappe
+        svar. Så ikke vær overrasket hvis dette går særdeles tregt på laptopen
         din.
       </li>
     </ul>
