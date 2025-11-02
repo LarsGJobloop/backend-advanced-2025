@@ -1,32 +1,47 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: { { BE03 - SOA - Introduksjon til Tjeneste Orienterte Systemer } }
-slug: { { be03-soa-introduksjon } }
+tittel: BE03 - <Tema kortnavn> - <Full tittel>
+slug: be03-<tema>-<kortnavn>
 ---
 
-# {{ Kort Tittel for Tema }}
+# <Kort Tittel for Tema>
 
-{{ Ingress for å beskrive temaet, kort }}
+[Kort inledning som gir kontekst og mål for temaet. Ikke mer enn 1-2 avsnitt.]
 
 ## Teori
 
-{{ Teoretisk fundament for temaet, strukturert etter behov. Tekst eller tegninger }}
+[Grunnleggende konsepter og prinsipper. Strukturer innholdet med underseksjoner (`###`) for bedre lesbarhet.]
+
+### Underseksjon 1
+
+[Teoretisk bakgrunn, inspirasjonskilder, eller relasjoner og sammenhenger.]
+
+### Underseksjon 2
+
+[Flere underseksjoner kan legges til etter behov.]
 
 ## Konkretisering
 
 ### Hva, hvor, når blir dette brukt?
 
-{{ Eksempler på hvorfor dette er et viktig tema }}
+[Beskriv konkrete bruksområder og scenarioer.]
+
+### Eksempler (valgfritt)
+
+[Kodeeksempler, praktiske øvelser, eller lenker til Git repositories.]
 
 ### Eksterne Lenker
 
-{{ Lenker til ressurser som viser eller bruker dette }}
+- [Beskrivende tekst](url)
+- [Relevant dokumentasjon eller verktøy](url)
 
 ## Videre Lesing
 
-{{ Lenke til ressuerser som kan brukes til fordypngin }}
+- Forfatter, _Tittel_
+- [Artikkel eller online ressurs](url)
 
 ## Referanse Liste
 
-{{ Lenke til autorative ressurser for temaet }}
+- Forfatter, År. _Tittel._ Utgiver.
+- [RFC eller standard](url)
