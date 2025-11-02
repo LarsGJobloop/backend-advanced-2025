@@ -20,10 +20,13 @@
       devShells = withPkgs (pkgs: {
         default = pkgs.mkShell {
           packages = with pkgs; [
+            # Content tools
             pandoc
             just
             nodePackages.prettier # For formatting markdown and HTMLfiles
             jq
+            # Infrastructure tools
+            opentofu
             sops
             age
           ];

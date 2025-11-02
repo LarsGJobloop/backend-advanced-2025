@@ -1,0 +1,4 @@
+# IaC temporary directories and files
+.terraform
+*.tfvars
+*.tfstate*
