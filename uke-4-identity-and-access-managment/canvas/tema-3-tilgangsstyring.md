@@ -69,9 +69,17 @@ I virkeligheten kombineres modellene:
 
 ## Konkretisering
 
-### Observasjonsøvelse
+### Hva, hvor, når blir dette brukt?
 
-Studentene analyserer eksisterende systemer som IAM-eksempler:
+Tilgangsstyring er grunnleggende i alle moderne systemer:
+
+- **Organisasjonsstrukturer:** Hvem kan endre innstillinger, hvem kan lese data?
+- **Plattformstyring:** GitHub, Discord, Azure, AWS bruker alle kombinasjoner av RBAC, ABAC, PBAC og ReBAC.
+- **Sikkerhet og compliance:** Nødvendig for å oppfylle regulatoriske krav og sikre data.
+
+### Eksempler
+
+**Observasjonsøvelse - Studentene analyserer eksisterende systemer som IAM-eksempler:**
 
 #### Discord
 
@@ -88,19 +96,19 @@ Studentene analyserer eksisterende systemer som IAM-eksempler:
 
 Disse observasjonene gjør IAM-begrepene konkrete og viser hvordan tillit implementeres gjennom kode, konfigurasjon og praksis.
 
-### Eksterne lenker
+### Eksterne Lenker
 
 - [Discord Developer Docs – Permissions & Roles](https://discord.com/developers/docs/topics/permissions)
 - [GitHub Docs – Managing Access to Repositories](https://docs.github.com/en/organizations/managing-access-to-your-organizations-repositories)
 - [NIST SP 800-192 – Access Control Models](https://csrc.nist.gov/publications/detail/sp/800-192/final)
 
-## Videre lesing
+## Videre Lesing
 
 - _Policy as Code_ (HashiCorp Sentinel, Open Policy Agent)
 - [NIST SP 800-162 – Attribute Based Access Control](https://csrc.nist.gov/publications/detail/sp/800-162/final)
 - [Zanzibar: Google's Consistent, Global Authorization System](https://research.google/pubs/pub48190/)
 
-## Referanse liste
+## Referanse Liste
 
 - GitHub Docs – Access Management
 - NIST 800-192 og 800-162 – Access Control Standard Models
