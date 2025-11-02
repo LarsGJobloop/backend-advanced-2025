@@ -3,7 +3,6 @@ synlighet: intern
 livsyklus: utkast
 tittel: BE03 - SOA - Introduksjon til Tjeneste Orienterte Systemer
 slug: be03-soa-introduksjon
-canvas_id: null
 ---
 
 # Introduksjon til Tjeneste Orienterte Systemer (SOA)

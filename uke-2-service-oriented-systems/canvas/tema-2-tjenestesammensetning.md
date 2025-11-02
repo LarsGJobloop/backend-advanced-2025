@@ -3,7 +3,6 @@ synlighet: intern
 livsyklus: utkast
 tittel: BE03 - SOA - Tjenestesammensetning
 slug: be03-soa-tjenestesammensetning
-canvas_id: null
 ---
 
 # Tjenestesammensetning

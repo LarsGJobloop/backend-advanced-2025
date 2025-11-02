@@ -3,7 +3,6 @@ synlighet: intern
 godkjent: usant
 tittel: BE03 - SOA - Timeplan
 slug: be03-soa-timeplan
-canvas_id: null
 ---
 
 # Timeplan

@@ -3,7 +3,6 @@ synlighet: intern
 godkjent: usant
 tittel: BE03 - IAM - Timeplan
 slug: be03-iam-timeplan
-canvas_id: null
 ---
 
 # Timeplan - Identity and Access Management (IAM)
