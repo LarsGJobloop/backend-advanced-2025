@@ -36,13 +36,23 @@ nix run . just --list
 1. Skriv innhold i markdown-filer under hver ukes `canvas/`-mappe.
 2. Kjør `just generate-canvas-manifest` for å generere en manifest-fil.
 3. Kjør `just render-canvas-pages` for å generere HTML-filer.
-4. Kjør `just update-canvas-page-mapping` for å oppdatere slug-id-mapping.
+4. Kjør `just update-canvas-page-mapping` for å oppdatere title-to-id-mapping.
 
-> [!WARNING]
+#### Sikkerhet og automatisk opplasting
+
+Opplastingsfunksjonaliteten er implementert med flere sikkerhetslag:
+
+- **Dry-run som standard**: `just upload-canvas-pages` kjører i dry-run modus og viser kun hva som ville blitt oppdatert. Ingen endringer gjøres med mindre du eksplisitt kaller `just upload-canvas-pages apply`.
+- **Eierskapsverifisering**: Systemet verifiserer at hver side sist ble redigert av `CONTENT_RESPONSIBLE` før opplasting. Sider redigert av andre brukere blir automatisk hoppet over.
+- **Interaktiv bekreftelse**: I apply-modus må du eksplisitt bekrefte hver oppdatering (yes/no) før den utføres.
+- **Ingen sideopprettelse**: Systemet støtter kun oppdatering av eksisterende sider. Opprettelse av nye sider må gjøres manuelt i Canvas.
+
+> [!NOTE]
 >
-> Neste steg vil overskrive eksisterende sider i Canvas LMS. Grunnet "quirks" dobbel og trippel sjekk sider som ligger under samme kurs nummer mot [id mapping](out/canvas-pages/slug-id-mapping.json). Det jobbes med bedre løsninger for dette.
+> **Nåværende status**: Inntil videre er potensiell destruktive mutasjon fjernet. Anbefaling er å sikre at alle ressurser i Canvas kursnummer er versjonert og har mulighet for å bli gjennskapt. [Kommentert ut API kall i canvas.just#update-page](/canvas.just) for å unngå uhell.
 
-5. Kjør `just upload-canvas-pages` for å publisere til Canvas LMS.
+5. For å teste opplasting (dry-run): `just upload-canvas-pages`
+6. For å faktisk oppdatere (krever eksplisitt bekreftelse): `just upload-canvas-pages apply`
 
 ## Skisse over systemet
 

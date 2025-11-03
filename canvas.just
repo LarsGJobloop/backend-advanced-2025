@@ -17,13 +17,15 @@ create-page slug title body_path course_id:
 
 [doc("Updates an existing page in Canvas.")]
 update-page url title body_path course_id:
-    #!/usr/bin/env bash    
-    curl -sS -o /dev/null -w "{{ url }} → HTTP %{http_code}\n" \
-        -X PUT \
-        -H "Authorization: Bearer {{ CANVAS_ACCESS_TOKEN }}" \
-        --data-urlencode "wiki_page[title]={{ title }}" \
-        --data-urlencode "wiki_page[body]@-" \
-        "{{ CANVAS_DOMAIN }}/api/v1/courses/{{ course_id }}/pages/{{ url }}" < "{{ body_path }}"
+    #!/usr/bin/env bash
+    # TODO: Uncomment once we are certain all content is capable of being re-rendered.
+    echo "This would update {{ url }} (title: {{ title }})"
+    # curl -sS -o /dev/null -w "{{ url }} → HTTP %{http_code}\n" \
+    #     -X PUT \
+    #     -H "Authorization: Bearer {{ CANVAS_ACCESS_TOKEN }}" \
+    #     --data-urlencode "wiki_page[title]={{ title }}" \
+    #     --data-urlencode "wiki_page[body]@-" \
+    #     "{{ CANVAS_DOMAIN }}/api/v1/courses/{{ course_id }}/pages/{{ url }}" < "{{ body_path }}"
 
 [doc("Lists pages in a Canvas course.")]
 list-pages course_id per_page="50" search_term="":

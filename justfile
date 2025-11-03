@@ -72,34 +72,83 @@ render-canvas-pages: generate-canvas-manifest
     prettier --write "${OUT_DIR}/**/*.html"
 
 [group("Canvas")]
-[doc("Upload html file under out/canvas-pages to Canvas.")]
-upload-canvas-pages: generate-canvas-manifest
+[doc("Upload html file under out/canvas-pages to Canvas. Default is dry-run mode - pass 'apply' to make changes.")]
+upload-canvas-pages apply="false": generate-canvas-manifest update-canvas-page-mapping
     #!/usr/bin/env bash
+    MAPPING_FILE="out/canvas-pages/title-to-id-mapping.json"
+
+    # Safety check: ensure mapping file exists and is non-empty
+    if [ ! -f "$MAPPING_FILE" ] || [ ! -s "$MAPPING_FILE" ]; then
+        echo "ERROR: Mapping file not found or empty. Run: just update-canvas-page-mapping" >&2
+        exit 1
+    fi
+
+    if [ "{{ apply }}" != "true" ]; then
+        echo "=== DRY-RUN MODE: No changes will be made ==="
+        echo "=== Run with 'apply' argument to make actual changes ==="
+    fi
+    echo ""
+
     just _for_each_canvas_page | while read -r page; do
         slug=$(echo "$page" | jq -r '.slug')
         title=$(echo "$page" | jq -r '.title')
         out=$(echo "$page" | jq -r '.out')
 
-        echo "Uploading ${slug}..."
-        just _upload_page "$slug" "$title" "$out" || {
-            echo "Failed to upload ${slug}" >&2
-        }
+        CANVAS_URL=$(jq -r ".[\"${title}\"]" "$MAPPING_FILE" 2>/dev/null || echo "null")
+
+        if [ "${CANVAS_URL}" = "null" ] || [ -z "${CANVAS_URL}" ]; then
+            echo "SKIP::(not in mapping)::${title}"
+            continue
+        fi
+
+        # Verify ownership before updating
+        PAGE_DATA=$(just canvas::get-page "{{ CANVAS_COURSE_ID }}" "${CANVAS_URL}" 2>/dev/null || echo "")
+
+        if [ -z "$PAGE_DATA" ]; then
+            echo "SKIP::(fetch failed)::${CANVAS_URL}"
+            continue
+        fi
+
+        LAST_EDITED_BY=$(echo "$PAGE_DATA" | jq -r '.last_edited_by.display_name // ""')
+
+        if [ "$LAST_EDITED_BY" != "{{ CONTENT_RESPONSIBLE }}" ]; then
+            echo "SKIP::(edited by ${LAST_EDITED_BY})::${CANVAS_URL}"
+            continue
+        fi
+
+        # Present page info
+        echo "URL: ${CANVAS_URL}"
+        echo "Title: ${title}"
+        echo "Last edited by: ${LAST_EDITED_BY}"
+
+        if [ "{{ apply }}" = "true" ]; then
+            # Interactive confirmation
+            while true; do
+                read -p "Update this page? (y/n): " response < /dev/tty
+                case "$response" in
+                    yes|y)
+                        just canvas::update-page "${CANVAS_URL}" "${title}" "${out}" "{{ CANVAS_COURSE_ID }}" || {
+                            echo "Failed to update ${CANVAS_URL}" >&2
+                        }
+                        break
+                        ;;
+                    no|n)
+                        echo "Skipped"
+                        break
+                        ;;
+                    *)
+                        echo "Answer 'y' or 'n'"
+                        ;;
+                esac
+            done
+        else
+            # Dry-run: just show what would be updated
+            echo "  [DRY-RUN: would update]"
+        fi
+        echo ""
+
         sleep 1
     done
-
-[private]
-_upload_page slug title path:
-    #!/usr/bin/env bash
-    # Lookup page url from title-to-id-mapping.json using title as key
-    CANVAS_URL=$(jq -r ".[\"{{ title }}\"]" "out/canvas-pages/title-to-id-mapping.json" 2>/dev/null || echo "null")
-    
-    if [ "${CANVAS_URL}" != "null" ]; then
-        # Page exists - update via PUT
-        just canvas::update-page "${CANVAS_URL}" "{{ title }}" "{{ path }}" "{{ CANVAS_COURSE_ID }}"
-    else
-        # Page doesn't exist - create via POST
-        just canvas::create-page "{{ slug }}" "{{ title }}" "{{ path }}" "{{ CANVAS_COURSE_ID }}"
-    fi
 
 [group("Canvas")]
 [doc("Update the title-to-id mapping file.")]
