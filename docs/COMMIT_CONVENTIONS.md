@@ -21,6 +21,7 @@ The type must be one of the following:
 - **refactor**: Code change that neither fixes a bug nor adds a feature
 - **docs**: Documentation only changes
 - **chore**: Changes to build process or auxiliary tools
+- **decision**: Document a project decision or change in approach
 
 ## Scope
 
@@ -64,6 +65,11 @@ fix(build): correct Nix flake dependency version
 docs(content): add timeplan for IaC module
 
 chore(config): update Canvas course ID to 516
+
+decision(content): adopt new title format with C# Advanced
+
+Format: {{ Fagnavn }} - {{ Week }}-{{ Day }}: {{ Title }}
+Fagnavn: 'C# Advanced' (authoritative)
 ```
 
 ## Git Commit Template
