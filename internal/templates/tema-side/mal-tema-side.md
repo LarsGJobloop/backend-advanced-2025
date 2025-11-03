@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - <Tema kortnavn> - <Full tittel>
+tittel: "C# Advanced - <Week>-<Day>: <Title>"
 slug: be03-<tema>-<kortnavn>
 ---
 

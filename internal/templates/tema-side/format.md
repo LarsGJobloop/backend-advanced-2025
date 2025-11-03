@@ -16,7 +16,7 @@ Alle tema-sider skal ha front matter i YAML-format øverst i filen:
 ---
 synlighet: intern | åpen
 livsyklus: utkast | høring | akseptert
-tittel: <Kurs kode> - <Tema kortnavn> - <Full tittel>
+tittel: "C# Advanced - <Week>-<Day>: <Title>"
 slug: <url-slug-for-siden>
 ---
 ```
@@ -25,7 +25,14 @@ slug: <url-slug-for-siden>
 
 - `synlighet`: `intern` for kun interne sider, `åpen` for åpne/publiserte sider
 - `livsyklus`: `utkast` (work in progress), `høring` (klar for review), `akseptert` (ferdig)
-- `tittel`: Full tittel som vises i Canvas, følg formatet: `<Kurs kode> - <Tema kortnavn> - <Full tittel>`
+- `tittel`: Full tittel som vises i Canvas, følg formatet: `"C# Advanced - <Week>-<Day>: <Title>"`
+
+  Format: `{{ Fagnavn }} - {{ Week }}-{{ Day }}: {{ Title }}`
+
+  Eksempel: `"C# Advanced - 1-1: Introduksjon til Testdrevet utvikling"`
+
+  **Fagnavn:** "C# Advanced" er det autoritative fagnavnet.
+
 - `slug`: URL-vennlig identifikator, bruk formatet: `<kurskode>-<tema>-<kortnavn>`
 
 ## Dokument Struktur
