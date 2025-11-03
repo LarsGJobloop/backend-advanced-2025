@@ -1,6 +1,6 @@
 ---
 synlighet: intern
-livsyklus: utkast
+livsyklus: akseptert
 tittel: "C# Advanced - 4-3: Tilgangsstyring i praksis"
 slug: be03-4-3-iam-tilgangsstyring
 ---

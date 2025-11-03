@@ -1,6 +1,6 @@
 ---
 synlighet: intern
-livsyklus: utkast
+livsyklus: akseptert
 tittel: "C# Advanced - 0-1: Ekstra temaer"
 slug: be03-0-1-ekstra-temaer
 ---

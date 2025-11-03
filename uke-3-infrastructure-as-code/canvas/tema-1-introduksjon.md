@@ -1,6 +1,6 @@
 ---
 synlighet: intern
-livsyklus: utkast
+livsyklus: akseptert
 tittel: "C# Advanced - 3-1: Introduksjon til deklarative infrastruktur"
 slug: be03-3-1-iac-introduksjon
 ---

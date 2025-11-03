@@ -1,6 +1,6 @@
 ---
 synlighet: intern
-livsyklus: utkast
+livsyklus: akseptert
 tittel: "C# Advanced - 1-2: Eksperimenter for kartlegging av behov"
 slug: be03-1-2-tdd-eksperimenter
 ---

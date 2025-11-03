@@ -1,6 +1,6 @@
 ---
 synlighet: intern
-livsyklus: utkast
+livsyklus: akseptert
 tittel: "C# Advanced - 3-2: Cloud Init og Automatisert Bootstrap"
 slug: be03-3-2-iac-cloud-init
 ---

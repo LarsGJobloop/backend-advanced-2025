@@ -1,6 +1,6 @@
 ---
 synlighet: åpen
-godkjent: usant
+godkjent: sant
 tittel: "C# Advanced - 0-0: Oversikt"
 slug: be03-0-0-backend-advanced-oversikt
 ---

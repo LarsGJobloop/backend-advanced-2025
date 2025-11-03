@@ -1,6 +1,6 @@
 ---
 synlighet: intern
-livsyklus: utkast
+livsyklus: akseptert
 tittel: "C# Advanced - 4-1: Introduksjon til Identitet og Tilgangsstyring"
 slug: be03-4-1-iam-introduksjon
 ---

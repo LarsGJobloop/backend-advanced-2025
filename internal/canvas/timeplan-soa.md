@@ -1,6 +1,6 @@
 ---
 synlighet: intern
-godkjent: usant
+godkjent: sant
 tittel: "C# Advanced - 2-0: Timeplan"
 slug: be03-2-0-soa-timeplan
 ---

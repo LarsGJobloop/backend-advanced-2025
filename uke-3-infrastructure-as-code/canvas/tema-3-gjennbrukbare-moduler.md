@@ -1,6 +1,6 @@
 ---
 synlighet: intern
-livsyklus: utkast
+livsyklus: akseptert
 tittel: "C# Advanced - 3-3: Moduler og Gjenbrukbar Infrastruktur"
 slug: be03-3-3-iac-moduler
 ---

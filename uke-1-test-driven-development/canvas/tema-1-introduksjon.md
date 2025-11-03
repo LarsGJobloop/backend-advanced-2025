@@ -1,6 +1,6 @@
 ---
 synlighet: intern
-livsyklus: utkast
+livsyklus: akseptert
 tittel: "C# Advanced - 1-1: Introduksjon til Testdrevet utvikling"
 slug: be03-1-1-tdd-introduksjon
 ---

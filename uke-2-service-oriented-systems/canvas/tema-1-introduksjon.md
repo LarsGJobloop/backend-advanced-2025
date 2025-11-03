@@ -1,6 +1,6 @@
 ---
 synlighet: intern
-livsyklus: utkast
+livsyklus: akseptert
 tittel: "C# Advanced - 2-1: Introduksjon til Tjeneste Orienterte Systemer"
 slug: be03-2-1-soa-introduksjon
 ---

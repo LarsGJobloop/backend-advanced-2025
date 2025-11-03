@@ -1,6 +1,6 @@
 ---
 synlighet: intern
-godkjent: usant
+godkjent: sant
 tittel: "C# Advanced - 4-0: Timeplan"
 slug: be03-4-0-iam-timeplan
 ---

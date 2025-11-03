@@ -1,6 +1,6 @@
 ---
 synlighet: intern
-livsyklus: utkast
+livsyklus: akseptert
 tittel: "C# Advanced - 2-3: Vanlige Tjenestesammensetninger"
 slug: be03-2-3-soa-vanlige-sammensettninger
 ---
