@@ -90,8 +90,8 @@ upload-canvas-pages: generate-canvas-manifest
 [private]
 _upload_page slug title path:
     #!/usr/bin/env bash
-    # Lookup page url from slug-id-mapping.json using title as key
-    CANVAS_URL=$(jq -r ".[\"{{ title }}\"]" "out/canvas-pages/slug-id-mapping.json" 2>/dev/null || echo "null")
+    # Lookup page url from title-to-id-mapping.json using title as key
+    CANVAS_URL=$(jq -r ".[\"{{ title }}\"]" "out/canvas-pages/title-to-id-mapping.json" 2>/dev/null || echo "null")
     
     if [ "${CANVAS_URL}" != "null" ]; then
         # Page exists - update via PUT
@@ -102,13 +102,13 @@ _upload_page slug title path:
     fi
 
 [group("Canvas")]
-[doc("Update the slug-id mapping file.")]
+[doc("Update the title-to-id mapping file.")]
 update-canvas-page-mapping:
     #!/usr/bin/env bash
     PER_PAGE=50
 
     OUT_DIR="out/canvas-pages"
-    MAPPING_FILE="${OUT_DIR}/slug-id-mapping.json"
+    MAPPING_FILE="${OUT_DIR}/title-to-id-mapping.json"
     mkdir -p "${OUT_DIR}"
 
     # Canvas is based on Ruby on Rails, which transmits pagination information in the headers.
