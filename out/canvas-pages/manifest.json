@@ -1,109 +1,109 @@
 [
   {
     "file": "./uke-2-service-oriented-systems/canvas/tema-2-tjenestesammensetning.md",
-    "title": "BE03 - 2-2 - SOA - Tjenestesammensetning",
+    "title": "C# Advanced - 2-2: Tjenestesammensetning",
     "slug": "be03-2-2-soa-tjenestesammensetning",
     "out": "out/canvas-pages/be03-2-2-soa-tjenestesammensetning.html"
   },
   {
     "file": "./uke-2-service-oriented-systems/canvas/tema-1-introduksjon.md",
-    "title": "BE03 - 2-1 - SOA - Introduksjon til Tjeneste Orienterte Systemer",
+    "title": "C# Advanced - 2-1: Introduksjon til Tjeneste Orienterte Systemer",
     "slug": "be03-2-1-soa-introduksjon",
     "out": "out/canvas-pages/be03-2-1-soa-introduksjon.html"
   },
   {
     "file": "./uke-2-service-oriented-systems/canvas/tema-3-vanlige-sammensettninger.md",
-    "title": "BE03 - 2-3 - SOA - Vanlige Tjenestesammensetninger",
+    "title": "C# Advanced - 2-3: Vanlige Tjenestesammensetninger",
     "slug": "be03-2-3-soa-vanlige-sammensettninger",
     "out": "out/canvas-pages/be03-2-3-soa-vanlige-sammensettninger.html"
   },
   {
     "file": "./uke-3-infrastructure-as-code/canvas/tema-3-gjennbrukbare-moduler.md",
-    "title": "BE03 - 3-3 - IaC - Moduler og Gjenbrukbar Infrastruktur",
+    "title": "C# Advanced - 3-3: Moduler og Gjenbrukbar Infrastruktur",
     "slug": "be03-3-3-iac-moduler",
     "out": "out/canvas-pages/be03-3-3-iac-moduler.html"
   },
   {
     "file": "./uke-3-infrastructure-as-code/canvas/tema-2-cloud-init.md",
-    "title": "BE03 - 3-2 - IaC - Cloud Init og Automatisert Bootstrap",
+    "title": "C# Advanced - 3-2: Cloud Init og Automatisert Bootstrap",
     "slug": "be03-3-2-iac-cloud-init",
     "out": "out/canvas-pages/be03-3-2-iac-cloud-init.html"
   },
   {
     "file": "./uke-3-infrastructure-as-code/canvas/tema-1-introduksjon.md",
-    "title": "BE03 - 3-1 - IaC - Introduksjon til deklarative infrastruktur",
+    "title": "C# Advanced - 3-1: Introduksjon til deklarative infrastruktur",
     "slug": "be03-3-1-iac-introduksjon",
     "out": "out/canvas-pages/be03-3-1-iac-introduksjon.html"
   },
   {
     "file": "./uke-4-identity-and-access-managment/canvas/tema-2-oauth-cli.md",
-    "title": "BE03 - 4-2 - IAM - OAuth 2.0 og GitHub CLI-autentisering",
+    "title": "C# Advanced - 4-2: OAuth 2.0 og GitHub CLI-autentisering",
     "slug": "be03-4-2-iam-oauth-github",
     "out": "out/canvas-pages/be03-4-2-iam-oauth-github.html"
   },
   {
     "file": "./uke-4-identity-and-access-managment/canvas/tema-3-tilgangsstyring.md",
-    "title": "BE03 - 4-3 - IAM - Tilgangsstyring i praksis",
+    "title": "C# Advanced - 4-3: Tilgangsstyring i praksis",
     "slug": "be03-4-3-iam-tilgangsstyring",
     "out": "out/canvas-pages/be03-4-3-iam-tilgangsstyring.html"
   },
   {
     "file": "./uke-4-identity-and-access-managment/canvas/tema-1-introduksjon-til-iam.md",
-    "title": "BE03 - 4-1 - IAM - Introduksjon til Identitet og Tilgangsstyring",
+    "title": "C# Advanced - 4-1: Introduksjon til Identitet og Tilgangsstyring",
     "slug": "be03-4-1-iam-introduksjon",
     "out": "out/canvas-pages/be03-4-1-iam-introduksjon.html"
   },
   {
     "file": "./internal/canvas/timeplan-iac.md",
-    "title": "BE03 - 3-0 - IaC - Timeplan",
+    "title": "C# Advanced - 3-0: Timeplan",
     "slug": "be03-3-0-iac-timeplan",
     "out": "out/canvas-pages/be03-3-0-iac-timeplan.html"
   },
   {
     "file": "./internal/canvas/oversikt.md",
-    "title": "BE03 - 0-0 - Backend Advanced - Oversikt",
+    "title": "C# Advanced - 0-0: Oversikt",
     "slug": "be03-0-0-backend-advanced-oversikt",
     "out": "out/canvas-pages/be03-0-0-backend-advanced-oversikt.html"
   },
   {
     "file": "./internal/canvas/timeplan-iam.md",
-    "title": "BE03 - 4-0 - IAM - Timeplan",
+    "title": "C# Advanced - 4-0: Timeplan",
     "slug": "be03-4-0-iam-timeplan",
     "out": "out/canvas-pages/be03-4-0-iam-timeplan.html"
   },
   {
     "file": "./internal/canvas/timeplan-tdd.md",
-    "title": "BE03 - 1-0 - TDD - Timeplan",
+    "title": "C# Advanced - 1-0: Timeplan",
     "slug": "be03-1-0-tdd-timeplan",
     "out": "out/canvas-pages/be03-1-0-tdd-timeplan.html"
   },
   {
     "file": "./internal/canvas/utvidelser.md",
-    "title": "BE03 - 0-1 - Ekstra temaer",
+    "title": "C# Advanced - 0-1: Ekstra temaer",
     "slug": "be03-0-1-ekstra-temaer",
     "out": "out/canvas-pages/be03-0-1-ekstra-temaer.html"
   },
   {
     "file": "./internal/canvas/timeplan-soa.md",
-    "title": "BE03 - 2-0 - SOA - Timeplan",
+    "title": "C# Advanced - 2-0: Timeplan",
     "slug": "be03-2-0-soa-timeplan",
     "out": "out/canvas-pages/be03-2-0-soa-timeplan.html"
   },
   {
     "file": "./uke-1-test-driven-development/canvas/tema-2-kartlegging-av-behov.md",
-    "title": "BE03 - 1-2 - TDD - Eksperimenter for kartlegging av behov",
+    "title": "C# Advanced - 1-2: Eksperimenter for kartlegging av behov",
     "slug": "be03-1-2-tdd-eksperimenter",
     "out": "out/canvas-pages/be03-1-2-tdd-eksperimenter.html"
   },
   {
     "file": "./uke-1-test-driven-development/canvas/tema-1-introduksjon.md",
-    "title": "BE03 - 1-1 - TDD - Introduksjon til Testdrevet utvikling",
+    "title": "C# Advanced - 1-1: Introduksjon til Testdrevet utvikling",
     "slug": "be03-1-1-tdd-introduksjon",
     "out": "out/canvas-pages/be03-1-1-tdd-introduksjon.html"
   },
   {
     "file": "./uke-1-test-driven-development/canvas/tema-3-grensesnittskontrakter.md",
-    "title": "BE03 - 1-3 - TDD - Grensesnittskontrakter",
+    "title": "C# Advanced - 1-3: Grensesnittskontrakter",
     "slug": "be03-1-3-tdd-grensesnittskontrakter",
     "out": "out/canvas-pages/be03-1-3-tdd-grensesnittskontrakter.html"
   }
