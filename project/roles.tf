@@ -9,7 +9,8 @@
 locals {
   # Repository administrators - full access including settings
   admins = [
-    "LarsGJobloop"
+    "LarsGJobloop",
+    "JorgenMJobloop"
   ]
 }
 
