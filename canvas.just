@@ -33,3 +33,10 @@ list-pages course_id per_page="50" search_term="":
     curl -sS \
         -H "Authorization: Bearer {{ CANVAS_ACCESS_TOKEN }}" \
         "{{ CANVAS_DOMAIN }}/api/v1/courses/{{ course_id }}/pages?per_page={{ per_page }}&search_term=${SEARCH_TERM}"
+
+[doc("Gets a single page from Canvas by URL.")]
+get-page course_id url:
+    #!/usr/bin/env bash
+    curl -sS \
+        -H "Authorization: Bearer {{ CANVAS_ACCESS_TOKEN }}" \
+        "{{ CANVAS_DOMAIN }}/api/v1/courses/{{ course_id }}/pages/{{ url }}"
