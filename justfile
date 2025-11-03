@@ -8,6 +8,8 @@ CANVAS_COURSE_ID := "373"
 # overwrite existing content.
 # Loose filter for partial titles.
 CONTENT_FILTER := "C# Advanced"
+# Concrete filter for last updated by.
+CONTENT_RESPONSIBLE := "Lars Gunnar"
 
 default:
     @just --list
@@ -111,9 +113,9 @@ update-canvas-page-mapping:
 
     # Canvas is based on Ruby on Rails, which transmits pagination information in the headers.
     # It's a remnant of the old days where Transport and Application semantics blurred.
-    # Map titles to URLs for lookup
+    # Filter to only pages last edited by CONTENT_RESPONSIBLE, then map titles to URLs for lookup.
     just canvas::list-pages "{{ CANVAS_COURSE_ID }}" "${PER_PAGE}" "{{ CONTENT_FILTER }}" | \
-        jq 'map({(.title): .url}) | add' > "${MAPPING_FILE}"
+        jq --arg responsible "{{ CONTENT_RESPONSIBLE }}" 'map(select(.last_edited_by.display_name == $responsible)) | map({(.title): .url}) | add' > "${MAPPING_FILE}"
 
 [group("Validation")]
 [doc("Validate frontmatter structure in all canvas markdown files.")]
