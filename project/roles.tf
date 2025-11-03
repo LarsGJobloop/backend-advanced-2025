@@ -9,9 +9,13 @@
 locals {
   # Repository administrators - full access including settings
   admins = [
+    # Content Responsible
     "LarsGJobloop",
+    # Content Support
     "JorgenMJobloop",
-    "JohnKristianJobloop"
+    "JohnKristianJobloop",
+    # Course Coordinator
+    "EndreJordal",
   ]
 }
 
