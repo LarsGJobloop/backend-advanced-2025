@@ -26,8 +26,10 @@ update-page url title body_path course_id:
         "{{ CANVAS_DOMAIN }}/api/v1/courses/{{ course_id }}/pages/{{ url }}" < "{{ body_path }}"
 
 [doc("Lists pages in a Canvas course.")]
-list-pages course_id per_page="50":
+list-pages course_id per_page="50" search_term="":
     #!/usr/bin/env bash
+    SEARCH_TERM=$(echo "{{ search_term }}" | urlencode)
+
     curl -sS \
         -H "Authorization: Bearer {{ CANVAS_ACCESS_TOKEN }}" \
-        "{{ CANVAS_DOMAIN }}/api/v1/courses/{{ course_id }}/pages?per_page={{ per_page }}"
+        "{{ CANVAS_DOMAIN }}/api/v1/courses/{{ course_id }}/pages?per_page={{ per_page }}&search_term=${SEARCH_TERM}"

@@ -27,6 +27,7 @@
             just
             nodePackages.prettier # For formatting markdown and HTMLfiles
             jq
+            urlencode
             # Infrastructure tools
             opentofu
             sops

@@ -3,6 +3,12 @@ mod canvas
 # The Canvas Course (Norsk Emne ID) to sync with.
 CANVAS_COURSE_ID := "373"
 
+# Filters for content to be synced to Canvas
+# We are exceedingly cautious here as otherwise we might
+# overwrite existing content.
+# Loose filter for partial titles.
+CONTENT_FILTER := "C# Advanced"
+
 default:
     @just --list
 
@@ -106,7 +112,7 @@ update-canvas-page-mapping:
     # Canvas is based on Ruby on Rails, which transmits pagination information in the headers.
     # It's a remnant of the old days where Transport and Application semantics blurred.
     # Map titles to URLs for lookup
-    just canvas::list-pages "{{ CANVAS_COURSE_ID }}" "${PER_PAGE}" | \
+    just canvas::list-pages "{{ CANVAS_COURSE_ID }}" "${PER_PAGE}" "{{ CONTENT_FILTER }}" | \
         jq 'map({(.title): .url}) | add' > "${MAPPING_FILE}"
 
 [group("Validation")]
