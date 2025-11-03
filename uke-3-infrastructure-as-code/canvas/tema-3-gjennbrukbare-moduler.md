@@ -1,8 +1,8 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - IaC - Moduler og Gjenbrukbar Infrastruktur
-slug: be03-iac-moduler
+tittel: BE03 - 3-3 - IaC - Moduler og Gjenbrukbar Infrastruktur
+slug: be03-3-3-iac-moduler
 ---
 
 # Moduler og Gjenbrukbar Infrastruktur

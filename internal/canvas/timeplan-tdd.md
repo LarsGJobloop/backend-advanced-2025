@@ -1,8 +1,8 @@
 ---
 synlighet: intern
 godkjent: usant
-tittel: BE03 - TDD - Timeplan
-slug: be03-tdd-timeplan
+tittel: BE03 - 1-0 - TDD - Timeplan
+slug: be03-1-0-tdd-timeplan
 ---
 
 # Timeplan — Testdrevet utvikling (TDD)

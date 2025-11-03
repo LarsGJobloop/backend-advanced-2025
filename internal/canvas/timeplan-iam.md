@@ -1,8 +1,8 @@
 ---
 synlighet: intern
 godkjent: usant
-tittel: BE03 - IAM - Timeplan
-slug: be03-iam-timeplan
+tittel: BE03 - 4-0 - IAM - Timeplan
+slug: be03-4-0-iam-timeplan
 ---
 
 # Timeplan - Identity and Access Management (IAM)

@@ -1,8 +1,8 @@
 ---
 synlighet: intern
 godkjent: usant
-tittel: BE03 - IaC - Timeplan
-slug: be03-iac-timeplan
+tittel: BE03 - 3-0 - IaC - Timeplan
+slug: be03-3-0-iac-timeplan
 ---
 
 # Timeplan

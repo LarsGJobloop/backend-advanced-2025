@@ -1,8 +1,8 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - IAM - OAuth 2.0 og GitHub CLI-autentisering
-slug: be03-iam-oauth-github
+tittel: BE03 - 4-2 - IAM - OAuth 2.0 og GitHub CLI-autentisering
+slug: be03-4-2-iam-oauth-github
 ---
 
 # OAuth 2.0 og GitHub CLI-autentisering

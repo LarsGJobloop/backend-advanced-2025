@@ -1,8 +1,8 @@
 ---
 synlighet: intern
 godkjent: usant
-tittel: BE03 - SOA - Timeplan
-slug: be03-soa-timeplan
+tittel: BE03 - 2-0 - SOA - Timeplan
+slug: be03-2-0-soa-timeplan
 ---
 
 # Timeplan

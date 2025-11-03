@@ -1,8 +1,8 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - TDD - Grensesnittskontrakter
-slug: be03-tdd-grensesnittskontrakter
+tittel: BE03 - 1-3 - TDD - Grensesnittskontrakter
+slug: be03-1-3-tdd-grensesnittskontrakter
 ---
 
 # TDD og Grensesnittskontrakter

@@ -1,8 +1,8 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - IAM - Introduksjon til Identitet og Tilgangsstyring
-slug: be03-iam-introduksjon
+tittel: BE03 - 4-1 - IAM - Introduksjon til Identitet og Tilgangsstyring
+slug: be03-4-1-iam-introduksjon
 ---
 
 # Introduksjon til Identitet og Tilgangsstyring

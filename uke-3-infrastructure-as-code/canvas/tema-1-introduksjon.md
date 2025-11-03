@@ -1,8 +1,8 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - IaC - Introduksjon til deklarative infrastruktur
-slug: be03-iac-introduksjon
+tittel: BE03 - 3-1 - IaC - Introduksjon til deklarative infrastruktur
+slug: be03-3-1-iac-introduksjon
 ---
 
 # Introduksjon til Infrastruktur som Kode (IaC)

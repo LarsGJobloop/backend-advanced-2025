@@ -1,8 +1,8 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - SOA - Tjenestesammensetning
-slug: be03-soa-tjenestesammensetning
+tittel: BE03 - 2-2 - SOA - Tjenestesammensetning
+slug: be03-2-2-soa-tjenestesammensetning
 ---
 
 # Tjenestesammensetning

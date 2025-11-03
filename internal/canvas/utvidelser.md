@@ -1,8 +1,8 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - Ekstra temaer
-slug: be03-ekstra-temaer
+tittel: BE03 - 0-1 - Ekstra temaer
+slug: be03-0-1-ekstra-temaer
 ---
 
 # Ekstra temaer

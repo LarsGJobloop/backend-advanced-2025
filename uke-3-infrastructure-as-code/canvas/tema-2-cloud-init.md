@@ -1,8 +1,8 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - IaC - Cloud Init og Automatisert Bootstrap
-slug: be03-iac-cloud-init
+tittel: BE03 - 3-2 - IaC - Cloud Init og Automatisert Bootstrap
+slug: be03-3-2-iac-cloud-init
 ---
 
 # Cloud Init og Automatisert Bootstrap
