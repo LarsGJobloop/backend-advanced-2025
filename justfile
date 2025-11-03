@@ -1,7 +1,7 @@
 mod canvas
 
 # The Canvas Course (Norsk Emne ID) to sync with.
-CANVAS_COURSE_ID := "515"
+CANVAS_COURSE_ID := "373"
 
 default:
     @just --list
