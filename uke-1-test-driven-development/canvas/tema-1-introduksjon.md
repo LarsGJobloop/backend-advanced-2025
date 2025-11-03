@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - 1-1 - TDD - Introduksjon til Testdrevet utvikling
+tittel: "C# Advanced - 1-1: Introduksjon til Testdrevet utvikling"
 slug: be03-1-1-tdd-introduksjon
 ---
 

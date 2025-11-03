@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - 4-1 - IAM - Introduksjon til Identitet og Tilgangsstyring
+tittel: "C# Advanced - 4-1: Introduksjon til Identitet og Tilgangsstyring"
 slug: be03-4-1-iam-introduksjon
 ---
 

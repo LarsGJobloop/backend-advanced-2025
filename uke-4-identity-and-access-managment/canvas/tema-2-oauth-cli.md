@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - 4-2 - IAM - OAuth 2.0 og GitHub CLI-autentisering
+tittel: "C# Advanced - 4-2: OAuth 2.0 og GitHub CLI-autentisering"
 slug: be03-4-2-iam-oauth-github
 ---
 

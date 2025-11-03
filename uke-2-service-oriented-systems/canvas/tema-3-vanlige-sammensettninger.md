@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - 2-3 - SOA - Vanlige Tjenestesammensetninger
+tittel: "C# Advanced - 2-3: Vanlige Tjenestesammensetninger"
 slug: be03-2-3-soa-vanlige-sammensettninger
 ---
 

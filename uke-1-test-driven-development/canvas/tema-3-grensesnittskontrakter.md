@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - 1-3 - TDD - Grensesnittskontrakter
+tittel: "C# Advanced - 1-3: Grensesnittskontrakter"
 slug: be03-1-3-tdd-grensesnittskontrakter
 ---
 

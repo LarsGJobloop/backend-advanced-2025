@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 godkjent: usant
-tittel: BE03 - 2-0 - SOA - Timeplan
+tittel: "C# Advanced - 2-0: Timeplan"
 slug: be03-2-0-soa-timeplan
 ---
 

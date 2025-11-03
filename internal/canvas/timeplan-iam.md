@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 godkjent: usant
-tittel: BE03 - 4-0 - IAM - Timeplan
+tittel: "C# Advanced - 4-0: Timeplan"
 slug: be03-4-0-iam-timeplan
 ---
 

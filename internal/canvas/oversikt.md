@@ -1,7 +1,7 @@
 ---
 synlighet: åpen
 godkjent: usant
-tittel: BE03 - 0-0 - Backend Advanced - Oversikt
+tittel: "C# Advanced - 0-0: Oversikt"
 slug: be03-0-0-backend-advanced-oversikt
 ---
 

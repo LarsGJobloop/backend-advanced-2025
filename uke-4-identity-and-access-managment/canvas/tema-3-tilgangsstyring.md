@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - 4-3 - IAM - Tilgangsstyring i praksis
+tittel: "C# Advanced - 4-3: Tilgangsstyring i praksis"
 slug: be03-4-3-iam-tilgangsstyring
 ---
 

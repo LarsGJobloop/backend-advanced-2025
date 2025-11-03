@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - 3-3 - IaC - Moduler og Gjenbrukbar Infrastruktur
+tittel: "C# Advanced - 3-3: Moduler og Gjenbrukbar Infrastruktur"
 slug: be03-3-3-iac-moduler
 ---
 

@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - 3-1 - IaC - Introduksjon til deklarative infrastruktur
+tittel: "C# Advanced - 3-1: Introduksjon til deklarative infrastruktur"
 slug: be03-3-1-iac-introduksjon
 ---
 

@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 godkjent: usant
-tittel: BE03 - 1-0 - TDD - Timeplan
+tittel: "C# Advanced - 1-0: Timeplan"
 slug: be03-1-0-tdd-timeplan
 ---
 

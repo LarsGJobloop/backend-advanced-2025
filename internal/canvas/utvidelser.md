@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - 0-1 - Ekstra temaer
+tittel: "C# Advanced - 0-1: Ekstra temaer"
 slug: be03-0-1-ekstra-temaer
 ---
 

@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - 2-1 - SOA - Introduksjon til Tjeneste Orienterte Systemer
+tittel: "C# Advanced - 2-1: Introduksjon til Tjeneste Orienterte Systemer"
 slug: be03-2-1-soa-introduksjon
 ---
 

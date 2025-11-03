@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - 1-2 - TDD - Eksperimenter for kartlegging av behov
+tittel: "C# Advanced - 1-2: Eksperimenter for kartlegging av behov"
 slug: be03-1-2-tdd-eksperimenter
 ---
 

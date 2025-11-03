@@ -1,7 +1,7 @@
 ---
 synlighet: intern
 livsyklus: utkast
-tittel: BE03 - 2-2 - SOA - Tjenestesammensetning
+tittel: "C# Advanced - 2-2: Tjenestesammensetning"
 slug: be03-2-2-soa-tjenestesammensetning
 ---
 
