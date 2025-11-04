@@ -17,8 +17,8 @@ Ingen programvare eksisterer i et vakuum.
 Hver modul, tjeneste eller funksjon samhandler med andre, direkte eller indirekte, gjennom **grensesnitt**.  
 Det er disse grensesnittene som gir **stabilitet** i systemet, ikke detaljene i implementasjonen.
 
-Når man endrer interne detaljer, men bevarer grensesnittet og dets oppførsel, kan resten av systemet fortsette å fungere uforstyrret.  
-TDD hjelper oss å oppnå dette ved å uttrykke forventninger som **kontrakter** i form av tester.
+Når du endrer interne detaljer, men bevarer grensesnittet og dets oppførsel, kan resten av systemet fortsette å fungere uforstyrret.  
+TDD hjelper deg å oppnå dette ved å uttrykke forventninger som **kontrakter** i form av tester.
 
 ### Testene som kontrakter
 
@@ -27,11 +27,11 @@ En test kan sees som en kontrakt mellom to parter:
 - _Hvis du gir meg dette inputet, lover jeg å gi deg dette resultatet._
 - Brudd på kontrakten indikerer at noe vesentlig har endret seg i oppførselen.
 
-Ved å skrive tester for grensesnittet – ikke bare for interne detaljer – oppnår vi:
+Ved å skrive tester for grensesnittet – ikke bare for interne detaljer – oppnår du:
 
-- Robusthet mot endringer i implementasjon.
-- Klare forventninger til hvordan komponenter skal samhandle.
-- Dokumentasjon som faktisk verifiseres maskinelt.
+- Robusthet mot endringer i implementasjon
+- Klare forventninger til hvordan komponenter skal samhandle
+- Dokumentasjon som faktisk verifiseres maskinelt
 
 Eksempel:
 
@@ -68,8 +68,8 @@ Når vi bruker TDD på grensesnittnivå, får vi naturlig frem spørsmål som:
 - Hva skal skje når en tjeneste ikke svarer?
 - Hvor går grensen mellom _vårt ansvar_ og _andres ansvar_?
 
-Ved å la testene drive frem svarene på disse spørsmålene, utvikler vi **arkitektur gjennom erfaring**, ikke antagelser.
-Testene hjelper oss å utforske og formalisere grensene i systemet.
+Ved å la testene drive frem svarene på disse spørsmålene, utvikler du **arkitektur gjennom erfaring**, ikke antagelser.  
+Testene hjelper deg å utforske og formalisere grensene i systemet.
 
 ## Konkretisering
 
