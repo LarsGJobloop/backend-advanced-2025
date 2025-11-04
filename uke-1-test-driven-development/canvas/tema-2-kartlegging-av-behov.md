@@ -8,14 +8,14 @@ slug: be03-1-2-tdd-eksperimenter
 # Eksperimenter for kartlegging av behov
 
 Den andre økten handler om å bruke TDD som **utforskende metode** for å finne løsninger, ikke for å validere ferdige ideer.  
-Deltakerne lærer å la testene avdekke hvordan systemet _bør_ oppføre seg, heller enn å følge en på forhånd gitt spesifikasjon.
+Du lærer å la testene avdekke hvordan systemet _bør_ oppføre seg, heller enn å følge en på forhånd gitt spesifikasjon.
 
 ## Teori
 
 ### TDD som utforskende design
 
-Tradisjonelt bygges systemer _top–down_: man definerer krav og deretter implementerer.  
-Med TDD snus dette på hodet — man begynner i det små, observerer hvordan koden responderer, og lar designet vokse **bottom–up**.
+Tradisjonelt bygges systemer _top–down_: du definerer krav og deretter implementerer.  
+Med TDD snus dette på hodet — du begynner i det små, observerer hvordan koden responderer, og lar designet vokse **bottom–up**.
 
 Nøkkelidéen er å bruke testene som **mikro-eksperimenter**:
 
@@ -46,15 +46,18 @@ Dette er en eksperimentell og iterativ prosess, ikke en lineær implementasjon.
 
 Denne fasen er typisk brukt når:
 
-- Løsningen ikke er kjent, men må **utforskes**.
-- Man ønsker å bygge forståelse for et domene gjennom kode.
-- Arkitekturen skal **emerge**, ikke defineres på forhånd.
+- Løsningen ikke er kjent, men må **utforskes**
+- Du ønsker å bygge forståelse for et domene gjennom kode
+- Arkitekturen skal **emerge**, ikke defineres på forhånd
+- Lignende konsepter blir og brukt før en går i gang med endringer i eldre systemer for å sikre at endringene ikke forårsaker feil underveis.
+
+**NB:** Ingen test suite vil noen gang kunne dekke over alt (Gödel). Ofte så vil der være en avveining mellom kostnad og nytte verdi.
 
 ### Eksempler
 
 Eksempel på arbeidsflyt:
 
-1. Deltakerne får et vagt problem: _Lag et system som kan registrere brukere og gi poeng._
+1. Du får et vagt problem: _Lag et system som kan registrere brukere og gi poeng._
 2. Første test kan være:
 
    ```csharp
