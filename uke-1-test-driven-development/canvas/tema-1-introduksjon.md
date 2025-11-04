@@ -15,9 +15,9 @@ Hensikten er ikke primært å teste, men å **utforske og forme design** gjennom
 ### Fra vitenskap til utvikling
 
 Testdrevet utvikling bygger på prinsippene fra vitenskapelig metode:
-man formulerer en hypotese (test), utfører et eksperiment (implementasjon), og evaluerer resultatet (refaktorering).
+du formulerer en hypotese (test), utfører et eksperiment (implementasjon), og evaluerer resultatet (refaktorering).
 
-I stedet for å starte med en ferdig spesifikasjon, bruker utvikleren TDD til å **utforske** løsninger:
+I stedet for å starte med en ferdig spesifikasjon, bruker du TDD til å **utforske** løsninger:
 
 - **Observasjon:** Hva er problemet vi forsøker å løse?
 - **Hypotese:** Hva bør koden gjøre?
@@ -40,11 +40,11 @@ Men innenfor et gitt domene, hjelper TDD oss å utforske det vi faktisk _kan_ vi
 
 ### _Å skrive tester først_
 
-Når man skriver tester først, tvinges man til å:
+Når du skriver tester først, tvinges du til å:
 
-- Tydeliggjøre hva koden **skal gjøre** (intensjon før implementasjon).
-- Skape en **kontrakt** mellom forventning og oppførsel.
-- Designe kode som er **modulær og testbar**.
+- Tydeliggjøre hva koden **skal gjøre** (intensjon før implementasjon)
+- Skape en **kontrakt** mellom forventning og oppførsel
+- Designe kode som er **modulær og testbar**
 
 Kort sagt: å skrive tester først gjør designbeslutningene mer eksplisitte.
 
@@ -67,13 +67,13 @@ Eksempel på første TDD-øvelse:
 5. Gjenta for neste test: `2 + (-3) = -1`.
 6. Til slutt: utforsk edge cases — overflow, deling på null, osv.
 
-Poenget er ikke at deltakerne skal bygge en komplett kalkulator, men at de skal **erfare rytmen** i TDD.
+Poenget er ikke at du skal bygge en komplett kalkulator, men at du skal **erfare rytmen** i TDD.
 
-Gjennom rytmen Red → Green → Refactor lærer de:
+Gjennom rytmen Red → Green → Refactor lærer du:
 
-- Å skrive små, målbare eksperimenter.
-- Å la testene drive frem designet.
-- Å observere hvordan feil gir ny innsikt.
+- Å skrive små, målbare eksperimenter
+- Å la testene drive frem designet
+- Å observere hvordan feil gir ny innsikt
 
 ### Eksterne Lenker
 
