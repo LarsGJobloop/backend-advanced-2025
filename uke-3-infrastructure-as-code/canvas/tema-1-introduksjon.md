@@ -17,15 +17,15 @@ Infrastructure as Code (IaC) handler om å beskrive og opprette IT-infrastruktur
 
 Grunntanken er **reproduserbarhet og sporbarhet**:
 
-- All infrastrukturkonfigurasjon lagres i versjonskontroll (Git).
-- Endringer kan revideres, testes og rulles tilbake.
-- Man kan bygge identiske miljøer på tvers av utvikling, test og produksjon.
+- All infrastrukturkonfigurasjon lagres i versjonskontroll (Git)
+- Endringer kan revideres, testes og rulles tilbake
+- Du kan bygge identiske miljøer på tvers av utvikling, test og produksjon
 
 ### Versjonskontroll og Reproduserbarhet
 
 Versjonskontrollsystemer som **Git** gir historikk og samarbeid rundt infrastrukturkode. Dette muliggjør reproduserbarhet — samme kode gir samme miljø, og dermed høyere kvalitet og forutsigbarhet.
 
-Reproduserbarhet er en forutsetning for kvalitetssikring og verifikasjon: uten versjonskontroll vet man aldri sikkert hvilken konfigurasjon som produserte et gitt system.
+Reproduserbarhet er en forutsetning for kvalitetssikring og verifikasjon: uten versjonskontroll vet du aldri sikkert hvilken konfigurasjon som produserte et gitt system.
 
 ### API-er som grensesnitt mot skyen
 
@@ -53,12 +53,12 @@ Dette er et fundamentalt tema for alle som jobber med moderne IT-drift, DevOps o
 
 ### Eksempler
 
-I praksisdelen av denne økten kommer dere til å lære hvordan man:
+I praksisdelen av denne økten kommer du til å lære hvordan du:
 
-- Generere SSH-nøkler og koble seg til en Hetzner-instans.
-- Opprette og konfigurere en server gjennom et webgrensesnitt.
-- Bruke Git til å versjonere konfigurasjonen.
-- Bruke Terraform til å realisere infrastruktur som kode.
+- Genererer SSH-nøkler og kobler deg til en Hetzner-instans
+- Oppretter og konfigurerer en server gjennom et webgrensesnitt
+- Bruker Git til å versjonere konfigurasjonen
+- Bruker Terraform til å realisere infrastruktur som kode
 
 ### Eksterne Lenker
 
