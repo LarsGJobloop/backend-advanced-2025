@@ -7,14 +7,14 @@ slug: be03-3-2-iac-cloud-init
 
 # Cloud Init og Automatisert Bootstrap
 
-Et dypdykk i hvordan servere kan konfigureres automatisk ved oppstart, uten manuelle SSH-kommandoer. Vi introduserer Cloud Init som standardverktøyet for deklarativ “bootstrap” av servere.
+Et dypdykk i hvordan servere kan konfigureres automatisk ved oppstart, uten manuelle SSH-kommandoer. Du vil lære om Cloud Init som standardverktøyet for deklarativ "bootstrap" av servere.
 
 ## Teori
 
 ### Reproduserbarhet og Imperative Installasjoner
 
-I forrige økt opprettet vi en server manuelt, logget inn via SSH og installerte programvare steg for steg. Det fungerer — men det **er ikke reproduserbart**.  
-Hver gang man gjør endringer manuelt, introduseres risiko for variasjon og feil.
+I forrige økt opprettet du en server manuelt, logget inn via SSH og installerte programvare steg for steg. Det fungerer — men det **er ikke reproduserbart**.  
+Hver gang du gjør endringer manuelt, introduseres risiko for variasjon og feil.
 
 IaC handler om å **beskrive ønsket tilstand**, ikke gjenta manuelle handlinger.  
 For at en server skal kunne konfigureres uten menneskelig innblanding, må selve oppstarten være deklarativ. Det er her **Cloud Init** kommer inn.
@@ -23,12 +23,12 @@ For at en server skal kunne konfigureres uten menneskelig innblanding, må selve
 
 Cloud Init er en standard mekanisme brukt av de fleste moderne skyleverandører (Hetzner, AWS, Azure, GCP, m.fl.) for å konfigurere en ny virtuell maskin **ved første oppstart**.
 
-Man leverer et YAML- eller shell-skript til serveren som beskriver:
+Du leverer et YAML- eller shell-skript til serveren som beskriver:
 
-- hvilke pakker som skal installeres,
-- hvilke filer som skal opprettes,
-- hvilke kommandoer som skal kjøres,
-- og hvordan systemet skal konfigureres.
+- hvilke pakker som skal installeres
+- hvilke filer som skal opprettes
+- hvilke kommandoer som skal kjøres
+- og hvordan systemet skal konfigureres
 
 Dette skriptet kjører **automatisk** når serveren starter første gang.
 
@@ -75,9 +75,9 @@ Bruksområder:
 
 Under økten:
 
-- Deltakerne lager et Cloud Init-skript for å installere Git og Docker Compose.
-- De legger inn kommandoer for å klone et repo og starte et Docker Compose-manifest automatisk.
-- De tester gjenoppbygging ved å kjøre `terraform destroy` og `terraform apply`.
+- Du lager et Cloud Init-skript for å installere Git og Docker Compose
+- Du legger inn kommandoer for å klone et repo og starte et Docker Compose-manifest automatisk
+- Du tester gjenoppbygging ved å kjøre `terraform destroy` og `terraform apply`
 
 > Poenget er å vise **iterasjon og validering**: små steg, test ofte, og tenk "reproduserbart fra dag 1".
 
