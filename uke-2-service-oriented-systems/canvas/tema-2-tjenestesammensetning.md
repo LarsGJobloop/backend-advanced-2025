@@ -7,15 +7,15 @@ slug: be03-2-2-soa-tjenestesammensetning
 
 # Tjenestesammensetning
 
-En trend de siste årene har vært et fokus på mikrotjenester, hvor vi splitter opp løsningene våre i veldig små biter for å lettere kunne utvikle løsninger. Det er en arkitektur for storskala løsninger og spesielt attraktivt/mye brukt når det er stor usikkerhet rundt hva som kreves for at bedriften skal være levedyktig.
+En trend de siste årene har vært et fokus på mikrotjenester, hvor du splitter opp løsningene dine i veldig små biter for å lettere kunne utvikle løsninger. Det er en arkitektur for storskala løsninger og spesielt attraktivt/mye brukt når det er stor usikkerhet rundt hva som kreves for at løsningen skal være levedyktig.
 
-Vi skal se på en mikro utgave av dette mønsteret her med hjelp av Docker Compose.
+Du skal se på en mikro utgave av dette mønsteret her med hjelp av Docker Compose.
 
 ## Teori
 
 ### Mikrotjenester
 
-Mikrotjenester er et arkitekturmønster som beskriver løsninger hvor tjenestene er potensielt på størrelse med en KommentarTjeneste. Dette gjør det veldig lett og kjapt å eksperimentere, men alene er disse ikke nødvendigvis noe som en kan ta betalt for.
+Mikrotjenester er et arkitekturmønster som beskriver løsninger hvor tjenestene er potensielt på størrelse med en KommentarTjeneste. Dette gjør det veldig lett og kjapt å eksperimentere, men alene er disse ikke nødvendigvis noe som du kan ta betalt for.
 
 Så verdien kommer først når du setter flere av disse sammen til et større produkt som en blogplatform, eller Learning Management System. Dette leder til at mye av kompleksiteten er flyttet fra individuelle programmer til orkestrering/sammensettingen av disse tjenestene til en løsning.
 
@@ -25,7 +25,7 @@ Det største og mest kjente løsningen for å definere disse tjenestesammensetni
 
 Kort fortalt er Kubernetes et distribuert operativsystem, ment for å kjøre tjenester på flåter av maskiner ([65,000+](https://cloud.google.com/blog/products/containers-kubernetes/gke-65k-nodes-and-counting)).
 
-Vi holder oss relativt mye enklere og skal benytte oss av [Docker Compose](https://docs.docker.com/compose/) for å sette opp våre egne komposisjoner som kan kjøres lokalt, og senere på en server. Docker Compose mangler mye av funksjonaliteten til Kubernetes, men det er lett å kjøre på sin egen maskin og gir et innblikk i, og muligheten for å teste, hvordan moderne systemer snakker sammen og hvordan en kan hente inn mange ferdige løsninger som benyttes i industrien (identitet, tilgangsstyring og database-løsninger vil være blant de nyttigste).
+Du kommer til å holde deg relativt mye enklere og skal benytte deg av [Docker Compose](https://docs.docker.com/compose/) for å sette opp dine egne komposisjoner som kan kjøres lokalt, og senere på en server. Docker Compose mangler mye av funksjonaliteten til Kubernetes, men det er lett å kjøre på din egen maskin og gir et innblikk i, og muligheten for å teste, hvordan moderne systemer snakker sammen og hvordan du kan hente inn mange ferdige løsninger som benyttes i industrien (identitet, tilgangsstyring og database-løsninger vil være blant de nyttigste).
 
 ## Konkretisering
 
