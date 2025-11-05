@@ -7,9 +7,9 @@ slug: be03-2-3-soa-vanlige-sammensettninger
 
 # Vanlige Tjenestesammensetninger
 
-Når det kommer til tjenestesammensetning i digitale systemer, har det dukket opp et sett med mer eller mindre standardiserte løsninger som de fleste vil benytte seg av. Disse vil ligne på det dere allerede har vært innom i MVC-mønstret og ellers i ASP.NET APIene. Hvis du har fulgt med og notert deg, vil du se at flere av de samme tankene repeteres på flere nivåer – de er det vi kaller fraktale.
+Når det kommer til tjenestesammensetning i digitale systemer, har det dukket opp et sett med mer eller mindre standardiserte løsninger som de fleste vil benytte seg av. Disse vil ligne på det dere allerede har vært innom i MVC-mønstret og ellers i ASP.NET APIene. Hvis du har fulgt med og notert deg, vil du se at flere av de samme tankene repeteres på flere nivåer – de er det som kalles fraktale.
 
-Her kommer vi til å dra inn to sett av disse, og peke på et par andre.
+Her kommer du til å dra inn to sett av disse, og se ett par andre.
 
 - **Ruting/Ingress**: En spesialisert tjeneste for å videresende inkommende meldinger til konkrete tjenester. Kan utvides til å kreve autentisering og terminere TLS-kjeder og benyttes for bevisføring av domeneeierskap (DNS-sertifikater). Eks: Nginx, Traefik, Kong
 - **Databaser**: Dedikerte tjenester for lagring og organisering av informasjon. Eks: PostgreSQL, MongoDB, Redis
@@ -23,11 +23,11 @@ Her kommer vi til å dra inn to sett av disse, og peke på et par andre.
 
 ### Ingress
 
-Ingress-tjenester er et lite program som er det første eksterne brukere treffer på når de sender meldinger til ditt system. I sin enkleste konfigurasjon leser disse kun av inkommende meldinger og videresender disse til konkrete tjenester. I denne konfigurasjonen kaller en det gjerne en reverse proxy, og fungerer mer som en byport som alle meldinger må igjennom.
+Ingress-tjenester er et lite program som er det første eksterne brukere treffer på når de sender meldinger til ditt system. I sin enkleste konfigurasjon leser disse kun av inkommende meldinger og videresender disse til konkrete tjenester. I denne konfigurasjonen kalles det gjerne en reverse proxy, og fungerer mer som en byport som alle meldinger må igjennom.
 
-Dette legger til et ekstra hopp inn i kommunikasjonskanalen. I Docker Compose blir dette fra en prosess til en annen, så i tilfeller hvor en har applikasjoner som er veldig _latency_-sensitive (spill og streaming), vil den typen kommunikasjon potensielt tas via dedikerte kanaler.
+Dette legger til et ekstra hopp inn i kommunikasjonskanalen. I Docker Compose blir dette fra en prosess til en annen, så i tilfeller hvor du har applikasjoner som er veldig _latency_-sensitive (spill og streaming), vil den typen kommunikasjon potensielt tas via dedikerte kanaler.
 
-Det første en benytter Traefik til er for å ha en stabil fasade, hvor vi bakenfor kan drive å oppdatere tjenesteimplementasjonene våre individuelt, uten at det påvirker resten av tjenestene vi har.
+Det første du benytter Traefik til er for å ha en stabil fasade, hvor du bakenfor kan drive å oppdatere tjenesteimplementasjonene dine individuelt, uten at det påvirker resten av tjenestene du har.
 
 Det er langt mer disse ingress/gateway-tjenestene kan ta ansvar for, så her er en liten liste av muligheter:
 
@@ -40,15 +40,15 @@ Det er langt mer disse ingress/gateway-tjenestene kan ta ansvar for, så her er 
 
 ### Databaser
 
-Databaser er et annet sett med tjenester som har vært standardisert og som vi benytter oss av til langtidslagring av strukturert data. Disse er som regel splitet i to biter: en databasetjeneste og et databaseadministrasjonsgrensesnitt.
+Databaser er et annet sett med tjenester som har vært standardisert og som du benytter deg av til langtidslagring av strukturert data. Disse er som regel splitet i to biter: en databasetjeneste og et databaseadministrasjonsgrensesnitt.
 
-Databaser er potensielt veldig tunge og kompliserte å operere, spesielt med tanke på varig lagring av data. Her må en tenke på backupplaner, oppetid, hvor mye data som skal lagres, forholdet mellom spørringer/lesninger og muteringer/skrivinger til database samt hvordan disse er gruppert, per bruker, på tvers av alle, etc.
+Databaser er potensielt veldig tunge og kompliserte å operere, spesielt med tanke på varig lagring av data. Her må du tenke på backupplaner, oppetid, hvor mye data som skal lagres, forholdet mellom spørringer/lesninger og muteringer/skrivinger til database samt hvordan disse er gruppert, per bruker, på tvers av alle, etc.
 
 Så når det kommer til outsourcing av tjenester så er det operative ansvaret for databaser sannsynligvis det første du ønsker å si ifra deg.
 
 ### Mellom tjenestelig kommunikasjon
 
-Docker Compose benytter seg av et internt nettverk som kan brukes når en trenger å snakke mellom de forskjellige tjenestene. Med dette nettverket hører det til en enkel DNS-tjeneste som kan benyttes, som bruker tjenestenavnet, som definert i Docker Compose-manifestet, som domene en kan gjøre spørringer mot internt. Det er mulig å isolere tjenester ved å sette opp flere nettverk, men siden dette er en enkelt node vi kjører det på, blir dette i hovedsak brukt for simulering av systemer, og ikke som nyttverktøy til faktiske produksjonsløsninger.
+Docker Compose benytter seg av et internt nettverk som kan brukes når du trenger å snakke mellom de forskjellige tjenestene. Med dette nettverket hører det til en enkel DNS-tjeneste som kan benyttes, som bruker tjenestenavnet, som definert i Docker Compose-manifestet, som domene du kan gjøre spørringer mot internt. Det er mulig å isolere tjenester ved å sette opp flere nettverk, men siden dette er en enkelt node du kjører det på, blir dette i hovedsak brukt for simulering av systemer, og ikke som nyttverktøy til faktiske produksjonsløsninger.
 
 ### Deklarativ lagring
 
@@ -56,14 +56,14 @@ Containere er stateless av design. Det vil si at når du starter en container, b
 
 Så hvis du trenger å lagre noe utenom livssyklusen til containeren, har du to alternativer:
 
-1. Du kan sende dataen til en dedikert tjeneste som håndterer dette (database, Object Storage, loggingtjeneste). Dette fungerer helt fint og er ofte det vi gjør, selv om det vil gjøre applikasjonen vår tregere. Motivasjonen her er ofte basert på økonomi og tjenestegarantier.
-2. Du kan, eksplisitt, sette inn (mounte) en del av filsystemet fra verten, som applikasjonen i containeren kan skrive til. Vi kommer til å bruke dette for databaser og andre tjenester som trenger harddisklagring. Hvis du bruker en skyleverandør, vil dette enten være harddisken til noden eller Block Storage (NAS-variant).
+1. Du kan sende dataen til en dedikert tjeneste som håndterer dette (database, Object Storage, loggingtjeneste). Dette fungerer helt fint og er ofte det du gjør, selv om det vil gjøre applikasjonen din tregere. Motivasjonen her er ofte basert på økonomi og tjenestegarantier.
+2. Du kan, eksplisitt, sette inn (mounte) en del av filsystemet fra verten, som applikasjonen i containeren kan skrive til. Du kommer til å bruke dette for databaser og andre tjenester som trenger harddisklagring. Hvis du bruker en skyleverandør, vil dette enten være harddisken til noden eller Block Storage (NAS-variant).
 
 ## Konkretisering
 
 ### Hva, hvor, når blir dette brukt?
 
-Moderne produksjonssystemer i dag er sammensatt av flere tjenester. Det som gjerne vil være aktuelt for din praksis/jobb er at du kommer ikke til å sitte med Docker Compose og konfigurere alt sammen selv. Ofte benytter en dedikerte tjenester med egne web-GUIer eller APIer for å konfigurere disse. Så Docker Compose er mer en løsning for å kunne eksperimentere lokalt og få innsikt i hvordan disse fungerer. Men du vil finne mye konseptuell overlapp mellom det som du kan kjøre lokalt av open source-løsninger og de tjenestene som tilbyes, selv om du betaler deg ut av en del av ansvaret med driften og konfigureringen av systemene.
+Moderne produksjonssystemer i dag er sammensatt av flere tjenester. Det som gjerne vil være aktuelt for din praksis/jobb er at du kommer ikke til å sitte med Docker Compose og konfigurere alt sammen selv. Ofte benytter du dedikerte tjenester med egne web-GUIer eller APIer for å konfigurere disse. Så Docker Compose er mer en introduksjons løsning for å kunne eksperimentere lokalt og få innsikt i hvordan disse fungerer. Men du vil finne mye konseptuell overlapp mellom det som du kan kjøre lokalt av open source-løsninger og de tjenestene som tilbyes, selv om du betaler deg ut av en del av ansvaret med driften og konfigureringen av systemene.
 
 Når det er sagt, kan enklere løsninger, ofte interne, fremdeles benytte seg av Docker Compose til oppsett. Og det er et nyttig verktøy som du kan bruke når du setter opp dine egne servere.
 
