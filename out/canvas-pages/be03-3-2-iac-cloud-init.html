@@ -3,7 +3,7 @@
 </h1>
 <p>
   Et dypdykk i hvordan servere kan konfigureres automatisk ved oppstart, uten
-  manuelle SSH-kommandoer. Vi introduserer Cloud Init som standardverktøyet for
+  manuelle SSH-kommandoer. Du vil lære om Cloud Init som standardverktøyet for
   deklarativ “bootstrap” av servere.
 </p>
 <h2 id="teori">Teori</h2>
@@ -11,10 +11,10 @@
   Reproduserbarhet og Imperative Installasjoner
 </h3>
 <p>
-  I forrige økt opprettet vi en server manuelt, logget inn via SSH og
+  I forrige økt opprettet du en server manuelt, logget inn via SSH og
   installerte programvare steg for steg. Det fungerer — men det
   <strong>er ikke reproduserbart</strong>.<br />
-  Hver gang man gjør endringer manuelt, introduseres risiko for variasjon og
+  Hver gang du gjør endringer manuelt, introduseres risiko for variasjon og
   feil.
 </p>
 <p>
@@ -30,12 +30,12 @@
   (Hetzner, AWS, Azure, GCP, m.fl.) for å konfigurere en ny virtuell maskin
   <strong>ved første oppstart</strong>.
 </p>
-<p>Man leverer et YAML- eller shell-skript til serveren som beskriver:</p>
+<p>Du leverer et YAML- eller shell-skript til serveren som beskriver:</p>
 <ul>
-  <li>hvilke pakker som skal installeres,</li>
-  <li>hvilke filer som skal opprettes,</li>
-  <li>hvilke kommandoer som skal kjøres,</li>
-  <li>og hvordan systemet skal konfigureres.</li>
+  <li>hvilke pakker som skal installeres</li>
+  <li>hvilke filer som skal opprettes</li>
+  <li>hvilke kommandoer som skal kjøres</li>
+  <li>og hvordan systemet skal konfigureres</li>
 </ul>
 <p>
   Dette skriptet kjører <strong>automatisk</strong> når serveren starter første
@@ -102,17 +102,14 @@
 </ul>
 <p>Under økten:</p>
 <ul>
+  <li>Du lager et Cloud Init-skript for å installere Git og Docker Compose</li>
   <li>
-    Deltakerne lager et Cloud Init-skript for å installere Git og Docker
-    Compose.
+    Du legger inn kommandoer for å klone et repo og starte et Docker
+    Compose-manifest automatisk
   </li>
   <li>
-    De legger inn kommandoer for å klone et repo og starte et Docker
-    Compose-manifest automatisk.
-  </li>
-  <li>
-    De tester gjenoppbygging ved å kjøre <code>terraform destroy</code> og
-    <code>terraform apply</code>.
+    Du tester gjenoppbygging ved å kjøre <code>terraform destroy</code> og
+    <code>terraform apply</code>
   </li>
 </ul>
 <blockquote>

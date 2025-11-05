@@ -1,56 +1,62 @@
 <h1 id="timeplan">Timeplan</h1>
+<blockquote>
+  <p>
+    For instruktører: Undervisnings øktene er delt opp i Teori med Praksis ca
+    50/50. Mink andelen teori, ikke praksis. For noen deler kan det være nok med
+    30 minutter teori/bakgrunn og 90 minutter praksis, legg inn 3-4 pauser.
+    Total tid 120 minutter.
+  </p>
+</blockquote>
 <p>
-  Undervisnings øktene er delt opp i Teori med Praksis ca 50/50. Mink andelen
-  teori, ikke praksis. For noen deler kan det være nok med 30 minutter
-  teori/bakgrunn og 90 minutter praksis, legg inn 3-4 pauser. Total tid 120
-  minutter.
+  Denne uken arbeider du med tjenesteorienterte systemer gjennom en kombinasjon
+  av teori og praksis.
 </p>
 <h2 id="tjeneste-orienterte-systemer-service-oriented-architecture-soa">
   Tjeneste Orienterte Systemer (Service Oriented Architecture, SOA)
 </h2>
 <h3 id="soa---intro">1. SOA - Intro</h3>
 <h4 id="teori">Teori</h4>
+<p>Du vil lære om:</p>
 <ul>
   <li>Tjenester fra den virkelige verden</li>
   <li>Grensesnitt mellom organisasjoner</li>
-  <li>Kontainer Teknologi</li>
-  <li>Software Standardisering av pakke format og grensesnitt</li>
+  <li>Kontainerteknologi</li>
+  <li>Software standardisering av pakkeformat og grensesnitt</li>
   <li>Docker Desktop</li>
 </ul>
 <h4 id="implementasjon">Implementasjon</h4>
+<p>Du skal:</p>
 <ul>
   <li>
-    Gå igjennom bygging av en .NET applikasjon, se på filer og hva som må
-    kopieres over, samt hva som kreves av kjøretids miljøet
+    Gå gjennom bygging av en .NET applikasjon, se på filer og hva som må
+    kopieres over, samt hva som kreves av kjøretidsmiljøet
   </li>
-  <li>Kontaineriser forrige ukes applikasjon</li>
-  <li>Start, stopp, ta imot miljø variabler</li>
-  <li>Introduser Docker Hub/Artefact Repositories</li>
-  <li>Last ned og test ut noen ekstern containere (Nginx, PenPot, etc)</li>
+  <li>Kontainerisere forrige ukes applikasjon</li>
+  <li>Starte, stoppe, og ta imot miljøvariabler</li>
+  <li>Lære om Docker Hub/Artefact Repositories</li>
+  <li>Laste ned og teste ut noen eksterne containere (Nginx, PenPot, etc)</li>
 </ul>
 <h3 id="soa---komposisjoner">2. SOA - Komposisjoner</h3>
 <h4 id="teori-1">Teori</h4>
+<p>Du vil lære om:</p>
 <ul>
-  <li>Kort, Docker Compose, fler-tjeneste komposisjoner</li>
+  <li>Docker Compose og fler-tjeneste komposisjoner</li>
 </ul>
 <h4 id="implementasjon-1">Implementasjon</h4>
+<p>Du skal:</p>
 <ul>
-  <li>Kjør opp .NET Web Server container via local build</li>
-  <li>Sett opp en database med en Web UI (eks. PostgreSQL)</li>
-  <li>Koble sammen server med databasen (ikke tenk komplekst her)</li>
+  <li>Kjøre opp .NET Web Server container via local build</li>
+  <li>Sette opp en database med en Web UI (eks. PostgreSQL)</li>
+  <li>Koble sammen server med databasen</li>
 </ul>
 <h3 id="soa---tjeneste-grensesnitt">3. SOA - Tjeneste Grensesnitt</h3>
 <h4 id="teori-2">Teori</h4>
+<p>Du vil lære om:</p>
 <ul>
-  <li><p>Introduser Volumes og Networking</p></li>
+  <li><p>Volumes og Networking</p></li>
+  <li><p>Ressursbegrensning og rettigheter (se offisiell dokumentasjon)</p></li>
   <li>
-    <p>
-      Pek på ressurs begrensning og rettigheter (henvis til offisiell
-      dokumentasjon)
-    </p>
-  </li>
-  <li>
-    <p>Introduser vanlig Tjeneste arkitektur</p>
+    <p>Vanlig tjenestearkitektur</p>
     <ul>
       <li>Ingress</li>
       <li>.NET Tjenester</li>
@@ -60,20 +66,17 @@
   </li>
 </ul>
 <h4 id="implementasjon-2">Implementasjon</h4>
+<p>Du skal bygge ut tjenesten med:</p>
 <ul>
-  <li>
-    <p>Bygg ut tjenesten vår med (en holder):</p>
-    <ul>
-      <li>Dedikert ingress (Traefik)</li>
-      <li>Statisk HTML, CSS &amp; JS nettside</li>
-      <li>En (eller flere) ASP .NET REST APIer</li>
-      <li>En (eller flere) databaser</li>
-    </ul>
-  </li>
+  <li>Dedikert ingress (Traefik)</li>
+  <li>Statisk HTML, CSS &amp; JS nettside</li>
+  <li>En (eller flere) ASP .NET REST APIer</li>
+  <li>En (eller flere) databaser</li>
 </ul>
 <blockquote>
   <p>
-    Traefik støtter subdomener, men dette blir brukt som en sikkerhets mekanisme
-    og bærer en del ekstra med seg. Så gjerne nevn det, men ikke bruk.
+    For instruktører: Bruk path-based routing, ikke subdomene routing.
+    Subdomener bærer ekstra kompleksitet og er primært for kompartmentalisering
+    av risiko.
   </p>
 </blockquote>

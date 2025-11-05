@@ -5,15 +5,15 @@
   Den andre økten handler om å bruke TDD som
   <strong>utforskende metode</strong> for å finne løsninger, ikke for å validere
   ferdige ideer.<br />
-  Deltakerne lærer å la testene avdekke hvordan systemet <em>bør</em> oppføre
-  seg, heller enn å følge en på forhånd gitt spesifikasjon.
+  Du lærer å la testene avdekke hvordan systemet <em>bør</em> oppføre seg,
+  heller enn å følge en på forhånd gitt spesifikasjon.
 </p>
 <h2 id="teori">Teori</h2>
 <h3 id="tdd-som-utforskende-design">TDD som utforskende design</h3>
 <p>
-  Tradisjonelt bygges systemer <em>top–down</em>: man definerer krav og deretter
+  Tradisjonelt bygges systemer <em>top–down</em>: du definerer krav og deretter
   implementerer.<br />
-  Med TDD snus dette på hodet — man begynner i det små, observerer hvordan koden
+  Med TDD snus dette på hodet — du begynner i det små, observerer hvordan koden
   responderer, og lar designet vokse <strong>bottom–up</strong>.
 </p>
 <p>Nøkkelidéen er å bruke testene som <strong>mikro-eksperimenter</strong>:</p>
@@ -63,16 +63,24 @@
 <h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
 <p>Denne fasen er typisk brukt når:</p>
 <ul>
-  <li>Løsningen ikke er kjent, men må <strong>utforskes</strong>.</li>
-  <li>Man ønsker å bygge forståelse for et domene gjennom kode.</li>
-  <li>Arkitekturen skal <strong>emerge</strong>, ikke defineres på forhånd.</li>
+  <li>Løsningen ikke er kjent, men må <strong>utforskes</strong></li>
+  <li>Du ønsker å bygge forståelse for et domene gjennom kode</li>
+  <li>Arkitekturen skal <strong>emerge</strong>, ikke defineres på forhånd</li>
+  <li>
+    Lignende konsepter blir og brukt før en går i gang med endringer i eldre
+    systemer for å sikre at endringene ikke forårsaker feil underveis.
+  </li>
 </ul>
+<p>
+  <strong>NB:</strong> Ingen test suite vil noen gang kunne dekke over alt
+  (Gödel). Ofte så vil der være en avveining mellom kostnad og nytte verdi.
+</p>
 <h3 id="eksempler">Eksempler</h3>
 <p>Eksempel på arbeidsflyt:</p>
 <ol type="1">
   <li>
     <p>
-      Deltakerne får et vagt problem:
+      Du får et vagt problem:
       <em>Lag et system som kan registrere brukere og gi poeng.</em>
     </p>
   </li>

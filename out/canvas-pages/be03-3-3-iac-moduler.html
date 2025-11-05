@@ -2,8 +2,8 @@
   Moduler og Gjenbrukbar Infrastruktur
 </h1>
 <p>
-  En introduksjon til hvordan man strukturerer infrastrukturkode i gjenbrukbare
-  moduler. Vi ser på hvordan Terraform-moduler brukes for å bygge
+  En introduksjon til hvordan du strukturerer infrastrukturkode i gjenbrukbare
+  moduler. Du vil lære om hvordan Terraform-moduler brukes for å bygge
   komponentbasert og vedlikeholdbar IaC.
 </p>
 <h2 id="teori">Teori</h2>
@@ -14,12 +14,12 @@
   Modularisering handler om <strong>gjenbruk</strong>,
   <strong>abstraksjon</strong> og <strong>ansvarsdeling</strong>.
 </p>
-<p>Ved å pakke sammen relaterte ressurser i en modul kan vi:</p>
+<p>Ved å pakke sammen relaterte ressurser i en modul kan du:</p>
 <ul>
-  <li>gjenbruke kode mellom prosjekter,</li>
-  <li>redusere duplisering,</li>
-  <li>standardisere oppsett,</li>
-  <li>og gjøre infrastrukturen enklere å vedlikeholde.</li>
+  <li>gjenbruke kode mellom prosjekter</li>
+  <li>redusere duplisering</li>
+  <li>standardisere oppsett</li>
+  <li>og gjøre infrastrukturen enklere å vedlikeholde</li>
 </ul>
 <h3 id="hva-er-en-terraform-modul">Hva er en Terraform-modul?</h3>
 <p>
@@ -31,11 +31,20 @@
   nettverk”).
 </p>
 <p><strong>Struktur:</strong></p>
-<pre class="plaintext"><code>modules/
-app_server/
-main.tf
-variables.tf
-outputs.tf</code></pre>
+<div class="sourceCode" id="cb1">
+  <pre
+    class="sourceCode sh"
+  ><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> .auto.tfvars <span class="co"># Hemmeligheter og konfigurasjon, ignorert i git</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> main.tf <span class="co"># Rotkonfigurasjon</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> providers.tf <span class="co"># Leverandør konfigurasjon</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> modules <span class="co"># Gjenbrukbare moduler</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> app-server <span class="co"># Modulen du setter opp</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="ex">├──</span> cloud-init.tf <span class="co"># Cloud Init-skript</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="ex">├──</span> server.tf <span class="co"># Server-konfigurasjon</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="ex">├──</span> variables.tf <span class="co"># Gyldige paremetre for modulen</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">└──</span> outputs.tf <span class="co"># Returnerte verdier fra modulenx</span></span></code></pre>
+</div>
 <p>En modul kan brukes fra andre moduler eller fra rotkonfigurasjonen:</p>
 <pre class="hcl"><code>module &quot;app_server&quot; {
   source = &quot;./modules/app_server&quot;
@@ -59,6 +68,12 @@ output &quot;ip_address&quot; {
   description = &quot;IP-adressen til serveren&quot;
   value       = hcloud_server.main.ipv4_address
 }</code></pre>
+<blockquote>
+  <p>
+    <strong>Refleksjons spørsmål:</strong> Hva er forskjellen på en
+    Terraform-modul, en C# metode og en JavaScript funksjon?
+  </p>
+</blockquote>
 <h3 id="dokumentasjon-og-sensitivitet">Dokumentasjon og Sensitivitet</h3>
 <p>
   Alle moduler bør dokumenteres, både formål, inputvariabler og outputs.
@@ -68,7 +83,7 @@ output &quot;ip_address&quot; {
 </p>
 <h3 id="komposisjon-og-rekonsiliering">Komposisjon og Rekonsiliering</h3>
 <p>
-  Etter at infrastrukturen er modularisert, kan man bygge
+  Etter at infrastrukturen er modularisert, kan du sette sammen
   <strong>komponerte systemer</strong>, moduler som kombinerer flere andre
   moduler. Et naturlig neste steg er å legge til et
   <strong>rekonsilieringsskript</strong> som sørger for kontinuerlig samsvar
@@ -76,14 +91,15 @@ output &quot;ip_address&quot; {
   Debian).
 </p>
 <p>
-  Dette illustrerer overgangen fra manuell drift til
+  Dette illustrerer overgangen fra manuell drift til å deklerativt beskrive
   <strong>systemer som oppdaterer seg selv</strong>.
 </p>
 <h2 id="konkretisering">Konkretisering</h2>
 <h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>
 <p>
   Modularisering er en modenhetsfase i IaC-prosjekter. Den brukes i alle større
-  organisasjoner og DevOps-team for å standardisere infrastrukturen.
+  organisasjoner og DevOps-team for å standardisere infrastrukturen og gjenbruke
+  kode mellom prosjekter.
 </p>
 <h3 id="eksempler">Eksempler</h3>
 <p>Bruksområder:</p>
@@ -97,16 +113,16 @@ output &quot;ip_address&quot; {
   </li>
   <li>En felles “monitoring”-modul som kan plugges inn i alle miljøer.</li>
 </ul>
-<p>I økten skal deltakerne:</p>
+<p>I økten skal du:</p>
 <ul>
   <li>
-    Trekke ut sin eksisterende “Hetzner Compose App Server” til en egen modul.
+    Trekke ut din eksisterende “Hetzner Compose App Server” til en egen modul
   </li>
-  <li>Definere <code>variable</code> og <code>output</code>.</li>
-  <li>Bruke modulen i sitt hovedprosjekt.</li>
+  <li>Definere <code>variable</code> og <code>output</code></li>
+  <li>Bruke modulen i ditt hovedprosjekt</li>
   <li>
     (Valgfritt) legge til rekonsilieringsskript via <code>systemd</code> for å
-    automatisere synkronisering mot et Git-repo.
+    automatisere synkronisering mot et Git-repo
   </li>
 </ul>
 <p>

@@ -11,14 +11,14 @@
 <h2 id="teori">Teori</h2>
 <h3 id="identitet-og-tillit-i-praksis">Identitet og tillit i praksis</h3>
 <p>
-  For å forstå identitet i digitale systemer, starter vi med et konkret
-  eksempel:<br />
+  For å forstå identitet i digitale systemer, start med et konkret eksempel:<br />
   Ved en <strong>trafikkontroll</strong> må du bevise at du er deg (førerkort),
   at du har lov til å kjøre kjøretøyet (vognkort), og at begge dokumentene er
   gyldige og utstedt av en <strong>autoritativ kilde</strong> (Statens Vegvesen,
   Politiet).<br />
-  Dette danner et bilde av <strong>autentisering (bevise hvem du er)</strong> og
-  <strong>autorisasjon (hva du får lov til)</strong>.
+  Dette danner et bilde av
+  <strong>autentisering (bevisføring for hvem du er)</strong> og
+  <strong>autorisasjon (håndheving av hva du får lov til)</strong>.
 </p>
 <h3 id="digitale-analoger">Digitale analoger</h3>
 <p>I digitale systemer er disse dokumentene erstattet av elektroniske bevis:</p>
@@ -51,6 +51,13 @@
 <p>
   Dette gir grunnlaget for tillit i distribuerte systemer uten sentral kontroll.
 </p>
+<blockquote>
+  <p>
+    <strong>Notat</strong>: Digitale varianter baserer seg på kryptografi for å
+    bevise at innholdet ikke er manipulert. Det kan fort bli et mattematikk
+    tungt problem, du trenger ikke å kunne dette for å bruke IAM.
+  </p>
+</blockquote>
 <h3 id="autoriteter-og-tillit">Autoriteter og tillit</h3>
 <p>Tillit i IAM bygges opp gjennom <strong>kjeder av autoritet</strong>:</p>
 <ul>
@@ -59,9 +66,9 @@
 </ul>
 <p>
   Systemer må definere <strong>hvilke autoriteter de stoler på</strong>, og
-  hvilke mekanismer som brukes for å bekrefte deres signaturer.<br />
-  Til slutt er tillit alltid <strong>relasjonell</strong>, den eksisterer mellom
-  aktører, ikke som en egen entitet.
+  hvilke mekanismer som brukes for å bekrefte deres signaturer. Til slutt er
+  tillit alltid <strong>relasjonell</strong>, den eksisterer mellom aktører,
+  ikke som en egen entitet.
 </p>
 <h2 id="konkretisering">Konkretisering</h2>
 <h3 id="hva-hvor-når-blir-dette-brukt">Hva, hvor, når blir dette brukt?</h3>

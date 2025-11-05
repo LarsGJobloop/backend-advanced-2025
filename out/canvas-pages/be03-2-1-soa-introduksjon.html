@@ -2,9 +2,9 @@
   Introduksjon til Tjeneste Orienterte Systemer (SOA)
 </h1>
 <p>
-  I begynnelsen av programmering lagde vi systemer som inkluderte alt, fra
-  hardware-komponenter til logikk, helt opp til brukergrensesnitt. Såkalte “Big
-  Balls of Mud” eller “Spaghetti Kode”.
+  I begynnelsen av programmering lagde utviklere systemer som inkluderte alt,
+  fra hardware-komponenter til logikk, helt opp til brukergrensesnitt. Såkalte
+  “Big Balls of Mud” eller “Spaghetti Kode”.
 </p>
 <p>
   Disse systemene kan ha fungert og løst problemet der og da, men de er tett
@@ -15,7 +15,7 @@
   disse.
 </p>
 <p>
-  Som en løsning på disse problemene, og flere, har vi et konsept som kalles
+  Som en løsning på disse problemene, og flere, finnes det et konsept som kalles
   Tjenesteorientert Arkitektur (Service Oriented Architecture, SOA).
 </p>
 <h2 id="teori">Teori</h2>
@@ -24,7 +24,7 @@
   markedsøkonomi og bedrifter organiserer sin virksomhet.
 </p>
 <h3 id="prinsipper-og-kvaliteter">Prinsipper og kvaliteter</h3>
-<p>Noen av kvalitetene en søker å oppnå:</p>
+<p>Noen av kvalitetene du søker å oppnå:</p>
 <ul>
   <li>
     <strong>(Loose Coupling)</strong> Tjenester kan utvikles uavhengig av
@@ -53,18 +53,18 @@
 </ul>
 <h3 id="kontainerteknologi">Kontainerteknologi</h3>
 <p>
-  For å kunne utvikle disse kommer vi til å benytte oss av et sett med løsninger
-  som vi kaller kontainerteknologier. Dette er standardiserte løsninger for å
-  pakke inn, distribuere applikasjoner, og kjøre applikasjoner.
+  For å kunne utvikle disse kommer du til å benytte deg av et sett med løsninger
+  som kalles kontainerteknologier. Dette er standardiserte løsninger for å pakke
+  inn, distribuere applikasjoner, og kjøre applikasjoner.
 </p>
 <p>
   Konkret trenger du å installere et lokalt kjøretidsmiljø for disse, kalt
   <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>.
 </p>
 <p>
-  Etter det kommer vi til å pakke inn en .NET-applikasjon i en Docker-container
-  og kjøre denne, før vi laster den opp på GitHub Container Registry (GHCR) og
-  kjører hverandres containere.
+  Etter det kommer du til å pakke inn en .NET-applikasjon i en Docker-container
+  og kjøre denne, før du laster den opp på GitHub Container Registry (GHCR) som
+  tillater oss å kjøre hverandres containere.
 </p>
 <p>
   Disse containerne er veldig lette å distribuere og kjøre lokalt. Du kan sjekke
@@ -91,11 +91,11 @@
   <li>Docker Compose Services</li>
   <li>Kubernetes Microservices</li>
 </ul>
-<p>Vi kommer til å bruke:</p>
+<p>Du kommer til å bruke:</p>
 <ul>
-  <li>Dockerfile for å definere våre egne containerbilder</li>
+  <li>Dockerfile for å definere dine egne containerbilder</li>
   <li>Docker Desktop til å overvåke og inspisere containere som kjører</li>
-  <li>GitHub Actions til å automatisk publisere våre egne containerbilder</li>
+  <li>GitHub Actions til å automatisk publisere dine egne containerbilder</li>
 </ul>
 <h3 id="eksempler">Eksempler</h3>
 <p><strong>Dockerfile for å bygge en lokal ASP.NET-applikasjon</strong>:</p>
@@ -190,7 +190,7 @@
 </ul>
 <blockquote>
   <p>
-    Vi kommer til å benytte oss av lettere verktøy framover, så ikke tenk at du
+    Du kommer til å benytte deg av lettere verktøy framover, så ikke tenk at du
     trenger å memorere disse kommandoene.
   </p>
 </blockquote>
