@@ -7,7 +7,7 @@ slug: be03-3-3-iac-moduler
 
 # Moduler og Gjenbrukbar Infrastruktur
 
-En introduksjon til hvordan man strukturerer infrastrukturkode i gjenbrukbare moduler. Vi ser på hvordan Terraform-moduler brukes for å bygge komponentbasert og vedlikeholdbar IaC.
+En introduksjon til hvordan du strukturerer infrastrukturkode i gjenbrukbare moduler. Du vil lære om hvordan Terraform-moduler brukes for å bygge komponentbasert og vedlikeholdbar IaC.
 
 ## Teori
 
@@ -16,12 +16,12 @@ En introduksjon til hvordan man strukturerer infrastrukturkode i gjenbrukbare mo
 Etter hvert som infrastrukturprosjekter vokser, blir det upraktisk å ha all konfigurasjon i én stor fil.  
 Modularisering handler om **gjenbruk**, **abstraksjon** og **ansvarsdeling**.
 
-Ved å pakke sammen relaterte ressurser i en modul kan vi:
+Ved å pakke sammen relaterte ressurser i en modul kan du:
 
-- gjenbruke kode mellom prosjekter,
-- redusere duplisering,
-- standardisere oppsett,
-- og gjøre infrastrukturen enklere å vedlikeholde.
+- gjenbruke kode mellom prosjekter
+- redusere duplisering
+- standardisere oppsett
+- og gjøre infrastrukturen enklere å vedlikeholde
 
 ### Hva er en Terraform-modul?
 
@@ -30,12 +30,17 @@ Modulen kan representere alt fra én ressurs (f.eks. “S3 bucket”) til et kom
 
 **Struktur:**
 
-```plaintext
-modules/
-app_server/
-main.tf
-variables.tf
-outputs.tf
+```sh
+.
+├── .auto.tfvars # Hemmeligheter og konfigurasjon, ignorert i git
+├── main.tf # Rotkonfigurasjon
+├── providers.tf # Leverandør konfigurasjon
+└── modules # Gjenbrukbare moduler
+    └── app-server # Modulen du setter opp
+        ├── cloud-init.tf # Cloud Init-skript
+        ├── server.tf # Server-konfigurasjon
+        ├── variables.tf # Gyldige paremetre for modulen
+        └── outputs.tf # Returnerte verdier fra modulenx
 ```
 
 En modul kan brukes fra andre moduler eller fra rotkonfigurasjonen:
@@ -68,6 +73,8 @@ output "ip_address" {
 }
 ```
 
+> **Refleksjons spørsmål:** Hva er forskjellen på en Terraform-modul, en C# metode og en JavaScript funksjon?
+
 ### Dokumentasjon og Sensitivitet
 
 Alle moduler bør dokumenteres, både formål, inputvariabler og outputs.
@@ -75,16 +82,16 @@ Terraform støtter automatisk dokumentasjon via `terraform-docs` og flagget `sen
 
 ### Komposisjon og Rekonsiliering
 
-Etter at infrastrukturen er modularisert, kan man bygge **komponerte systemer**, moduler som kombinerer flere andre moduler.
+Etter at infrastrukturen er modularisert, kan du sette sammen **komponerte systemer**, moduler som kombinerer flere andre moduler.
 Et naturlig neste steg er å legge til et **rekonsilieringsskript** som sørger for kontinuerlig samsvar mellom ønsket og faktisk tilstand (for eksempel med `systemd` på Debian).
 
-Dette illustrerer overgangen fra manuell drift til **systemer som oppdaterer seg selv**.
+Dette illustrerer overgangen fra manuell drift til å deklerativt beskrive **systemer som oppdaterer seg selv**.
 
 ## Konkretisering
 
 ### Hva, hvor, når blir dette brukt?
 
-Modularisering er en modenhetsfase i IaC-prosjekter. Den brukes i alle større organisasjoner og DevOps-team for å standardisere infrastrukturen.
+Modularisering er en modenhetsfase i IaC-prosjekter. Den brukes i alle større organisasjoner og DevOps-team for å standardisere infrastrukturen og gjenbruke kode mellom prosjekter.
 
 ### Eksempler
 
@@ -94,12 +101,12 @@ Bruksområder:
 - En modul for "database" som oppretter PostgreSQL med backup og brukere.
 - En felles "monitoring"-modul som kan plugges inn i alle miljøer.
 
-I økten skal deltakerne:
+I økten skal du:
 
-- Trekke ut sin eksisterende "Hetzner Compose App Server" til en egen modul.
-- Definere `variable` og `output`.
-- Bruke modulen i sitt hovedprosjekt.
-- (Valgfritt) legge til rekonsilieringsskript via `systemd` for å automatisere synkronisering mot et Git-repo.
+- Trekke ut din eksisterende "Hetzner Compose App Server" til en egen modul
+- Definere `variable` og `output`
+- Bruke modulen i ditt hovedprosjekt
+- (Valgfritt) legge til rekonsilieringsskript via `systemd` for å automatisere synkronisering mot et Git-repo
 
 Dette gir førstehånds erfaring med **strukturert, skalerbar IaC**, en forutsetning for profesjonell drift.
 
