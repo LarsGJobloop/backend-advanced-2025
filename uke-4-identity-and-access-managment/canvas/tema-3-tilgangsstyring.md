@@ -79,7 +79,7 @@ Tilgangsstyring er grunnleggende i alle moderne systemer:
 
 ### Eksempler
 
-**Observasjonsøvelse - Studentene analyserer eksisterende systemer som IAM-eksempler:**
+**Observasjonsøvelse - Du analyserer eksisterende systemer som IAM-eksempler:**
 
 #### Discord
 
