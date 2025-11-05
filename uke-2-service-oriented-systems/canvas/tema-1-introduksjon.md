@@ -7,11 +7,11 @@ slug: be03-2-1-soa-introduksjon
 
 # Introduksjon til Tjeneste Orienterte Systemer (SOA)
 
-I begynnelsen av programmering lagde vi systemer som inkluderte alt, fra hardware-komponenter til logikk, helt opp til brukergrensesnitt. Såkalte "Big Balls of Mud" eller "Spaghetti Kode".
+I begynnelsen av programmering lagde utviklere systemer som inkluderte alt, fra hardware-komponenter til logikk, helt opp til brukergrensesnitt. Såkalte "Big Balls of Mud" eller "Spaghetti Kode".
 
 Disse systemene kan ha fungert og løst problemet der og da, men de er tett flettet sammen, og endringer i disse er som regel veldig til ekstremt vanskelige å gjøre. For eksempel kan det å endre hvem som har tilgang til en ressurs medføre endringer i titalls filer, gjennom et dusin undersystemer. Det er også særdeles vanskelig å resonere rundt eller isolere egenskaper ved disse.
 
-Som en løsning på disse problemene, og flere, har vi et konsept som kalles Tjenesteorientert Arkitektur (Service Oriented Architecture, SOA).
+Som en løsning på disse problemene, og flere, finnes det et konsept som kalles Tjenesteorientert Arkitektur (Service Oriented Architecture, SOA).
 
 ## Teori
 
@@ -19,7 +19,7 @@ Tjenesteorientering løser flere problemer og er inspirert av hvordan moderne ma
 
 ### Prinsipper og kvaliteter
 
-Noen av kvalitetene en søker å oppnå:
+Noen av kvalitetene du søker å oppnå:
 
 - **(Loose Coupling)** Tjenester kan utvikles uavhengig av hverandre
 - **(Reliability)** Hvis en tjeneste går ned, kan andre håndtere mangler elegant
@@ -30,11 +30,11 @@ Noen av kvalitetene en søker å oppnå:
 
 ### Kontainerteknologi
 
-For å kunne utvikle disse kommer vi til å benytte oss av et sett med løsninger som vi kaller kontainerteknologier. Dette er standardiserte løsninger for å pakke inn, distribuere applikasjoner, og kjøre applikasjoner.
+For å kunne utvikle disse kommer du til å benytte deg av et sett med løsninger som kalles kontainerteknologier. Dette er standardiserte løsninger for å pakke inn, distribuere applikasjoner, og kjøre applikasjoner.
 
 Konkret trenger du å installere et lokalt kjøretidsmiljø for disse, kalt [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
-Etter det kommer vi til å pakke inn en .NET-applikasjon i en Docker-container og kjøre denne, før vi laster den opp på GitHub Container Registry (GHCR) og kjører hverandres containere.
+Etter det kommer du til å pakke inn en .NET-applikasjon i en Docker-container og kjøre denne, før du laster den opp på GitHub Container Registry (GHCR) som tillater oss å kjøre hverandres containere.
 
 Disse containerne er veldig lette å distribuere og kjøre lokalt. Du kan sjekke ut åpne registre for å se hva andre ting som er blitt laget og gjort åpent tilgjengelig. [Docker Hub](https://hub.docker.com/) er det mest kjente, men det er også andre steder som GitHub sitt eget.
 
@@ -50,11 +50,11 @@ Tjenesteorientering er i bruk gjennom hele samfunnet, ikke kun i digitale system
 - Docker Compose Services
 - Kubernetes Microservices
 
-Vi kommer til å bruke:
+Du kommer til å bruke:
 
-- Dockerfile for å definere våre egne containerbilder
+- Dockerfile for å definere dine egne containerbilder
 - Docker Desktop til å overvåke og inspisere containere som kjører
-- GitHub Actions til å automatisk publisere våre egne containerbilder
+- GitHub Actions til å automatisk publisere dine egne containerbilder
 
 ### Eksempler
 
@@ -138,7 +138,7 @@ jobs:
   docker run --publish 8080:5000 dotnet-test
   ```
 
-> Vi kommer til å benytte oss av lettere verktøy framover, så ikke tenk at du trenger å memorere disse kommandoene.
+> Du kommer til å benytte deg av lettere verktøy framover, så ikke tenk at du trenger å memorere disse kommandoene.
 
 ### Eksterne Lenker
 
