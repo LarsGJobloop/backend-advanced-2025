@@ -14,9 +14,9 @@ Denne økten etablerer grunnlaget for forståelsen av identitet, legitimasjon og
 
 ### Identitet og tillit i praksis
 
-For å forstå identitet i digitale systemer, starter vi med et konkret eksempel:  
+For å forstå identitet i digitale systemer, start med et konkret eksempel:  
 Ved en **trafikkontroll** må du bevise at du er deg (førerkort), at du har lov til å kjøre kjøretøyet (vognkort), og at begge dokumentene er gyldige og utstedt av en **autoritativ kilde** (Statens Vegvesen, Politiet).  
-Dette danner et bilde av **autentisering (bevise hvem du er)** og **autorisasjon (hva du får lov til)**.
+Dette danner et bilde av **autentisering (bevisføring for hvem du er)** og **autorisasjon (håndheving av hva du får lov til)**.
 
 ### Digitale analoger
 
@@ -34,6 +34,8 @@ Når en applikasjon mottar et **JWT**, validerer den:
 
 Dette gir grunnlaget for tillit i distribuerte systemer uten sentral kontroll.
 
+> **Notat**: Digitale varianter baserer seg på kryptografi for å bevise at innholdet ikke er manipulert. Det kan fort bli et mattematikk tungt problem, du trenger ikke å kunne dette for å bruke IAM.
+
 ### Autoriteter og tillit
 
 Tillit i IAM bygges opp gjennom **kjeder av autoritet**:
@@ -41,7 +43,7 @@ Tillit i IAM bygges opp gjennom **kjeder av autoritet**:
 - Offentlige: BankID, eIDAS, Skatteetaten
 - Private: Google, GitHub, Microsoft Entra ID
 
-Systemer må definere **hvilke autoriteter de stoler på**, og hvilke mekanismer som brukes for å bekrefte deres signaturer.  
+Systemer må definere **hvilke autoriteter de stoler på**, og hvilke mekanismer som brukes for å bekrefte deres signaturer.
 Til slutt er tillit alltid **relasjonell**, den eksisterer mellom aktører, ikke som en egen entitet.
 
 ## Konkretisering
